@@ -27,27 +27,23 @@
             <button class="start-btn" onclick="startQuiz()">Start Quiz</button>
         </div>
 
-        <!-- Quiz Screen -->
-        <div id="quizScreen" class="quiz-screen hidden">
-            <div class="question-counter">
-                Vraag <span id="currentQuestion">1</span> van <span id="totalQuestions">5</span>
-            </div>
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
-            <h1 id="questionText"></h1>
-            <div id="errorMessage" class="error-message hidden"></div>
-            <div class="options" id="optionsContainer"></div>
-            <button class="submit-btn" id="submitBtn" onclick="checkAnswer()">Volgende</button>
+        <!-- QR Scanner Screen -->
+        <div id="scannerScreen" class="scanner-screen hidden">
+            <div class="scanner-icon">📱</div>
+            <h1>Scan QR Code</h1>
+            <p class="scanner-description">
+                Scan een QR code van een poster om een vraag te starten
+            </p>
+            <div id="reader" class="qr-reader-container"></div>
+            <div class="scanner-status">Camera wordt geladen...</div>
         </div>
 
         <!-- Success Screen -->
         <div id="successScreen" class="success-screen hidden">
             <div class="success-icon">🌱</div>
             <div class="success-text">Prima!</div>
-            <div class="success-subtext">Scan de QR code van de poster met je camera.</div>
-            <div id="reader" class="qr-reader-container"></div>
-            <div class="scanner-status">Camera wordt geladen...</div>
+            <div class="success-subtext">Goed antwoord! Scan de volgende QR code voor je volgende vraag.</div>
+            <button class="submit-btn finish-btn" id="nextBtn" onclick="backToScanner()">Scan volgende QR code</button>
         </div>
 
         <!-- Completion Screen -->
@@ -109,23 +105,12 @@
             // Request camera permission
             requestCameraPermission();
             
-            // Check URL parameter for single question
-            const params = new URLSearchParams(window.location.search);
-            const questionParam = params.get('q');
-            
-            if (questionParam !== null) {
-                const questionIndex = parseInt(questionParam) - 1;
-                if (questionIndex >= 0 && questionIndex < quizData.length) {
-                    currentQuestionIndex = questionIndex;
-                    singleQuestionMode = true;
-                }
-            }
-            
-            // Hide start screen and show quiz
+            // Hide start screen and show scanner
             document.getElementById('startScreen').classList.add('hidden');
-            document.getElementById('quizScreen').classList.remove('hidden');
+            document.getElementById('scannerScreen').classList.remove('hidden');
             
-            loadQuestion();
+            // Start QR scanner immediately
+            startQRScanner();
         }
         
         // Request camera permission
@@ -187,13 +172,8 @@
             const question = quizData[currentQuestionIndex];
             
             if (selectedAnswer === question.correct) {
-                if (singleQuestionMode) {
-                    // Direct to completion in single question mode
-                    document.getElementById('quizScreen').classList.add('hidden');
-                    document.getElementById('completionScreen').classList.remove('hidden');
-                } else {
-                    showSuccess();
-                }
+                // Always show success screen first, then go back to scanner
+                showSuccess();
             } else {
                 showError('Niet correct. Probeer nog een keer - je kan het!');
                 selectedAnswer = null;
@@ -257,7 +237,8 @@
                         const questionIndex = parseInt(questionParam) - 1;
                         if (questionIndex >= 0 && questionIndex < quizData.length) {
                             currentQuestionIndex = questionIndex;
-                            document.getElementById('successScreen').classList.add('hidden');
+                            // Hide scanner and show quiz
+                            document.getElementById('scannerScreen').classList.add('hidden');
                             document.getElementById('quizScreen').classList.remove('hidden');
                             selectedAnswer = null;
                             loadQuestion();
@@ -290,16 +271,17 @@
             window.currentScanner = html5QrcodeScanner;
         }
         
-        // Stop QR scanner when leaving success screen
-        function stopQRScanner() {
-            if (window.currentScanner) {
-                window.currentScanner.clear().then(() => {
-                    console.log('Scanner gestopt');
-                }).catch(err => {
-                    console.error('Fout bij stoppen scanner:', err);
-                });
-                window.currentScanner = null;
-            }
+        // Go back to scanner after correct answer
+        function backToScanner() {
+            // Stop any running scanner
+            stopQRScanner();
+            
+            // Hide success screen and show scanner
+            document.getElementById('successScreen').classList.add('hidden');
+            document.getElementById('scannerScreen').classList.remove('hidden');
+            
+            // Start new scanner
+            startQRScanner();
         }
         
         // Show error message
@@ -313,28 +295,10 @@
                 errorElement.classList.add('hidden');
             }, 5000);
         }
+        // Move to next question (not used in QR flow, but kept for compatibility)
         function nextQuestion() {
-            // Stop scanner if running
-            stopQRScanner();
-            
-            if (singleQuestionMode) {
-                // In single question mode, go directly to completion
-                document.getElementById('successScreen').classList.add('hidden');
-                document.getElementById('completionScreen').classList.remove('hidden');
-            } else {
-                currentQuestionIndex++;
-                
-                if (currentQuestionIndex < quizData.length) {
-                    document.getElementById('successScreen').classList.add('hidden');
-                    document.getElementById('quizScreen').classList.remove('hidden');
-                    selectedAnswer = null;
-                    loadQuestion();
-                } else {
-                    // Quiz completed
-                    document.getElementById('successScreen').classList.add('hidden');
-                    document.getElementById('completionScreen').classList.remove('hidden');
-                }
-            }
+            // In QR flow, we always go back to scanner
+            backToScanner();
         }
 
         // Start the quiz

@@ -339,6 +339,25 @@ h1 {
     }
 }
 
+.scanner-status {
+    color: var(--text-secondary);
+    font-size: 14px;
+    text-align: center;
+    margin: 15px 0;
+    font-weight: 500;
+    padding: 10px;
+    background: var(--bg-secondary);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    transition: all 0.3s ease;
+}
+
+.scanner-status.success {
+    color: var(--success);
+    background: rgba(16, 185, 129, 0.1);
+    border-color: var(--success);
+}
+
 /* Sustainable design elements */
 .container::before {
     content: '';

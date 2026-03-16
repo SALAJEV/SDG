@@ -29,6 +29,7 @@
             <div class="success-text">Prima!</div>
             <div class="success-subtext">Scan de QR code van de poster met je camera.</div>
             <div id="reader" class="qr-reader-container"></div>
+            <div class="scanner-status">Camera wordt geladen...</div>
         </div>
 
         <!-- Completion Screen -->
@@ -89,17 +90,8 @@
         
         // Request camera permission
         function requestCameraPermission() {
-            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                navigator.mediaDevices.getUserMedia({ video: true })
-                    .then(stream => {
-                        // Stop the stream after getting permission
-                        stream.getTracks().forEach(track => track.stop());
-                        console.log('Camera permission granted');
-                    })
-                    .catch(error => {
-                        console.log('Camera permission denied:', error);
-                    });
-            }
+            // Don't request permission at startup, wait for scanner
+            console.log('Camera permission will be requested when scanner starts');
         }
 
         // Load current question
@@ -168,17 +160,42 @@
         // Start QR code scanner
         function startQRScanner() {
             const reader = document.getElementById("reader");
-            reader.innerHTML = ''; // Clear previous scanner
+            const statusElement = document.querySelector('.scanner-status');
             
+            reader.innerHTML = ''; // Clear previous scanner
+            statusElement.textContent = 'Camera wordt geladen...';
+            
+            // Check if camera is available
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                statusElement.textContent = 'Camera wordt niet ondersteund op dit apparaat.';
+                return;
+            }
+            
+            // Create scanner with better configuration
             const html5QrcodeScanner = new Html5QrcodeScanner(
                 "reader",
-                { fps: 10, qrbox: { width: 250, height: 250 } },
+                { 
+                    fps: 10, 
+                    qrbox: { width: 250, height: 250 },
+                    aspectRatio: 1.0,
+                    showTorchButtonIfSupported: false,
+                    showZoomSliderIfSupported: false,
+                    defaultZoomValueIfSupported: 1
+                },
                 false
             );
             
             html5QrcodeScanner.render((decodedText, decodedResult) => {
+                console.log('QR Code gedetecteerd:', decodedText);
+                statusElement.textContent = 'QR code gedetecteerd!';
+                statusElement.classList.add('success');
+                
                 // Stop scanner
-                html5QrcodeScanner.clear();
+                html5QrcodeScanner.clear().then(() => {
+                    console.log('Scanner gestopt');
+                }).catch(err => {
+                    console.error('Fout bij stoppen scanner:', err);
+                });
                 
                 // Extract question number from QR code URL
                 try {
@@ -194,41 +211,62 @@
                             document.getElementById('quizScreen').classList.remove('hidden');
                             selectedAnswer = null;
                             loadQuestion();
+                        } else {
+                            statusElement.textContent = 'Ongeldig vraagnummer in QR code.';
+                            statusElement.classList.remove('success');
                         }
+                    } else {
+                        statusElement.textContent = 'QR code bevat geen geldige vraag link.';
+                        statusElement.classList.remove('success');
                     }
                 } catch (error) {
                     console.error('Fout bij QR code parsing:', error);
-                    showError('QR code kon niet worden gelezen. Probeer opnieuw.');
+                    statusElement.textContent = 'QR code kon niet worden gelezen.';
+                    statusElement.classList.remove('success');
                 }
             }, (error) => {
-                console.log('QR scanner error:', error);
+                // Ignore scan errors, only log them
+                console.log('Scan error (normaal):', error);
             });
+            
+            // Update status when scanner is ready
+            setTimeout(() => {
+                if (statusElement.textContent === 'Camera wordt geladen...') {
+                    statusElement.textContent = 'Scan een QR code';
+                }
+            }, 2000);
+            
+            // Store scanner reference for cleanup
+            window.currentScanner = html5QrcodeScanner;
         }
         
         // Stop QR scanner when leaving success screen
         function stopQRScanner() {
-            try {
-                Html5Qrcode.getCameras().then(cameras => {
-                    if (cameras && cameras.length) {
-                        const cameraId = cameras[0].id;
-                        const html5Qrcode = new Html5Qrcode(cameraId);
-                        html5Qrcode.stop();
-                    }
+            if (window.currentScanner) {
+                window.currentScanner.clear().then(() => {
+                    console.log('Scanner gestopt');
+                }).catch(err => {
+                    console.error('Fout bij stoppen scanner:', err);
                 });
-            } catch (error) {
-                console.log('Error stopping scanner:', error);
+                window.currentScanner = null;
             }
         }
-
+        
         // Show error message
         function showError(message) {
             const errorElement = document.getElementById('errorMessage');
             errorElement.textContent = message;
             errorElement.classList.remove('hidden');
-        }
-
+            
+            // Hide error after 5 seconds
+            setTimeout(() => {
+                errorElement.classList.add('hidden');
+            }, 5000);
         // Move to next question
         function nextQuestion() {
+            // Stop scanner if running
+            stopQRScanner();
+            
             if (singleQuestionMode) {
                 // In single question mode, go directly to completion
                 document.getElementById('successScreen').classList.add('hidden');

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator voor Test</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .qr-container { margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <h1>QR Code Generator voor Test</h1>
+    <p>Genereer QR codes voor de quiz vragen:</p>
+    
+    <div>
+        <label>Vraag nummer: <input type="number" id="questionNum" value="2" min="1" max="5"></label>
+        <button onclick="generateQR()">Genereer QR Code</button>
+    </div>
+    
+    <div class="qr-container" id="qrContainer"></div>
+    
+    <script>
+        function generateQR() {
+            const questionNum = document.getElementById('questionNum').value;
+            const url = `index.html?q=${questionNum}`;
+            
+            const container = document.getElementById('qrContainer');
+            container.innerHTML = '';
+            
+            new QRCode(container, {
+                text: url,
+                width: 256,
+                height: 256,
+                colorDark: '#10b981',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.H
+            });
+        }
+        
+        // Generate first QR code on load
+        generateQR();
+    </script>
+</body>
+</html>

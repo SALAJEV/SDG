@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Duurzaamheid Quiz - Start</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.4/html5-qrcode.min.js"></script>
+    <script src="https://unpkg.com/qr-scanner@1.4.2/qr-scanner.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -194,6 +194,7 @@
             
             reader.innerHTML = ''; // Clear previous scanner
             statusElement.textContent = 'Camera wordt geladen...';
+            statusElement.classList.remove('success');
             
             // Check if camera is available
             if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
@@ -201,35 +202,26 @@
                 return;
             }
             
-            // Create scanner with better configuration
-            const html5QrcodeScanner = new Html5QrcodeScanner(
-                "reader",
-                { 
-                    fps: 10, 
-                    qrbox: { width: 250, height: 250 },
-                    aspectRatio: 1.0,
-                    showTorchButtonIfSupported: false,
-                    showZoomSliderIfSupported: false,
-                    defaultZoomValueIfSupported: 1
-                },
-                false
-            );
+            // Create video element for camera
+            const video = document.createElement('video');
+            video.style.width = '100%';
+            video.style.height = 'auto';
+            video.style.borderRadius = '17px';
+            video.style.objectFit = 'cover';
+            reader.appendChild(video);
             
-            html5QrcodeScanner.render((decodedText, decodedResult) => {
-                console.log('QR Code gedetecteerd:', decodedText);
+            // Initialize QR Scanner
+            const qrScanner = new QrScanner(video, result => {
+                console.log('QR Code gedetecteerd:', result);
                 statusElement.textContent = 'QR code gedetecteerd!';
                 statusElement.classList.add('success');
                 
                 // Stop scanner
-                html5QrcodeScanner.clear().then(() => {
-                    console.log('Scanner gestopt');
-                }).catch(err => {
-                    console.error('Fout bij stoppen scanner:', err);
-                });
+                qrScanner.stop();
                 
                 // Extract question number from QR code URL
                 try {
-                    const url = new URL(decodedText, window.location.origin);
+                    const url = new URL(result, window.location.origin);
                     const questionParam = url.searchParams.get('q');
                     
                     if (questionParam) {
@@ -245,30 +237,43 @@
                         } else {
                             statusElement.textContent = 'Ongeldig vraagnummer in QR code.';
                             statusElement.classList.remove('success');
+                            // Restart scanner after error
+                            setTimeout(() => startQRScanner(), 2000);
                         }
                     } else {
                         statusElement.textContent = 'QR code bevat geen geldige vraag link.';
                         statusElement.classList.remove('success');
+                        // Restart scanner after error
+                        setTimeout(() => startQRScanner(), 2000);
                     }
                 } catch (error) {
                     console.error('Fout bij QR code parsing:', error);
                     statusElement.textContent = 'QR code kon niet worden gelezen.';
                     statusElement.classList.remove('success');
+                    // Restart scanner after error
+                    setTimeout(() => startQRScanner(), 2000);
                 }
-            }, (error) => {
-                // Ignore scan errors, only log them
-                console.log('Scan error (normaal):', error);
+            }, {
+                // Options
+                highlightScanRegion: true,
+                highlightCodeOutline: true,
+                returnDetailedScanResult: true
             });
             
-            // Update status when scanner is ready
-            setTimeout(() => {
-                if (statusElement.textContent === 'Camera wordt geladen...') {
-                    statusElement.textContent = 'Scan een QR code';
-                }
-            }, 2000);
+            // Start scanning
+            qrScanner.start().then(() => {
+                console.log('QR Scanner gestart');
+                statusElement.textContent = 'Scan een QR code';
+            }).catch(error => {
+                console.error('Fout bij starten scanner:', error);
+                statusElement.textContent = 'Kon camera niet starten. Controleer permissies.';
+                
+                // Try to restart after error
+                setTimeout(() => startQRScanner(), 3000);
+            });
             
             // Store scanner reference for cleanup
-            window.currentScanner = html5QrcodeScanner;
+            window.currentScanner = qrScanner;
         }
         
         // Go back to scanner after correct answer

@@ -402,11 +402,7 @@ h1 {
     overflow: hidden;
     box-shadow: 0 10px 40px rgba(16, 185, 129, 0.2);
     max-width: 400px;
-}
-
-#reader {
-    width: 100% !important;
-    max-width: 400px;
+    position: relative;
 }
 
 #reader video {
@@ -414,19 +410,7 @@ h1 {
     height: auto !important;
     border-radius: 17px;
     object-fit: cover;
-}
-
-#reader canvas {
-    display: none;
-}
-
-#reader img {
-    width: 100% !important;
-    border-radius: 10px;
-}
-
-#reader section {
-    width: 100% !important;
+    display: block;
 }
 
 @keyframes fadeIn {

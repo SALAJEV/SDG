@@ -266,14 +266,29 @@
                 statusElement.textContent = 'Scan een QR code';
             }).catch(error => {
                 console.error('Fout bij starten scanner:', error);
-                statusElement.textContent = 'Kon camera niet starten. Controleer permissies.';
+                if (error.name === 'NotAllowedError') {
+                    statusElement.textContent = 'Camera toestemming geweigerd. Vernieuw de pagina en geef toestemming.';
+                } else if (error.name === 'NotFoundError') {
+                    statusElement.textContent = 'Geen camera gevonden op dit apparaat.';
+                } else {
+                    statusElement.textContent = 'Kon camera niet starten. Probeer te vernieuwen.';
+                }
                 
                 // Try to restart after error
-                setTimeout(() => startQRScanner(), 3000);
+                setTimeout(() => startQRScanner(), 5000);
             });
             
             // Store scanner reference for cleanup
             window.currentScanner = qrScanner;
+        }
+        
+        // Stop QR scanner when leaving success screen
+        function stopQRScanner() {
+            if (window.currentScanner) {
+                window.currentScanner.stop();
+                console.log('Scanner gestopt');
+                window.currentScanner = null;
+            }
         }
         
         // Go back to scanner after correct answer

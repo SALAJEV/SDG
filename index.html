@@ -29,8 +29,6 @@
             <div class="success-text">Prima!</div>
             <div class="success-subtext">Scan de QR code van de poster met je camera.</div>
             <div id="reader" class="qr-reader-container"></div>
-            <div class="qr-fallback">Of klik hier:</div>
-            <button class="submit-btn finish-btn" id="nextBtn" onclick="nextQuestion()">Volgende vraag</button>
         </div>
 
         <!-- Completion Screen -->
@@ -71,6 +69,9 @@
 
         // Initialize quiz
         function init() {
+            // Request camera permission at startup
+            requestCameraPermission();
+            
             // Check URL parameter for single question
             const params = new URLSearchParams(window.location.search);
             const questionParam = params.get('q');
@@ -84,6 +85,21 @@
             }
             
             loadQuestion();
+        }
+        
+        // Request camera permission
+        function requestCameraPermission() {
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then(stream => {
+                        // Stop the stream after getting permission
+                        stream.getTracks().forEach(track => track.stop());
+                        console.log('Camera permission granted');
+                    })
+                    .catch(error => {
+                        console.log('Camera permission denied:', error);
+                    });
+            }
         }
 
         // Load current question

@@ -288,7 +288,7 @@ h1 {
     animation: slideIn 0.6s ease-out;
 }
 
-.qr-code-container {
+.qr-reader-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -298,6 +298,18 @@ h1 {
     border-radius: 15px;
     border: 2px dashed var(--primary);
     animation: fadeIn 0.4s ease;
+    min-height: 300px;
+}
+
+#reader {
+    width: 100%;
+    max-width: 300px;
+}
+
+#reader video,
+#reader img {
+    width: 100%;
+    border-radius: 10px;
 }
 
 @keyframes fadeIn {
@@ -307,12 +319,6 @@ h1 {
     to {
         opacity: 1;
     }
-}
-
-.qr-code-container img {
-    width: 100%;
-    height: auto;
-    max-width: 250px;
 }
 
 .qr-fallback {

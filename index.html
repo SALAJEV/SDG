@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Duurzaamheid Quiz</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.4/html5-qrcode.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -27,8 +27,8 @@
         <div id="successScreen" class="success-screen hidden">
             <div class="success-icon">🌱</div>
             <div class="success-text">Prima!</div>
-            <div class="success-subtext">Scan de QR code met je camera om naar de volgende vraag te gaan.</div>
-            <div id="qrCode" class="qr-code-container"></div>
+            <div class="success-subtext">Scan de QR code van de poster met je camera.</div>
+            <div id="reader" class="qr-reader-container"></div>
             <div class="qr-fallback">Of klik hier:</div>
             <button class="submit-btn finish-btn" id="nextBtn" onclick="nextQuestion()">Volgende vraag</button>
         </div>
@@ -146,28 +146,62 @@
         function showSuccess() {
             document.getElementById('quizScreen').classList.add('hidden');
             document.getElementById('successScreen').classList.remove('hidden');
-            generateQRCode();
+            startQRScanner();
         }
         
-        // Generate QR code for next question
-        function generateQRCode() {
-            const nextQuestionIndex = currentQuestionIndex + 1;
-            const baseUrl = window.location.pathname;
-            const qrUrl = baseUrl + '?q=' + (nextQuestionIndex + 1);
+        // Start QR code scanner
+        function startQRScanner() {
+            const reader = document.getElementById("reader");
+            reader.innerHTML = ''; // Clear previous scanner
             
-            // Clear previous QR code
-            const qrContainer = document.getElementById('qrCode');
-            qrContainer.innerHTML = '';
+            const html5QrcodeScanner = new Html5QrcodeScanner(
+                "reader",
+                { fps: 10, qrbox: { width: 250, height: 250 } },
+                false
+            );
             
-            // Generate new QR code
-            new QRCode(qrContainer, {
-                text: qrUrl,
-                width: 250,
-                height: 250,
-                colorDark: '#10b981',
-                colorLight: '#ffffff',
-                correctLevel: QRCode.CorrectLevel.H
+            html5QrcodeScanner.render((decodedText, decodedResult) => {
+                // Stop scanner
+                html5QrcodeScanner.clear();
+                
+                // Extract question number from QR code URL
+                try {
+                    const url = new URL(decodedText, window.location.origin);
+                    const questionParam = url.searchParams.get('q');
+                    
+                    if (questionParam) {
+                        // Navigate to the scanned question
+                        const questionIndex = parseInt(questionParam) - 1;
+                        if (questionIndex >= 0 && questionIndex < quizData.length) {
+                            currentQuestionIndex = questionIndex;
+                            document.getElementById('successScreen').classList.add('hidden');
+                            document.getElementById('quizScreen').classList.remove('hidden');
+                            selectedAnswer = null;
+                            loadQuestion();
+                        }
+                    }
+                } catch (error) {
+                    console.error('Fout bij QR code parsing:', error);
+                    showError('QR code kon niet worden gelezen. Probeer opnieuw.');
+                }
+            }, (error) => {
+                console.log('QR scanner error:', error);
             });
+        }
+        
+        // Stop QR scanner when leaving success screen
+        function stopQRScanner() {
+            try {
+                Html5Qrcode.getCameras().then(cameras => {
+                    if (cameras && cameras.length) {
+                        const cameraId = cameras[0].id;
+                        const html5Qrcode = new Html5Qrcode(cameraId);
+                        html5Qrcode.stop();
+                    }
+                });
+            } catch (error) {
+                console.log('Error stopping scanner:', error);
+            }
         }
 
         // Show error message

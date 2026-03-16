@@ -3,14 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Duurzaamheid Quiz</title>
+    <title>Duurzaamheid Quiz - Start</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.4/html5-qrcode.min.js"></script>
 </head>
 <body>
     <div class="container">
+        <!-- Start Screen -->
+        <div id="startScreen" class="start-screen">
+            <div class="start-icon">🌱</div>
+            <h1>Duurzaamheid Quiz</h1>
+            <p class="start-description">
+                Ontdek hoe duurzaam jij bent! Beantwoord vragen over milieu en duurzaamheid.
+            </p>
+            <div class="start-info">
+                <div class="info-icon">📱</div>
+                <p>Scan QR codes op posters om vragen te beantwoorden</p>
+            </div>
+            <div class="camera-notice">
+                <div class="notice-icon">📷</div>
+                <p>De app vraagt toestemming voor je camera om QR codes te scannen</p>
+            </div>
+            <button class="start-btn" onclick="startQuiz()">Start Quiz</button>
+        </div>
+
         <!-- Quiz Screen -->
-        <div id="quizScreen" class="quiz-screen">
+        <div id="quizScreen" class="quiz-screen hidden">
             <div class="question-counter">
                 Vraag <span id="currentQuestion">1</span> van <span id="totalQuestions">5</span>
             </div>
@@ -74,12 +92,21 @@
         let currentQuestionIndex = 0;
         let selectedAnswer = null;
         let singleQuestionMode = false;
+        let quizStarted = false;
 
-        // Initialize quiz
+        // Initialize app
         function init() {
             console.log('Quiz data geladen:', quizData.length, 'vragen');
+            // Don't start quiz automatically, wait for user to click start
+        }
+        
+        // Start the quiz when user clicks start button
+        function startQuiz() {
+            if (quizStarted) return; // Prevent multiple starts
             
-            // Request camera permission at startup
+            quizStarted = true;
+            
+            // Request camera permission
             requestCameraPermission();
             
             // Check URL parameter for single question
@@ -87,20 +114,34 @@
             const questionParam = params.get('q');
             
             if (questionParam !== null) {
-                const questionIndex = parseInt(questionParam) - 1; // Convert to 0-based index
+                const questionIndex = parseInt(questionParam) - 1;
                 if (questionIndex >= 0 && questionIndex < quizData.length) {
                     currentQuestionIndex = questionIndex;
                     singleQuestionMode = true;
                 }
             }
             
+            // Hide start screen and show quiz
+            document.getElementById('startScreen').classList.add('hidden');
+            document.getElementById('quizScreen').classList.remove('hidden');
+            
             loadQuestion();
         }
         
         // Request camera permission
         function requestCameraPermission() {
-            // Don't request permission at startup, wait for scanner
-            console.log('Camera permission will be requested when scanner starts');
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then(stream => {
+                        // Stop the stream after getting permission
+                        stream.getTracks().forEach(track => track.stop());
+                        console.log('Camera permission granted');
+                    })
+                    .catch(error => {
+                        console.log('Camera permission denied:', error);
+                        alert('Camera toestemming is nodig om QR codes te scannen. Geef toestemming en klik opnieuw op Start.');
+                    });
+            }
         }
 
         // Load current question

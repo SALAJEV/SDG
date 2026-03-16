@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Code Generator voor Test</title>
+    <title>QR Code Generator voor The Green Hunt</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
         body { font-family: Arial, sans-serif; padding: 20px; }
@@ -11,8 +11,8 @@
     </style>
 </head>
 <body>
-    <h1>QR Code Generator voor Test</h1>
-    <p>Genereer QR codes voor de quiz vragen:</p>
+    <h1>QR Code Generator voor The Green Hunt</h1>
+    <p>Genereer QR codes voor de quiz vragen op https://the-green-hunt.pages.dev:</p>
     
     <div>
         <label>Vraag nummer: <input type="number" id="questionNum" value="2" min="1" max="5"></label>
@@ -24,7 +24,7 @@
     <script>
         function generateQR() {
             const questionNum = document.getElementById('questionNum').value;
-            const url = `index.html?q=${questionNum}`;
+            const url = `https://the-green-hunt.pages.dev/?q=${questionNum}`;
             
             const container = document.getElementById('qrContainer');
             container.innerHTML = '';

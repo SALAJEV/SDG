@@ -18,7 +18,7 @@
             </p>
             <div class="start-info">
                 <div class="info-icon">📱</div>
-                <p>Scan QR codes op posters om vragen te beantwoorden</p>
+                <p>Scan QR codes die naar The Green Hunt leiden</p>
             </div>
             <div class="camera-notice">
                 <div class="notice-icon">📷</div>
@@ -32,7 +32,7 @@
             <div class="scanner-icon">📱</div>
             <h1>Scan QR Code</h1>
             <p class="scanner-description">
-                Scan een QR code van een poster om een vraag te starten
+                Scan een QR code die naar The Green Hunt leidt om een vraag te starten
             </p>
             <div id="reader" class="qr-reader-container"></div>
             <div class="scanner-status">Camera wordt geladen...</div>
@@ -42,7 +42,7 @@
         <div id="successScreen" class="success-screen hidden">
             <div class="success-icon">🌱</div>
             <div class="success-text">Prima!</div>
-            <div class="success-subtext">Goed antwoord! Scan de volgende QR code voor je volgende vraag.</div>
+            <div class="success-subtext">Link geopend! Scan een andere QR code voor je volgende vraag.</div>
             <button class="submit-btn finish-btn" id="nextBtn" onclick="backToScanner()">Scan volgende QR code</button>
         </div>
 
@@ -298,24 +298,24 @@
         // Process detected QR code
         function processQRCode(qrData) {
             try {
-                const url = new URL(qrData, window.location.origin);
-                const questionParam = url.searchParams.get('q');
+                // Validate that it's a proper URL
+                const url = new URL(qrData);
                 
-                if (questionParam) {
-                    // Navigate to the scanned question
-                    const questionIndex = parseInt(questionParam) - 1;
-                    if (questionIndex >= 0 && questionIndex < quizData.length) {
-                        currentQuestionIndex = questionIndex;
-                        // Hide scanner and show quiz
-                        document.getElementById('scannerScreen').classList.add('hidden');
-                        document.getElementById('quizScreen').classList.remove('hidden');
-                        selectedAnswer = null;
-                        loadQuestion();
-                    } else {
-                        showScannerError('Ongeldig vraagnummer in QR code.');
+                // Check if it's the expected domain
+                if (url.hostname === 'the-green-hunt.pages.dev') {
+                    // Open the URL in a new tab/window
+                    window.open(qrData, '_blank');
+                    
+                    statusElement.textContent = 'Link geopend in nieuw tabblad!';
+                    statusElement.classList.add('success');
+                    
+                    // Stop scanning after successful detection
+                    if (window.currentStream) {
+                        window.currentStream.getTracks().forEach(track => track.stop());
+                        window.currentStream = null;
                     }
                 } else {
-                    showScannerError('QR code bevat geen geldige vraag link.');
+                    showScannerError('QR code bevat geen geldige The Green Hunt link.');
                 }
             } catch (error) {
                 console.error('Fout bij QR code parsing:', error);

@@ -40,38 +40,31 @@
     </div>
 
     <script>
-        // Quiz data in JSON
-        const quizData = [
-            {
-                question: "Welke energiebron is het meest duurzaam?",
-                options: ["Aardolie", "Zonnepanelen", "Steenkool", "Aardgas"],
-                correct: 1
-            },
-            {
-                question: "Hoeveel procent van het plastic gegeten wordt daadwerkelijk gerecycled?",
-                options: ["5%", "35%", "65%", "85%"],
-                correct: 0
-            },
-            {
-                question: "Wat is het meest milieubelastende product?",
-                options: ["Papieren zak", "Plastic zak", "Katoenen zak", "Polyester zak"],
-                correct: 1
-            },
-            {
-                question: "Hoeveel water kost het om 1 kg katoen te produceren?",
-                options: ["500 liter", "5.000 liter", "10.000 liter", "50.000 liter"],
-                correct: 2
-            },
-            {
-                question: "Welke voedselkeuze heeft de kleinste koolstofvoetafdruk?",
-                options: ["Rundvlees", "Kipvlees", "Groenten", "Kaas"],
-                correct: 2
-            }
-        ];
-
+        // Quiz data loaded from JSON
+        let quizData = [];
         let currentQuestionIndex = 0;
         let selectedAnswer = null;
         let singleQuestionMode = false;
+
+        // Load quiz data from JSON file
+        async function loadQuizData() {
+            try {
+                const response = await fetch('quiz-data.json');
+                quizData = await response.json();
+                init();
+            } catch (error) {
+                console.error('Fout bij het laden van quiz data:', error);
+                // Fallback quiz data if JSON fails to load
+                quizData = [
+                    {
+                        question: "Quiz data kon niet worden geladen. Probeer later opnieuw.",
+                        options: ["OK", "OK", "OK", "OK"],
+                        correct: 0
+                    }
+                ];
+                init();
+            }
+        }
 
         // Initialize quiz
         function init() {
@@ -182,7 +175,7 @@
         }
 
         // Start the quiz
-        init();
+        loadQuizData();
     </script>
 </body>
 </html>

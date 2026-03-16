@@ -288,6 +288,43 @@ h1 {
     animation: slideIn 0.6s ease-out;
 }
 
+.qr-code-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0;
+    padding: 20px;
+    background: var(--bg-secondary);
+    border-radius: 15px;
+    border: 2px dashed var(--primary);
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.qr-code-container img {
+    width: 100%;
+    height: auto;
+    max-width: 250px;
+}
+
+.qr-fallback {
+    color: var(--text-secondary);
+    font-size: 14px;
+    text-align: center;
+    margin: 20px 0 10px 0;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
 /* Sustainable design elements */
 .container::before {
     content: '';

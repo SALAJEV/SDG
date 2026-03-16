@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Duurzaamheid Quiz</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -26,7 +27,9 @@
         <div id="successScreen" class="success-screen hidden">
             <div class="success-icon">🌱</div>
             <div class="success-text">Prima!</div>
-            <div class="success-subtext">Je bent op de goede weg! Volgende stap voor onze planeet.</div>
+            <div class="success-subtext">Scan de QR code met je camera om naar de volgende vraag te gaan.</div>
+            <div id="qrCode" class="qr-code-container"></div>
+            <div class="qr-fallback">Of klik hier:</div>
             <button class="submit-btn finish-btn" id="nextBtn" onclick="nextQuestion()">Volgende vraag</button>
         </div>
 
@@ -143,6 +146,28 @@
         function showSuccess() {
             document.getElementById('quizScreen').classList.add('hidden');
             document.getElementById('successScreen').classList.remove('hidden');
+            generateQRCode();
+        }
+        
+        // Generate QR code for next question
+        function generateQRCode() {
+            const nextQuestionIndex = currentQuestionIndex + 1;
+            const baseUrl = window.location.pathname;
+            const qrUrl = baseUrl + '?q=' + (nextQuestionIndex + 1);
+            
+            // Clear previous QR code
+            const qrContainer = document.getElementById('qrCode');
+            qrContainer.innerHTML = '';
+            
+            // Generate new QR code
+            new QRCode(qrContainer, {
+                text: qrUrl,
+                width: 250,
+                height: 250,
+                colorDark: '#10b981',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.H
+            });
         }
 
         // Show error message

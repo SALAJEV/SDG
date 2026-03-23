@@ -46,6 +46,9 @@
         <!-- Quiz Screen -->
         <div id="quizScreen" class="quiz-screen hidden">
             <h1>Vraag <span id="currentQuestion">1</span> / <span id="totalQuestions">5</span></h1>
+            <div class="progress-bar">
+                <div id="progressFill" class="progress-fill" style="width:0%;"></div>
+            </div>
             <p id="questionText" class="question-text"></p>
             <div id="optionsContainer" class="options"></div>
             <div id="errorMessage" class="error-message hidden"></div>
@@ -174,6 +177,10 @@
             });
             
             selectedAnswer = null;
+
+            // Update progress fill
+            const progress = ((currentQuestionIndex + 1) / quizData.length) * 100;
+            document.getElementById('progressFill').style.width = `${progress}%`;
         }
 
         // Check if answer is correct

@@ -9,6 +9,11 @@
 </head>
 <body>
     <div class="container">
+        <div id="scoreBoard" class="score-board">
+            <div>Score: <span id="scoreValue">0</span></div>
+            <div>Pogingen: <span id="attemptsValue">3</span></div>
+        </div>
+
         <!-- Start Screen -->
         <div id="startScreen" class="start-screen">
             <div class="start-icon">🌱</div>
@@ -36,6 +41,15 @@
             </p>
             <div id="reader" class="qr-reader-container"></div>
             <div class="scanner-status">Camera wordt geladen...</div>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quizScreen" class="quiz-screen hidden">
+            <h1>Vraag <span id="currentQuestion">1</span> / <span id="totalQuestions">5</span></h1>
+            <p id="questionText" class="question-text"></p>
+            <div id="optionsContainer" class="options"></div>
+            <div id="errorMessage" class="error-message hidden"></div>
+            <button class="submit-btn" onclick="checkAnswer()">Antwoord controleren</button>
         </div>
 
         <!-- Success Screen -->
@@ -85,14 +99,21 @@
             }
         ];
 
-        let currentQuestionIndex = 0;
+        let currentQuestionIndex = null;
         let selectedAnswer = null;
-        let singleQuestionMode = false;
+        let attemptsRemaining = 3;
+        let score = 0;
         let quizStarted = false;
+
+        function updateScoreboard() {
+            document.getElementById('scoreValue').textContent = score;
+            document.getElementById('attemptsValue').textContent = attemptsRemaining;
+        }
 
         // Initialize app
         function init() {
             console.log('Quiz data geladen:', quizData.length, 'vragen');
+            updateScoreboard();
             // Don't start quiz automatically, wait for user to click start
         }
         
@@ -132,18 +153,11 @@
         // Load current question
         function loadQuestion() {
             const question = quizData[currentQuestionIndex];
-            const totalQuestions = singleQuestionMode ? 1 : quizData.length;
-            
-            document.getElementById('currentQuestion').textContent = singleQuestionMode ? 1 : (currentQuestionIndex + 1);
-            document.getElementById('totalQuestions').textContent = totalQuestions;
+            document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
+            document.getElementById('totalQuestions').textContent = quizData.length;
             document.getElementById('questionText').textContent = question.question;
             document.getElementById('errorMessage').classList.add('hidden');
             
-            // Update progress bar
-            const progress = singleQuestionMode ? 100 : ((currentQuestionIndex + 1) / quizData.length) * 100;
-            document.getElementById('progressFill').style.width = progress + '%';
-            
-            // Load options
             const optionsContainer = document.getElementById('optionsContainer');
             optionsContainer.innerHTML = '';
             
@@ -172,19 +186,36 @@
             const question = quizData[currentQuestionIndex];
             
             if (selectedAnswer === question.correct) {
-                // Always show success screen first, then go back to scanner
-                showSuccess();
+                score += 1;
+                attemptsRemaining = 3;
+                updateScoreboard();
+                showSuccess('Goed gedaan! Score verhoogd. Scan de volgende QR code.');
             } else {
-                showError('Niet correct. Probeer nog een keer - je kan het!');
-                selectedAnswer = null;
+                attemptsRemaining -= 1;
+                updateScoreboard();
+
+                if (attemptsRemaining > 0) {
+                    showError(`Fout antwoord. Je hebt nog ${attemptsRemaining} pogingen over.`);
+                    selectedAnswer = null;
+                } else {
+                    showError('Je hebt 3x fout geantwoord. Terug naar QR-scanner.');
+                    setTimeout(() => {
+                        attemptsRemaining = 3;
+                        updateScoreboard();
+                        backToScanner();
+                    }, 1200);
+                }
             }
         }
 
         // Show success screen
-        function showSuccess() {
+        function showSuccess(message) {
             document.getElementById('quizScreen').classList.add('hidden');
+            document.getElementById('scannerScreen').classList.add('hidden');
             document.getElementById('successScreen').classList.remove('hidden');
-            startQRScanner();
+            if (message) {
+                document.querySelector('#successScreen .success-subtext').textContent = message;
+            }
         }
         
         // Start QR code scanner
@@ -297,23 +328,36 @@
         
         // Process detected QR code
         function processQRCode(qrData) {
+            const statusElement = document.querySelector('.scanner-status');
             try {
                 // Validate that it's a proper URL
                 const url = new URL(qrData);
                 
                 // Check if it's the expected domain
                 if (url.hostname === 'the-green-hunt.pages.dev') {
-                    // Open the URL in a new tab/window
-                    window.open(qrData, '_blank');
-                    
-                    statusElement.textContent = 'Link geopend in nieuw tabblad!';
-                    statusElement.classList.add('success');
-                    
-                    // Stop scanning after successful detection
+                    const qValue = Number(url.searchParams.get('q'));
+                    if (!qValue || qValue < 1 || qValue > quizData.length) {
+                        showScannerError('QR code bevat een ongeldig vraagnummer.');
+                        return;
+                    }
+
+                    // Stop scanning and show vraag
                     if (window.currentStream) {
                         window.currentStream.getTracks().forEach(track => track.stop());
                         window.currentStream = null;
                     }
+
+                    currentQuestionIndex = qValue - 1;
+                    attemptsRemaining = 3;
+                    updateScoreboard();
+                    loadQuestion();
+
+                    document.getElementById('scannerScreen').classList.add('hidden');
+                    document.getElementById('successScreen').classList.add('hidden');
+                    document.getElementById('quizScreen').classList.remove('hidden');
+
+                    statusElement.textContent = 'Vraag geladen: ' + qValue;
+                    statusElement.classList.add('success');
                 } else {
                     showScannerError('QR code bevat geen geldige The Green Hunt link.');
                 }
@@ -342,16 +386,12 @@
             }
         }
         
-        // Go back to scanner after correct answer
+        // Go back to scanner after correct answer or reset
         function backToScanner() {
-            // Stop any running scanner
             stopQRScanner();
-            
-            // Hide success screen and show scanner
             document.getElementById('successScreen').classList.add('hidden');
+            document.getElementById('quizScreen').classList.add('hidden');
             document.getElementById('scannerScreen').classList.remove('hidden');
-            
-            // Start new scanner
             startQRScanner();
         }
         

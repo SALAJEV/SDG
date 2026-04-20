@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="theme-color" content="#0d9488">
   <title>Challenge 10 Games</title>
@@ -235,6 +236,7 @@
                   id="hunt-video"
                   class="scanner-video"
                   playsinline
+                  webkit-playsinline
                   muted
                   autoplay
                   aria-label="Camera preview voor de campusscanner"
@@ -352,6 +354,7 @@
     </section>
   </main>
 
+  <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
   <script>
     const DEFAULT_GAME_DATA = {
       memoryImages: [
@@ -495,7 +498,6 @@
         "serviceWorker" in navigator &&
         (window.location.protocol === "http:" || window.location.protocol === "https:"),
       canUseCamera:
-        window.isSecureContext &&
         window.location.protocol !== "file:" &&
         !!navigator.mediaDevices &&
         typeof navigator.mediaDevices.getUserMedia === "function"
@@ -525,6 +527,8 @@
         stream: null,
         detector: null,
         scanFrameId: null,
+        scanCanvas: null,
+        scanContext: null,
         lastScanValue: "",
         lastScanAt: 0
       }
@@ -799,7 +803,7 @@
               <span class="memory-front-label">Memorie</span>
             </span>
             <span class="memory-face memory-back">
-              <img src="${toSrc(card.fileName)}" alt="Memoriekaart" loading="lazy" draggable="false">
+              <img src="${toSrc(card.fileName)}" alt="Memoriekaart" draggable="false">
             </span>
           </span>
         </button>
@@ -965,6 +969,31 @@
       }
     }
 
+    function hasJsQrFallback() {
+      return typeof window.jsQR === "function";
+    }
+
+    function ensureScanCanvas() {
+      if (state.hunt.scanCanvas && state.hunt.scanContext) {
+        return {
+          canvas: state.hunt.scanCanvas,
+          context: state.hunt.scanContext
+        };
+      }
+
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d", { willReadFrequently: true });
+
+      if (!context) {
+        return null;
+      }
+
+      state.hunt.scanCanvas = canvas;
+      state.hunt.scanContext = context;
+
+      return { canvas, context };
+    }
+
     function extractQuestionId(rawValue) {
       const questionMap = getHuntQuestionMap();
       const rawText = String(rawValue || "").trim();
@@ -1040,10 +1069,34 @@
       }
 
       try {
-        const barcodes = await state.hunt.detector.detect(huntVideoEl);
+        if (state.hunt.detector) {
+          const barcodes = await state.hunt.detector.detect(huntVideoEl);
 
-        if (Array.isArray(barcodes) && barcodes.length) {
-          handleHuntScan(barcodes[0].rawValue || "");
+          if (Array.isArray(barcodes) && barcodes.length) {
+            handleHuntScan(barcodes[0].rawValue || "");
+          }
+        } else if (hasJsQrFallback() && huntVideoEl.readyState >= HTMLMediaElement.HAVE_ENOUGH_DATA) {
+          const scanSurface = ensureScanCanvas();
+
+          if (scanSurface && huntVideoEl.videoWidth && huntVideoEl.videoHeight) {
+            const maxWidth = 960;
+            const scale = Math.min(1, maxWidth / huntVideoEl.videoWidth);
+            const scanWidth = Math.max(1, Math.round(huntVideoEl.videoWidth * scale));
+            const scanHeight = Math.max(1, Math.round(huntVideoEl.videoHeight * scale));
+
+            scanSurface.canvas.width = scanWidth;
+            scanSurface.canvas.height = scanHeight;
+            scanSurface.context.drawImage(huntVideoEl, 0, 0, scanWidth, scanHeight);
+
+            const imageData = scanSurface.context.getImageData(0, 0, scanWidth, scanHeight);
+            const qrCode = window.jsQR(imageData.data, scanWidth, scanHeight, {
+              inversionAttempts: "dontInvert"
+            });
+
+            if (qrCode && qrCode.data) {
+              handleHuntScan(qrCode.data);
+            }
+          }
         }
       } catch (error) {
         /* ignore intermittent detector errors while camera warms up */
@@ -1087,8 +1140,9 @@
       }
 
       const detector = await ensureQrDetector();
+      const canUseFallbackScanner = hasJsQrFallback();
 
-      if (!detector) {
+      if (!detector && !canUseFallbackScanner) {
         setScannerStatus(
           "Scannen lukt op dit toestel niet. Gebruik de locatiecode om verder te spelen.",
           "is-error"
@@ -1113,7 +1167,12 @@
         huntVideoEl.srcObject = stream;
         await huntVideoEl.play();
 
-        setScannerStatus("Scanner actief. Open nu de code van je volgende locatie.", "is-neutral");
+        setScannerStatus(
+          detector
+            ? "Scanner actief. Richt je camera op de QR-code van je volgende locatie."
+            : "Scanner actief. Je toestel leest de QR-code nu via de camerabeelden.",
+          "is-neutral"
+        );
         showFeedback("Scan de code van de volgende stop om je vraag te openen.", "is-neutral");
         state.hunt.scanFrameId = window.requestAnimationFrame(scanVideoFrame);
       } catch (error) {

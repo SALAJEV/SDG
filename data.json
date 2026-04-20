@@ -1,0 +1,74 @@
+{
+  "memoryImages": [
+    "IMG_2528_Edited.jpg",
+    "IMG_2581_Edited.jpg",
+    "\u041c\u043e\u0440\u0435.jpg",
+    "\u041c\u043e\u0441\u043a\u0432\u0430.jpg",
+    "\u0413\u043e\u0440\u044b.jpg",
+    "\u0417\u0438\u043c\u0430.jpg",
+    "\u041c\u0438\u0448\u043a\u0438.jpg",
+    "\u0421\u0430\u043d\u043a\u0442-\u041f\u0435\u0442\u0435\u0440\u0431\u0443\u0440\u0433.jpg"
+  ],
+  "huntQuestions": [
+    {
+      "id": "GH-01",
+      "location": "Campusingang",
+      "question": "Je start je lesdag op VIVES Kortrijk. Wat is de slimste duurzame keuze voor je drinkfles?",
+      "answers": [
+        "Elke dag een nieuwe plastic fles kopen",
+        "Een herbruikbare fles navullen aan een drinkpunt",
+        "De fles thuis laten en niets drinken"
+      ],
+      "correctAnswer": 1,
+      "points": 20
+    },
+    {
+      "id": "GH-02",
+      "location": "Fietsenstalling",
+      "question": "Wat is voor veel VIVES-studenten meestal de meest duurzame manier om naar de campus te komen?",
+      "answers": [
+        "Met de fiets of te voet",
+        "Alleen met de auto voor een korte rit",
+        "Met een scooter voor elk traject"
+      ],
+      "correctAnswer": 0,
+      "points": 20
+    },
+    {
+      "id": "GH-03",
+      "location": "Studentenrestaurant",
+      "question": "Hoe beperk je tijdens de middag op campus het best voedselverspilling?",
+      "answers": [
+        "Meer nemen dan je nodig hebt",
+        "Porties kiezen die je echt opeet",
+        "Eten weggooien zodra het minder warm is"
+      ],
+      "correctAnswer": 1,
+      "points": 20
+    },
+    {
+      "id": "GH-04",
+      "location": "Leercentrum",
+      "question": "Je bent klaar met laden na een lange studiedag. Wat is dan de slimste energiegewoonte?",
+      "answers": [
+        "Je lader laten insteken tot de volgende dag",
+        "Je lader uittrekken zodra je toestel voldoende opgeladen is",
+        "Altijd meerdere stopcontacten bezet houden"
+      ],
+      "correctAnswer": 1,
+      "points": 20
+    },
+    {
+      "id": "GH-05",
+      "location": "Campusgroen",
+      "question": "Wat helpt het meest om de campus van VIVES Kortrijk proper en aangenaam te houden?",
+      "answers": [
+        "Afval laten liggen tot iemand anders het opraapt",
+        "Groene zones respecteren en je afval meteen weggooien",
+        "Blikjes naast een vuilnisbak zetten als die bijna vol is"
+      ],
+      "correctAnswer": 1,
+      "points": 20
+    }
+  ]
+}

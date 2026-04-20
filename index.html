@@ -1,426 +1,1401 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Duurzaamheid Quiz - Start</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0d9488">
+  <title>Challenge 10 Games</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="apple-touch-icon" href="memes/IMG_2581_Edited.jpg">
 </head>
 <body>
-    <div class="container">
-        <div id="scoreBoard" class="score-board">
-            <div>Score: <span id="scoreValue">0</span></div>
-            <div>Pogingen: <span id="attemptsValue">3</span></div>
+  <main class="app-shell" data-mode="menu">
+    <section id="start-screen" class="screen screen-start">
+      <div class="hero-grid">
+        <header class="hero hero-start">
+          <div class="eyebrow-row">
+            <p class="badge">Challenge 10</p>
+            <span class="hero-chip">Hogeschool VIVES Kortrijk</span>
+          </div>
+
+          <h1>Klaar voor een duurzame campuschallenge op VIVES Kortrijk?</h1>
+          <p class="subtitle">
+            Kies tussen <strong>The Green Hunt</strong> op de campus of <strong>memorie</strong>
+            voor tussendoor. Alles is afgestemd op studenten van Hogeschool VIVES in Kortrijk:
+            snel, duidelijk en vlot speelbaar op je smartphone.
+          </p>
+
+          <section class="overview-grid" aria-label="Overzicht van de challenge">
+            <article class="overview-card">
+              <span class="overview-label">Games</span>
+              <strong class="overview-value">2</strong>
+              <p class="overview-text">Een actieve campus hunt en een snelle game voor tussendoor.</p>
+            </article>
+
+            <article class="overview-card">
+              <span class="overview-label">Green Hunt</span>
+              <strong class="overview-value">5 stops</strong>
+              <p class="overview-text">Ga van locatie naar locatie en speel stap voor stap naar je eindscore.</p>
+            </article>
+
+            <article class="overview-card">
+              <span class="overview-label">Beloning</span>
+              <strong class="overview-value">Prijs</strong>
+              <p class="overview-text">Na de hunt krijg je meteen te zien dat je je prijs mag afhalen.</p>
+            </article>
+          </section>
+        </header>
+
+        <aside class="hero-panel">
+          <p class="panel-kicker">In een oogopslag</p>
+
+          <div class="step-list">
+            <article class="step-item">
+              <span class="step-number">1</span>
+              <div>
+                <strong>Kies je spel</strong>
+                <p>Start met de campus hunt of speel eerst een snelle ronde memorie.</p>
+              </div>
+            </article>
+
+            <article class="step-item">
+              <span class="step-number">2</span>
+              <div>
+                <strong>Volg de flow</strong>
+                <p>De flow begeleidt je vanzelf van start tot eindscherm.</p>
+              </div>
+            </article>
+
+            <article class="step-item">
+              <span class="step-number">3</span>
+              <div>
+                <strong>Werk professioneel af</strong>
+                <p>Score, voortgang en afronding staan altijd helder in beeld.</p>
+              </div>
+            </article>
+          </div>
+
+          <p class="panel-note">
+            Ontworpen voor VIVES-studenten die de challenge snel op hun smartphone willen spelen tijdens het event.
+          </p>
+        </aside>
+      </div>
+
+      <section class="mode-grid" aria-label="Kies een game">
+        <button class="mode-card mode-card-hunt" type="button" data-mode="hunt">
+          <span class="mode-kicker">Rond de campus</span>
+          <strong class="mode-title">The Green Hunt</strong>
+          <span class="mode-text">
+            Trek met je medestudenten over de campus, open per locatie een vraag en speel naar je score.
+          </span>
+          <span class="mode-meta">
+            <span class="meta-pill">5 campusstops</span>
+            <span class="meta-pill">Score op vragen</span>
+            <span class="meta-pill">Prijs aan de stand</span>
+          </span>
+          <span class="mode-cta">Start speurtocht</span>
+        </button>
+
+        <button class="mode-card mode-card-memory" type="button" data-mode="memory">
+          <span class="mode-kicker">Geheugen challenge</span>
+          <strong class="mode-title">Memorie</strong>
+          <span class="mode-text">
+            Ideaal tussen twee activiteiten door: draai de kaarten om, onthoud de beelden en los alles op in zo weinig mogelijk beurten.
+          </span>
+          <span class="mode-meta">
+            <span class="meta-pill">Rustige modus</span>
+            <span class="meta-pill">8 kaarten</span>
+            <span class="meta-pill">Score op beurten</span>
+          </span>
+          <span class="mode-cta">Start memorie</span>
+        </button>
+      </section>
+    </section>
+
+    <section id="game-screen" class="screen screen-game" hidden>
+      <header class="hero hero-compact hero-game">
+        <div class="hero-head">
+          <div class="hero-head-stack">
+            <div class="eyebrow-row">
+              <p id="game-badge" class="badge">Challenge 10</p>
+              <span class="hero-chip hero-chip-soft">Voor VIVES-studenten</span>
+            </div>
+
+            <div class="hero-copy">
+              <h1 id="game-title">The Green Hunt</h1>
+              <p id="game-subtitle" class="subtitle"></p>
+            </div>
+          </div>
+
+          <button id="back-to-menu" class="ghost-btn" type="button">Terug naar start</button>
         </div>
 
-        <!-- Start Screen -->
-        <div id="startScreen" class="start-screen">
-            <div class="start-icon">🌱</div>
-            <h1>Duurzaamheid Quiz</h1>
-            <p class="start-description">
-                Ontdek hoe duurzaam jij bent! Beantwoord vragen over milieu en duurzaamheid.
+        <div class="hero-info-strip" aria-label="Spelinfo">
+          <span class="info-pill">Gemaakt voor smartphone</span>
+          <span class="info-pill">Speelbaar tijdens het VIVES-event</span>
+        </div>
+      </header>
+
+      <section class="status-row" aria-label="Spelstatus">
+        <div class="status-card">
+          <span id="primary-label" class="status-label">Punten</span>
+          <strong id="primary-value" class="status-value">0</strong>
+        </div>
+        <div class="status-card">
+          <span id="secondary-label" class="status-label">Voortgang</span>
+          <strong id="secondary-value" class="status-value">0/5</strong>
+        </div>
+        <button id="restart" class="restart-btn" type="button">Opnieuw starten</button>
+      </section>
+
+      <section id="hunt-game" class="game-panel" hidden>
+        <div class="hunt-shell">
+          <div id="hunt-intro-view" class="hunt-view">
+            <article class="hunt-stage-card hunt-intro-card">
+              <div class="hunt-stage-header">
+                <p class="panel-kicker">The Green Hunt</p>
+                <span class="hunt-stage-tag">VIVES Kortrijk</span>
+              </div>
+
+              <h2 class="question-title">Scan een QR-code op campus en open je eerste vraag.</h2>
+              <p class="question-support">
+                Zoals in de referentieflow: je start eenvoudig, scant een code, beantwoordt de vraag en trekt daarna
+                door naar je volgende stop op campus.
+              </p>
+
+              <div class="hunt-feature-grid">
+                <article class="hunt-feature-card">
+                  <span class="overview-label">Vragen</span>
+                  <strong class="overview-value">5</strong>
+                  <p class="overview-text">Elke QR-code opent 1 aparte vraag op een campuslocatie.</p>
+                </article>
+
+                <article class="hunt-feature-card">
+                  <span class="overview-label">Pogingen</span>
+                  <strong class="overview-value">3</strong>
+                  <p class="overview-text">Per vraag krijg je 3 kansen om het juiste antwoord te kiezen.</p>
+                </article>
+
+                <article class="hunt-feature-card">
+                  <span class="overview-label">Beloning</span>
+                  <strong class="overview-value">Prijs</strong>
+                  <p class="overview-text">Na je vijfde campusstop verschijnt meteen je prijsscherm.</p>
+                </article>
+              </div>
+
+              <div class="step-list step-list-compact">
+                <article class="step-item">
+                  <span class="step-number">1</span>
+                  <div>
+                    <strong>Scan een code</strong>
+                    <p>Gebruik de QR-code op de campus of vul de code manueel in als reserve.</p>
+                  </div>
+                </article>
+
+                <article class="step-item">
+                  <span class="step-number">2</span>
+                  <div>
+                    <strong>Beantwoord de vraag</strong>
+                    <p>Je score stijgt per juist antwoord. Bij 3 missers ga je terug naar de scanner.</p>
+                  </div>
+                </article>
+
+                <article class="step-item">
+                  <span class="step-number">3</span>
+                  <div>
+                    <strong>Werk de 5 stops af</strong>
+                    <p>Na de laatste vraag krijg je je score en zie je dat je je prijs mag afhalen.</p>
+                  </div>
+                </article>
+              </div>
+
+              <div class="finish-actions">
+                <button id="hunt-start-game" class="restart-btn" type="button">Start The Green Hunt</button>
+                <button id="hunt-back-home-intro" class="ghost-btn" type="button">Terug naar start</button>
+              </div>
+            </article>
+          </div>
+
+          <div id="hunt-scanner-view" class="hunt-view" hidden>
+            <article class="hunt-stage-card scanner-stage-card">
+              <div class="hunt-stage-header">
+                <p class="panel-kicker">Scan QR-code</p>
+                <span id="hunt-scan-counter" class="hunt-stage-tag">0 / 5 afgerond</span>
+              </div>
+
+              <h2 class="question-title">Scan je volgende Green Hunt-code</h2>
+              <p class="scanner-description">
+                Richt je camera op een QR-code op de VIVES-campus. Zodra de code herkend wordt, opent de juiste vraag.
+              </p>
+
+              <div class="scanner-preview">
+                <video
+                  id="hunt-video"
+                  class="scanner-video"
+                  playsinline
+                  muted
+                  autoplay
+                  aria-label="Camera preview voor de campusscanner"
+                ></video>
+                <div class="scanner-frame" aria-hidden="true">
+                  <span>Richt je camera op de QR-code van je campusstop</span>
+                </div>
+              </div>
+
+              <p id="scanner-status" class="scanner-status">Geef cameratoegang om je eerste campusstop te openen.</p>
+
+              <div class="scanner-actions">
+                <button id="start-scanner" class="restart-btn" type="button">Scanner starten</button>
+                <button id="stop-scanner" class="ghost-btn" type="button">Scanner stoppen</button>
+              </div>
+
+              <form id="manual-qr-form" class="manual-form">
+                <label class="manual-label" for="manual-qr-input">Lukt scannen niet? Vul dan je QR-link of code in</label>
+                <div class="manual-row">
+                  <input
+                    id="manual-qr-input"
+                    class="manual-input"
+                    name="manual-qr-input"
+                    type="text"
+                    placeholder="Bijvoorbeeld q=1 of GH-01"
+                    autocomplete="off"
+                  >
+                  <button class="ghost-btn" type="submit">Open vraag</button>
+                </div>
+              </form>
+            </article>
+          </div>
+
+          <div id="hunt-question-view" class="hunt-view" hidden>
+            <article class="hunt-stage-card question-stage-card">
+              <div class="hunt-stage-header">
+                <p id="hunt-question-counter" class="panel-kicker">Vraag 1 van 5</p>
+                <span id="hunt-question-location" class="hunt-stage-tag">Locatie</span>
+              </div>
+
+              <div class="progress-shell" aria-label="Voortgang van de hunt">
+                <div class="progress-label-row">
+                  <span class="question-counter">Voortgang</span>
+                  <span id="hunt-progress-label" class="question-counter">1 / 5</span>
+                </div>
+                <div class="progress-bar">
+                  <span id="hunt-progress-fill" class="progress-fill"></span>
+                </div>
+              </div>
+
+              <h2 id="hunt-question-text" class="question-title">Vraag</h2>
+              <p id="hunt-attempt-caption" class="question-support">Je hebt nog 3 pogingen voor deze vraag.</p>
+              <div id="hunt-answer-list" class="answer-list"></div>
+              <p id="hunt-question-message" class="hunt-inline-message" hidden></p>
+            </article>
+          </div>
+
+          <div id="hunt-success-view" class="hunt-view" hidden>
+            <article class="hunt-stage-card hunt-success-card">
+              <div class="success-burst" aria-hidden="true">+</div>
+              <p class="badge">Campusstop afgerond</p>
+              <h2 class="finish-title">Prima, deze vraag is binnen.</h2>
+              <p id="hunt-success-text" class="finish-score">
+                Scan een andere QR-code om door te gaan naar je volgende stop.
+              </p>
+
+              <div class="finish-actions">
+                <button id="hunt-next-scan" class="restart-btn" type="button">Scan volgende QR-code</button>
+              </div>
+            </article>
+          </div>
+
+          <div id="hunt-finish-view" class="hunt-view" hidden>
+            <article class="finish-card">
+              <div class="finish-emblem" aria-hidden="true">+</div>
+              <p class="badge">The Green Hunt voltooid</p>
+              <h2 class="finish-title">Top gedaan. Je mag je prijs afhalen aan de VIVES-stand</h2>
+              <p id="hunt-final-score" class="finish-score">Je score is 0 op 5.</p>
+
+              <div class="finish-meta">
+                <span class="meta-pill">5 stops afgewerkt</span>
+                <span class="meta-pill">Score meteen zichtbaar</span>
+                <span class="meta-pill">Klaar voor de stand</span>
+              </div>
+
+              <div class="finish-actions">
+                <button id="hunt-play-again" class="restart-btn" type="button">Nog eens spelen</button>
+                <button id="hunt-back-home" class="ghost-btn" type="button">Terug naar start</button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="memory-game" class="game-panel" hidden>
+        <div class="memory-shell">
+          <article class="memory-intro">
+            <p class="panel-kicker">Memorie</p>
+            <h2 class="question-title">Even wachten op vrienden? Speel een snelle ronde.</h2>
+            <p class="memory-copy">
+              Deze modus is ideaal tussen twee campusactiviteiten door. Onthoud de kaarten, hou je beurten laag en werk de set af.
             </p>
-            <div class="start-info">
-                <div class="info-icon">📱</div>
-                <p>Scan QR codes die naar The Green Hunt leiden</p>
+            <div class="memory-tags">
+              <span class="meta-pill">8 kaarten</span>
+              <span class="meta-pill">Focus op geheugen</span>
+              <span class="meta-pill">Beurten tellen mee</span>
             </div>
-            <div class="camera-notice">
-                <div class="notice-icon">📷</div>
-                <p>De app vraagt toestemming voor je camera om QR codes te scannen</p>
-            </div>
-            <button class="start-btn" onclick="startQuiz()">Start Quiz</button>
+          </article>
+
+          <div id="memory-grid" class="memory-grid" aria-label="Memorie speelveld"></div>
         </div>
+      </section>
 
-        <!-- QR Scanner Screen -->
-        <div id="scannerScreen" class="scanner-screen hidden">
-            <div class="scanner-icon">📱</div>
-            <h1>Scan QR Code</h1>
-            <p class="scanner-description">
-                Scan een QR code die naar The Green Hunt leidt om een vraag te starten
-            </p>
-            <div id="reader" class="qr-reader-container"></div>
-            <div class="scanner-status">Camera wordt geladen...</div>
-        </div>
+      <p id="feedback" class="feedback" aria-live="polite"></p>
+    </section>
+  </main>
 
-        <!-- Quiz Screen -->
-        <div id="quizScreen" class="quiz-screen hidden">
-            <h1>Vraag <span id="currentQuestion">1</span> / <span id="totalQuestions">5</span></h1>
-            <div class="progress-bar">
-                <div id="progressFill" class="progress-fill" style="width:0%;"></div>
-            </div>
-            <p id="questionText" class="question-text"></p>
-            <div id="optionsContainer" class="options"></div>
-            <div id="errorMessage" class="error-message hidden"></div>
-            <button class="submit-btn" onclick="checkAnswer()">Antwoord controleren</button>
-        </div>
+  <script>
+    const DEFAULT_GAME_DATA = {
+      memoryImages: [
+        "IMG_2528_Edited.jpg",
+        "IMG_2581_Edited.jpg",
+        "\u041c\u043e\u0440\u0435.jpg",
+        "\u041c\u043e\u0441\u043a\u0432\u0430.jpg",
+        "\u0413\u043e\u0440\u044b.jpg",
+        "\u0417\u0438\u043c\u0430.jpg",
+        "\u041c\u0438\u0448\u043a\u0438.jpg",
+        "\u0421\u0430\u043d\u043a\u0442-\u041f\u0435\u0442\u0435\u0440\u0431\u0443\u0440\u0433.jpg"
+      ],
+      huntQuestions: [
+        {
+          id: "GH-01",
+          location: "Campusingang",
+          question: "Je start je lesdag op VIVES Kortrijk. Wat is de slimste duurzame keuze voor je drinkfles?",
+          answers: [
+            "Elke dag een nieuwe plastic fles kopen",
+            "Een herbruikbare fles navullen aan een drinkpunt",
+            "De fles thuis laten en niets drinken"
+          ],
+          correctAnswer: 1,
+          points: 20
+        },
+        {
+          id: "GH-02",
+          location: "Fietsenstalling",
+          question: "Wat is voor veel VIVES-studenten meestal de meest duurzame manier om naar de campus te komen?",
+          answers: [
+            "Met de fiets of te voet",
+            "Alleen met de auto voor een korte rit",
+            "Met een scooter voor elk traject"
+          ],
+          correctAnswer: 0,
+          points: 20
+        },
+        {
+          id: "GH-03",
+          location: "Studentenrestaurant",
+          question: "Hoe beperk je tijdens de middag op campus het best voedselverspilling?",
+          answers: [
+            "Meer nemen dan je nodig hebt",
+            "Porties kiezen die je echt opeet",
+            "Eten weggooien zodra het minder warm is"
+          ],
+          correctAnswer: 1,
+          points: 20
+        },
+        {
+          id: "GH-04",
+          location: "Leercentrum",
+          question: "Je bent klaar met laden na een lange studiedag. Wat is dan de slimste energiegewoonte?",
+          answers: [
+            "Je lader laten insteken tot de volgende dag",
+            "Je lader uittrekken zodra je toestel voldoende opgeladen is",
+            "Altijd meerdere stopcontacten bezet houden"
+          ],
+          correctAnswer: 1,
+          points: 20
+        },
+        {
+          id: "GH-05",
+          location: "Campusgroen",
+          question: "Wat helpt het meest om de campus van VIVES Kortrijk proper en aangenaam te houden?",
+          answers: [
+            "Afval laten liggen tot iemand anders het opraapt",
+            "Groene zones respecteren en je afval meteen weggooien",
+            "Blikjes naast een vuilnisbak zetten als die bijna vol is"
+          ],
+          correctAnswer: 1,
+          points: 20
+        }
+      ]
+    };
 
-        <!-- Success Screen -->
-        <div id="successScreen" class="success-screen hidden">
-            <div class="success-icon">🌱</div>
-            <div class="success-text">Prima!</div>
-            <div class="success-subtext">Link geopend! Scan een andere QR code voor je volgende vraag.</div>
-            <button class="submit-btn finish-btn" id="nextBtn" onclick="backToScanner()">Scan volgende QR code</button>
-        </div>
+    const gameConfigs = {
+      hunt: {
+        badge: "Rond de campus",
+        title: "The Green Hunt",
+        subtitle: "Scan QR-codes op 5 campusstops, beantwoord de vragen en speel naar je score."
+      },
+      memory: {
+        badge: "Geheugen challenge",
+        title: "Memorie",
+        subtitle: "Een snelle studentengame voor tussendoor: draai de kaarten om en vind alle gelijke foto's."
+      }
+    };
 
-        <!-- Completion Screen -->
-        <div id="completionScreen" class="success-screen hidden">
-            <div class="success-icon">🌍</div>
-            <div class="success-text">Fantastisch!</div>
-            <div class="success-subtext">Je bent duurzaamheidsbewust! Samen kunnen we de wereld verbeteren.</div>
-            <button class="submit-btn finish-btn" onclick="location.reload()">Opnieuw starten</button>
-        </div>
-    </div>
+    const appShell = document.querySelector(".app-shell");
+    const startScreen = document.getElementById("start-screen");
+    const gameScreen = document.getElementById("game-screen");
+    const modeButtons = Array.from(document.querySelectorAll(".mode-card"));
+    const gameBadgeEl = document.getElementById("game-badge");
+    const gameTitleEl = document.getElementById("game-title");
+    const gameSubtitleEl = document.getElementById("game-subtitle");
+    const primaryLabelEl = document.getElementById("primary-label");
+    const primaryValueEl = document.getElementById("primary-value");
+    const secondaryLabelEl = document.getElementById("secondary-label");
+    const secondaryValueEl = document.getElementById("secondary-value");
+    const feedbackEl = document.getElementById("feedback");
+    const restartBtn = document.getElementById("restart");
+    const backToMenuBtn = document.getElementById("back-to-menu");
 
-    <script>
-        // Quiz data - direct in HTML voor betrouwbaarheid
-        const quizData = [
-            {
-                "question": "Welke energiebron is het meest duurzaam?",
-                "options": ["Aardolie", "Zonnepanelen", "Steenkool", "Aardgas"],
-                "correct": 1
-            },
-            {
-                "question": "Hoeveel procent van het plastic gegeten wordt daadwerkelijk gerecycled?",
-                "options": ["5%", "35%", "65%", "85%"],
-                "correct": 0
-            },
-            {
-                "question": "Wat is het meest milieubelastende product?",
-                "options": ["Papieren zak", "Plastic zak", "Katoenen zak", "Polyester zak"],
-                "correct": 1
-            },
-            {
-                "question": "Hoeveel water kost het om 1 kg katoen te produceren?",
-                "options": ["500 liter", "5.000 liter", "10.000 liter", "50.000 liter"],
-                "correct": 2
-            },
-            {
-                "question": "Welke voedselkeuze heeft de kleinste koolstofvoetafdruk?",
-                "options": ["Rundvlees", "Kipvlees", "Groenten", "Kaas"],
-                "correct": 2
-            }
-        ];
+    const huntGameEl = document.getElementById("hunt-game");
+    const huntIntroViewEl = document.getElementById("hunt-intro-view");
+    const huntScannerViewEl = document.getElementById("hunt-scanner-view");
+    const huntQuestionViewEl = document.getElementById("hunt-question-view");
+    const huntSuccessViewEl = document.getElementById("hunt-success-view");
+    const huntFinishViewEl = document.getElementById("hunt-finish-view");
+    const huntVideoEl = document.getElementById("hunt-video");
+    const scannerStatusEl = document.getElementById("scanner-status");
+    const huntStartGameBtn = document.getElementById("hunt-start-game");
+    const huntBackHomeIntroBtn = document.getElementById("hunt-back-home-intro");
+    const huntScanCounterEl = document.getElementById("hunt-scan-counter");
+    const startScannerBtn = document.getElementById("start-scanner");
+    const stopScannerBtn = document.getElementById("stop-scanner");
+    const manualQrForm = document.getElementById("manual-qr-form");
+    const manualQrInput = document.getElementById("manual-qr-input");
+    const huntQuestionCounterEl = document.getElementById("hunt-question-counter");
+    const huntQuestionLocationEl = document.getElementById("hunt-question-location");
+    const huntQuestionTextEl = document.getElementById("hunt-question-text");
+    const huntAttemptCaptionEl = document.getElementById("hunt-attempt-caption");
+    const huntAnswerListEl = document.getElementById("hunt-answer-list");
+    const huntQuestionMessageEl = document.getElementById("hunt-question-message");
+    const huntSuccessTextEl = document.getElementById("hunt-success-text");
+    const huntNextScanBtn = document.getElementById("hunt-next-scan");
+    const huntFinalScoreEl = document.getElementById("hunt-final-score");
+    const huntPlayAgainBtn = document.getElementById("hunt-play-again");
+    const huntBackHomeBtn = document.getElementById("hunt-back-home");
+    const huntProgressFillEl = document.getElementById("hunt-progress-fill");
+    const huntProgressLabelEl = document.getElementById("hunt-progress-label");
 
-        let currentQuestionIndex = null;
-        let selectedAnswer = null;
-        let attemptsRemaining = 3;
-        let score = 0;
-        let quizStarted = false;
+    const memoryGameEl = document.getElementById("memory-game");
+    const memoryGridEl = document.getElementById("memory-grid");
 
-        function updateScoreboard() {
-            document.getElementById('scoreValue').textContent = score;
-            document.getElementById('attemptsValue').textContent = attemptsRemaining;
+    const runtime = {
+      protocol: window.location.protocol,
+      isFile: window.location.protocol === "file:",
+      canRegisterServiceWorker:
+        "serviceWorker" in navigator &&
+        (window.location.protocol === "http:" || window.location.protocol === "https:"),
+      canUseCamera:
+        window.isSecureContext &&
+        window.location.protocol !== "file:" &&
+        !!navigator.mediaDevices &&
+        typeof navigator.mediaDevices.getUserMedia === "function"
+    };
+
+    let pendingTimers = [];
+    let dataLoadPromise = null;
+
+    const state = {
+      currentMode: null,
+      gameData: DEFAULT_GAME_DATA,
+      memory: {
+        deck: [],
+        firstCard: null,
+        secondCard: null,
+        locked: false,
+        pairsFound: 0,
+        turns: 0,
+        totalPairs: 0
+      },
+      hunt: {
+        score: 0,
+        attemptsRemaining: 3,
+        answeredIds: new Set(),
+        currentQuestion: null,
+        locked: false,
+        stream: null,
+        detector: null,
+        scanFrameId: null,
+        lastScanValue: "",
+        lastScanAt: 0
+      }
+    };
+
+    function schedule(callback, delay) {
+      const timerId = window.setTimeout(() => {
+        pendingTimers = pendingTimers.filter((currentId) => currentId !== timerId);
+        callback();
+      }, delay);
+
+      pendingTimers.push(timerId);
+    }
+
+    function clearPendingTimers() {
+      pendingTimers.forEach((timerId) => window.clearTimeout(timerId));
+      pendingTimers = [];
+    }
+
+    function showFeedback(message, stateClass) {
+      feedbackEl.textContent = message;
+      feedbackEl.className = "feedback " + stateClass;
+    }
+
+    function pickRandom(items) {
+      return items[Math.floor(Math.random() * items.length)];
+    }
+
+    function shuffle(items) {
+      const copy = [...items];
+
+      for (let index = copy.length - 1; index > 0; index -= 1) {
+        const swapIndex = Math.floor(Math.random() * (index + 1));
+        [copy[index], copy[swapIndex]] = [copy[swapIndex], copy[index]];
+      }
+
+      return copy;
+    }
+
+    function toSrc(fileName) {
+      return "memes/" + encodeURIComponent(fileName);
+    }
+
+    function normalizeGameData(data) {
+      const memoryImages =
+        Array.isArray(data.memoryImages) && data.memoryImages.length
+          ? data.memoryImages
+          : [
+              ...(Array.isArray(data.sustainable) ? data.sustainable.map((item) => item.image || item) : []),
+              ...(Array.isArray(data.notsustainable) ? data.notsustainable.map((item) => item.image || item) : [])
+            ];
+
+      const huntQuestions =
+        Array.isArray(data.huntQuestions) && data.huntQuestions.length
+          ? data.huntQuestions
+          : DEFAULT_GAME_DATA.huntQuestions;
+
+      return {
+        memoryImages: memoryImages.length ? memoryImages : DEFAULT_GAME_DATA.memoryImages,
+        huntQuestions: huntQuestions.map((question, index) => ({
+          id: String(question.id || "GH-0" + (index + 1)).trim().toUpperCase(),
+          location: String(question.location || "Campuslocatie").trim(),
+          question: String(question.question || "Vraag").trim(),
+          answers: Array.isArray(question.answers) ? question.answers.map((answer) => String(answer)) : [],
+          correctAnswer: Number.isInteger(question.correctAnswer) ? question.correctAnswer : 0,
+          points: Number.isFinite(question.points) ? Number(question.points) : 20
+        }))
+      };
+    }
+
+    function installRuntimeEnhancements() {
+      if (runtime.canRegisterServiceWorker) {
+        const manifestLink = document.createElement("link");
+        manifestLink.rel = "manifest";
+        manifestLink.href = "manifest.json";
+        document.head.appendChild(manifestLink);
+      }
+    }
+
+    function loadGameData() {
+      if (dataLoadPromise) {
+        return dataLoadPromise;
+      }
+
+      if (runtime.isFile) {
+        dataLoadPromise = Promise.resolve(normalizeGameData(DEFAULT_GAME_DATA)).then((data) => {
+          state.gameData = data;
+          return data;
+        });
+
+        return dataLoadPromise;
+      }
+
+      dataLoadPromise = fetch("data.json", { cache: "no-store" })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Kon data.json niet laden.");
+          }
+
+          return response.json();
+        })
+        .then((data) => {
+          state.gameData = normalizeGameData(data);
+          return state.gameData;
+        })
+        .catch(() => {
+          state.gameData = normalizeGameData(DEFAULT_GAME_DATA);
+          return state.gameData;
+        });
+
+      return dataLoadPromise;
+    }
+
+    function getHuntQuestions() {
+      return state.gameData.huntQuestions;
+    }
+
+    function getHuntQuestionMap() {
+      return new Map(getHuntQuestions().map((question) => [question.id, question]));
+    }
+
+    function getQuestionIdFromSequenceNumber(sequenceNumber) {
+      const questionNumber = Number.parseInt(sequenceNumber, 10);
+
+      if (!Number.isInteger(questionNumber) || questionNumber < 1) {
+        return null;
+      }
+
+      const questions = getHuntQuestions();
+      const directId = "GH-" + String(questionNumber).padStart(2, "0");
+      const questionMap = getHuntQuestionMap();
+
+      if (questionMap.has(directId)) {
+        return directId;
+      }
+
+      return questions[questionNumber - 1] ? questions[questionNumber - 1].id : null;
+    }
+
+    function getHuntTargetCount() {
+      return Math.min(5, getHuntQuestions().length);
+    }
+
+    function getHuntQuestionNumber(question) {
+      const questionIndex = getHuntQuestions().findIndex((entry) => entry.id === question.id);
+      return questionIndex >= 0 ? questionIndex + 1 : state.hunt.answeredIds.size + 1;
+    }
+
+    function updateHuntProgressUI() {
+      const total = getHuntTargetCount();
+      const currentStep = state.hunt.currentQuestion
+        ? Math.min(total, state.hunt.answeredIds.size + 1)
+        : state.hunt.answeredIds.size;
+      const progressPercent = total ? (currentStep / total) * 100 : 0;
+
+      huntProgressFillEl.style.width = progressPercent + "%";
+      huntProgressLabelEl.textContent = total ? currentStep + " / " + total : "0 / 0";
+
+      if (huntScanCounterEl) {
+        huntScanCounterEl.textContent = total
+          ? state.hunt.answeredIds.size + " / " + total + " afgerond"
+          : "0 / 0 afgerond";
+      }
+
+      if (huntAttemptCaptionEl) {
+        huntAttemptCaptionEl.textContent =
+          "Je hebt nog " +
+          String(state.hunt.attemptsRemaining) +
+          (state.hunt.attemptsRemaining === 1 ? " poging" : " pogingen") +
+          " voor deze vraag.";
+      }
+    }
+
+    function updateStatus() {
+      if (state.currentMode === "hunt") {
+        primaryLabelEl.textContent = "Score";
+        primaryValueEl.textContent = String(state.hunt.score);
+        secondaryLabelEl.textContent = "Pogingen";
+        secondaryValueEl.textContent = String(state.hunt.attemptsRemaining);
+        updateHuntProgressUI();
+        return;
+      }
+
+      if (state.currentMode === "memory") {
+        primaryLabelEl.textContent = "Paren";
+        primaryValueEl.textContent = state.memory.totalPairs
+          ? state.memory.pairsFound + "/" + state.memory.totalPairs
+          : "0/0";
+        secondaryLabelEl.textContent = "Beurten";
+        secondaryValueEl.textContent = String(state.memory.turns);
+      }
+    }
+
+    function stopHuntScanner() {
+      if (state.hunt.scanFrameId) {
+        window.cancelAnimationFrame(state.hunt.scanFrameId);
+        state.hunt.scanFrameId = null;
+      }
+
+      if (state.hunt.stream) {
+        state.hunt.stream.getTracks().forEach((track) => track.stop());
+        state.hunt.stream = null;
+      }
+
+      huntVideoEl.srcObject = null;
+    }
+
+    function showStartScreen() {
+      clearPendingTimers();
+      stopHuntScanner();
+      state.currentMode = null;
+      appShell.dataset.mode = "menu";
+      document.title = "Challenge 10 Games";
+      startScreen.hidden = false;
+      gameScreen.hidden = true;
+      huntGameEl.hidden = true;
+      memoryGameEl.hidden = true;
+    }
+
+    function applyGameMeta(mode) {
+      const config = gameConfigs[mode];
+      document.title = config.title + " | Challenge 10";
+      gameBadgeEl.textContent = config.badge;
+      gameTitleEl.textContent = config.title;
+      gameSubtitleEl.textContent = config.subtitle;
+    }
+
+    async function openGame(mode) {
+      clearPendingTimers();
+      stopHuntScanner();
+      await loadGameData();
+      state.currentMode = mode;
+      appShell.dataset.mode = mode;
+      startScreen.hidden = true;
+      gameScreen.hidden = false;
+      huntGameEl.hidden = mode !== "hunt";
+      memoryGameEl.hidden = mode !== "memory";
+      applyGameMeta(mode);
+      restartCurrentGame();
+    }
+
+    function buildMemoryDeck() {
+      const selectedImages = shuffle(state.gameData.memoryImages).slice(0, 4);
+      const cards = selectedImages.flatMap((fileName, index) => [
+        {
+          id: "pair-" + index + "-a",
+          pairKey: "pair-" + index,
+          fileName
+        },
+        {
+          id: "pair-" + index + "-b",
+          pairKey: "pair-" + index,
+          fileName
+        }
+      ]);
+
+      return shuffle(cards);
+    }
+
+    function memoryCardMarkup(card) {
+      return `
+        <button
+          class="memory-card"
+          type="button"
+          data-card-id="${card.id}"
+          data-pair-key="${card.pairKey}"
+          aria-label="Verborgen kaart"
+        >
+          <span class="memory-card-inner">
+            <span class="memory-face memory-front">
+              <span class="memory-front-mark">?</span>
+              <span class="memory-front-label">Memorie</span>
+            </span>
+            <span class="memory-face memory-back">
+              <img src="${toSrc(card.fileName)}" alt="Memoriekaart" loading="lazy" draggable="false">
+            </span>
+          </span>
+        </button>
+      `;
+    }
+
+    function resetMemoryTurn() {
+      state.memory.firstCard = null;
+      state.memory.secondCard = null;
+      state.memory.locked = false;
+    }
+
+    function renderMemoryDeck() {
+      memoryGridEl.innerHTML = state.memory.deck.map(memoryCardMarkup).join("");
+
+      Array.from(memoryGridEl.querySelectorAll(".memory-card")).forEach((card) => {
+        card.addEventListener("click", () => handleMemoryCardClick(card));
+      });
+    }
+
+    function restartMemoryGame() {
+      state.memory.deck = buildMemoryDeck();
+      state.memory.firstCard = null;
+      state.memory.secondCard = null;
+      state.memory.locked = false;
+      state.memory.pairsFound = 0;
+      state.memory.turns = 0;
+      state.memory.totalPairs = state.memory.deck.length / 2;
+
+      renderMemoryDeck();
+      updateStatus();
+      showFeedback("Draai twee kaarten om en vind alle gelijke paren.", "is-neutral");
+    }
+
+    function handleMemoryCardClick(card) {
+      if (
+        state.currentMode !== "memory" ||
+        state.memory.locked ||
+        card.classList.contains("is-revealed") ||
+        card.classList.contains("is-matched")
+      ) {
+        return;
+      }
+
+      card.classList.add("is-revealed");
+      card.setAttribute("aria-label", "Omgedraaide kaart");
+
+      if (!state.memory.firstCard) {
+        state.memory.firstCard = card;
+        showFeedback("Eerste kaart onthouden. Zoek nu het bijpassende paar.", "is-neutral");
+        return;
+      }
+
+      state.memory.secondCard = card;
+      state.memory.locked = true;
+      state.memory.turns += 1;
+
+      const isMatch =
+        state.memory.firstCard.dataset.pairKey === state.memory.secondCard.dataset.pairKey;
+
+      if (isMatch) {
+        state.memory.firstCard.classList.add("is-matched");
+        state.memory.secondCard.classList.add("is-matched");
+        state.memory.firstCard.disabled = true;
+        state.memory.secondCard.disabled = true;
+        state.memory.pairsFound += 1;
+        updateStatus();
+
+        if (state.memory.pairsFound === state.memory.totalPairs) {
+          showFeedback(
+            "Alles gevonden in " + state.memory.turns + " beurten. Sterk gespeeld.",
+            "is-success"
+          );
+        } else {
+          showFeedback("Mooi, dat is een juist paar.", "is-success");
         }
 
-        // Initialize app
-        function init() {
-            console.log('Quiz data geladen:', quizData.length, 'vragen');
-            updateScoreboard();
-            // Don't start quiz automatically, wait for user to click start
-        }
-        
-        // Start the quiz when user clicks start button
-        function startQuiz() {
-            if (quizStarted) return; // Prevent multiple starts
-            
-            quizStarted = true;
-            
-            // Request camera permission
-            requestCameraPermission();
-            
-            // Hide start screen and show scanner
-            document.getElementById('startScreen').classList.add('hidden');
-            document.getElementById('scannerScreen').classList.remove('hidden');
-            
-            // Start QR scanner immediately
-            startQRScanner();
-        }
-        
-        // Request camera permission
-        function requestCameraPermission() {
-            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                navigator.mediaDevices.getUserMedia({ video: true })
-                    .then(stream => {
-                        // Stop the stream after getting permission
-                        stream.getTracks().forEach(track => track.stop());
-                        console.log('Camera permission granted');
-                    })
-                    .catch(error => {
-                        console.log('Camera permission denied:', error);
-                        alert('Camera toestemming is nodig om QR codes te scannen. Geef toestemming en klik opnieuw op Start.');
-                    });
-            }
+        schedule(() => {
+          resetMemoryTurn();
+        }, 280);
+
+        return;
+      }
+
+      updateStatus();
+      showFeedback("Geen paar. Onthoud de posities en probeer opnieuw.", "is-error");
+
+      const firstCard = state.memory.firstCard;
+      const secondCard = state.memory.secondCard;
+
+      schedule(() => {
+        firstCard.classList.remove("is-revealed");
+        secondCard.classList.remove("is-revealed");
+        firstCard.setAttribute("aria-label", "Verborgen kaart");
+        secondCard.setAttribute("aria-label", "Verborgen kaart");
+        resetMemoryTurn();
+      }, 880);
+    }
+
+    function resetHuntState() {
+      stopHuntScanner();
+      state.hunt.score = 0;
+      state.hunt.attemptsRemaining = 3;
+      state.hunt.answeredIds = new Set();
+      state.hunt.currentQuestion = null;
+      state.hunt.locked = false;
+      state.hunt.lastScanValue = "";
+      state.hunt.lastScanAt = 0;
+      huntAnswerListEl.innerHTML = "";
+      manualQrInput.value = "";
+      setHuntQuestionMessage("", "is-neutral");
+      updateHuntProgressUI();
+    }
+
+    function showHuntView(view) {
+      huntIntroViewEl.hidden = view !== "intro";
+      huntScannerViewEl.hidden = view !== "scanner";
+      huntQuestionViewEl.hidden = view !== "question";
+      huntSuccessViewEl.hidden = view !== "success";
+      huntFinishViewEl.hidden = view !== "finish";
+    }
+
+    function setScannerStatus(message, stateClass) {
+      scannerStatusEl.textContent = message;
+      scannerStatusEl.className = "scanner-status " + stateClass;
+    }
+
+    function setHuntQuestionMessage(message, stateClass) {
+      if (!message) {
+        huntQuestionMessageEl.hidden = true;
+        huntQuestionMessageEl.textContent = "";
+        huntQuestionMessageEl.className = "hunt-inline-message";
+        return;
+      }
+
+      huntQuestionMessageEl.hidden = false;
+      huntQuestionMessageEl.textContent = message;
+      huntQuestionMessageEl.className = "hunt-inline-message " + stateClass;
+    }
+
+    async function ensureQrDetector() {
+      if (state.hunt.detector) {
+        return state.hunt.detector;
+      }
+
+      if (!("BarcodeDetector" in window)) {
+        return null;
+      }
+
+      try {
+        if (typeof BarcodeDetector.getSupportedFormats === "function") {
+          const formats = await BarcodeDetector.getSupportedFormats();
+
+          if (Array.isArray(formats) && !formats.includes("qr_code")) {
+            return null;
+          }
         }
 
-        // Load current question
-        function loadQuestion() {
-            const question = quizData[currentQuestionIndex];
-            document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
-            document.getElementById('totalQuestions').textContent = quizData.length;
-            document.getElementById('questionText').textContent = question.question;
-            document.getElementById('errorMessage').classList.add('hidden');
-            
-            const optionsContainer = document.getElementById('optionsContainer');
-            optionsContainer.innerHTML = '';
-            
-            question.options.forEach((option, index) => {
-                const optionDiv = document.createElement('div');
-                optionDiv.className = 'option';
-                optionDiv.innerHTML = `
-                    <label>
-                        <input type="radio" name="answer" value="${index}" onchange="selectedAnswer = ${index}">
-                        <span>${option}</span>
-                    </label>
-                `;
-                optionsContainer.appendChild(optionDiv);
-            });
-            
-            selectedAnswer = null;
+        state.hunt.detector = new BarcodeDetector({ formats: ["qr_code"] });
+        return state.hunt.detector;
+      } catch (error) {
+        return null;
+      }
+    }
 
-            // Update progress fill
-            const progress = ((currentQuestionIndex + 1) / quizData.length) * 100;
-            document.getElementById('progressFill').style.width = `${progress}%`;
+    function extractQuestionId(rawValue) {
+      const questionMap = getHuntQuestionMap();
+      const rawText = String(rawValue || "").trim();
+
+      if (!rawText) {
+        return null;
+      }
+
+      const candidates = [rawText];
+
+      try {
+        const url = new URL(rawText);
+        candidates.push(
+          url.searchParams.get("id") || "",
+          url.searchParams.get("code") || "",
+          url.searchParams.get("qr") || "",
+          url.searchParams.get("q") || "",
+          url.searchParams.get("question") || "",
+          url.pathname.split("/").filter(Boolean).pop() || ""
+        );
+      } catch (error) {
+        /* raw text is not a URL */
+      }
+
+      if (rawText.includes(":")) {
+        candidates.push(rawText.split(":").pop() || "");
+      }
+
+      for (const candidate of candidates) {
+        const normalizedCandidate = String(candidate || "").trim().toUpperCase();
+
+        if (!normalizedCandidate) {
+          continue;
         }
 
-        // Check if answer is correct
-        function checkAnswer() {
-            if (selectedAnswer === null) {
-                showError('Selecteer alstublieft een antwoord!');
-                return;
-            }
-
-            const question = quizData[currentQuestionIndex];
-            
-            if (selectedAnswer === question.correct) {
-                score += 1;
-                attemptsRemaining = 3;
-                updateScoreboard();
-                showSuccess('Goed gedaan! Score verhoogd. Scan de volgende QR code.');
-            } else {
-                attemptsRemaining -= 1;
-                updateScoreboard();
-
-                if (attemptsRemaining > 0) {
-                    showError(`Fout antwoord. Je hebt nog ${attemptsRemaining} pogingen over.`);
-                    selectedAnswer = null;
-                } else {
-                    showError('Je hebt 3x fout geantwoord. Terug naar QR-scanner.');
-                    setTimeout(() => {
-                        attemptsRemaining = 3;
-                        updateScoreboard();
-                        backToScanner();
-                    }, 1200);
-                }
-            }
+        if (questionMap.has(normalizedCandidate)) {
+          return normalizedCandidate;
         }
 
-        // Show success screen
-        function showSuccess(message) {
-            document.getElementById('quizScreen').classList.add('hidden');
-            document.getElementById('scannerScreen').classList.add('hidden');
-            document.getElementById('successScreen').classList.remove('hidden');
-            if (message) {
-                document.querySelector('#successScreen .success-subtext').textContent = message;
-            }
-        }
-        
-        // Start QR code scanner
-        function startQRScanner() {
-            const reader = document.getElementById("reader");
-            const statusElement = document.querySelector('.scanner-status');
-            
-            reader.innerHTML = ''; // Clear previous scanner
-            statusElement.textContent = 'Camera wordt geladen...';
-            statusElement.classList.remove('success');
-            
-            // Check if camera is available
-            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-                statusElement.textContent = 'Camera wordt niet ondersteund op dit apparaat.';
-                return;
-            }
-            
-            // Create video and canvas elements
-            const video = document.createElement('video');
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            
-            video.style.width = '100%';
-            video.style.height = 'auto';
-            video.style.borderRadius = '17px';
-            video.style.objectFit = 'cover';
-            video.style.display = 'block';
-            
-            canvas.style.display = 'none'; // Hidden canvas for processing
-            
-            reader.appendChild(video);
-            
-            // Get camera stream
-            navigator.mediaDevices.getUserMedia({ 
-                video: { 
-                    facingMode: 'environment', // Use back camera on mobile
-                    width: { ideal: 640 },
-                    height: { ideal: 480 }
-                } 
-            }).then(stream => {
-                video.srcObject = stream;
-                video.play();
-                
-                statusElement.textContent = 'Scan een QR code';
-                
-                // Start scanning loop
-                let scanning = true;
-                let lastScanTime = 0;
-                
-                function scanFrame(timestamp) {
-                    if (!scanning) return;
-                    
-                    // Limit scan rate to ~10fps
-                    if (timestamp - lastScanTime < 100) {
-                        requestAnimationFrame(scanFrame);
-                        return;
-                    }
-                    lastScanTime = timestamp;
-                    
-                    if (video.readyState === video.HAVE_ENOUGH_DATA) {
-                        canvas.width = video.videoWidth;
-                        canvas.height = video.videoHeight;
-                        
-                        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-                        
-                        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-                        
-                        try {
-                            const code = jsQR(imageData.data, imageData.width, imageData.height);
-                            
-                            if (code) {
-                                console.log('QR Code gedetecteerd:', code.data);
-                                statusElement.textContent = 'QR code gedetecteerd!';
-                                statusElement.classList.add('success');
-                                
-                                // Stop scanning
-                                scanning = false;
-                                stream.getTracks().forEach(track => track.stop());
-                                
-                                // Process the QR code
-                                processQRCode(code.data);
-                            }
-                        } catch (error) {
-                            console.log('Scan error:', error);
-                        }
-                    }
-                    
-                    if (scanning) {
-                        requestAnimationFrame(scanFrame);
-                    }
-                }
-                
-                // Start the scanning loop
-                requestAnimationFrame(scanFrame);
-                
-                // Store stream reference for cleanup
-                window.currentStream = stream;
-                
-            }).catch(error => {
-                console.error('Camera error:', error);
-                if (error.name === 'NotAllowedError') {
-                    statusElement.textContent = 'Camera toestemming geweigerd. Vernieuw de pagina en geef toestemming.';
-                } else if (error.name === 'NotFoundError') {
-                    statusElement.textContent = 'Geen camera gevonden op dit apparaat.';
-                } else {
-                    statusElement.textContent = 'Kon camera niet starten: ' + error.message;
-                }
-            });
-        }
-        
-        // Process detected QR code
-        function processQRCode(qrData) {
-            const statusElement = document.querySelector('.scanner-status');
-            try {
-                // Validate that it's a proper URL
-                const url = new URL(qrData);
-                
-                // Check if it's the expected domain
-                if (url.hostname === 'the-green-hunt.pages.dev') {
-                    const qValue = Number(url.searchParams.get('q'));
-                    if (!qValue || qValue < 1 || qValue > quizData.length) {
-                        showScannerError('QR code bevat een ongeldig vraagnummer.');
-                        return;
-                    }
+        const match = normalizedCandidate.match(/GH-\d+/);
 
-                    // Stop scanning and show vraag
-                    if (window.currentStream) {
-                        window.currentStream.getTracks().forEach(track => track.stop());
-                        window.currentStream = null;
-                    }
-
-                    currentQuestionIndex = qValue - 1;
-                    attemptsRemaining = 3;
-                    updateScoreboard();
-                    loadQuestion();
-
-                    document.getElementById('scannerScreen').classList.add('hidden');
-                    document.getElementById('successScreen').classList.add('hidden');
-                    document.getElementById('quizScreen').classList.remove('hidden');
-
-                    statusElement.textContent = 'Vraag geladen: ' + qValue;
-                    statusElement.classList.add('success');
-                } else {
-                    showScannerError('QR code bevat geen geldige The Green Hunt link.');
-                }
-            } catch (error) {
-                console.error('Fout bij QR code parsing:', error);
-                showScannerError('QR code kon niet worden gelezen.');
-            }
-        }
-        
-        // Show scanner error and restart
-        function showScannerError(message) {
-            const statusElement = document.querySelector('.scanner-status');
-            statusElement.textContent = message;
-            statusElement.classList.remove('success');
-            
-            // Restart scanner after 3 seconds
-            setTimeout(() => startQRScanner(), 3000);
-        }
-        
-        // Stop QR scanner when leaving success screen
-        function stopQRScanner() {
-            if (window.currentStream) {
-                window.currentStream.getTracks().forEach(track => track.stop());
-                console.log('Camera stream gestopt');
-                window.currentStream = null;
-            }
-        }
-        
-        // Go back to scanner after correct answer or reset
-        function backToScanner() {
-            stopQRScanner();
-            document.getElementById('successScreen').classList.add('hidden');
-            document.getElementById('quizScreen').classList.add('hidden');
-            document.getElementById('scannerScreen').classList.remove('hidden');
-            startQRScanner();
-        }
-        
-        // Show error message
-        function showError(message) {
-            const errorElement = document.getElementById('errorMessage');
-            errorElement.textContent = message;
-            errorElement.classList.remove('hidden');
-            
-            // Hide error after 5 seconds
-            setTimeout(() => {
-                errorElement.classList.add('hidden');
-            }, 5000);
-        }
-        // Move to next question (not used in QR flow, but kept for compatibility)
-        function nextQuestion() {
-            // In QR flow, we always go back to scanner
-            backToScanner();
+        if (match && questionMap.has(match[0])) {
+          return match[0];
         }
 
-        // Start the quiz
-        init();
-    </script>
+        const sequenceMatch = normalizedCandidate.match(
+          /(?:^|[^A-Z])(?:Q|QUESTION|VRAAG)[=/_ -]*0*(\d+)(?:[^0-9]|$)/
+        );
+
+        if (sequenceMatch) {
+          const questionId = getQuestionIdFromSequenceNumber(sequenceMatch[1]);
+
+          if (questionId) {
+            return questionId;
+          }
+        }
+
+        if (/^\d+$/.test(normalizedCandidate)) {
+          const questionId = getQuestionIdFromSequenceNumber(normalizedCandidate);
+
+          if (questionId) {
+            return questionId;
+          }
+        }
+      }
+
+      return null;
+    }
+
+    async function scanVideoFrame() {
+      if (state.currentMode !== "hunt" || huntScannerViewEl.hidden || !state.hunt.stream) {
+        return;
+      }
+
+      try {
+        const barcodes = await state.hunt.detector.detect(huntVideoEl);
+
+        if (Array.isArray(barcodes) && barcodes.length) {
+          handleHuntScan(barcodes[0].rawValue || "");
+        }
+      } catch (error) {
+        /* ignore intermittent detector errors while camera warms up */
+      }
+
+      if (state.currentMode === "hunt" && !huntScannerViewEl.hidden && state.hunt.stream) {
+        state.hunt.scanFrameId = window.requestAnimationFrame(scanVideoFrame);
+      }
+    }
+
+    async function startHuntScanner() {
+      showHuntView("scanner");
+      setHuntQuestionMessage("", "is-neutral");
+
+      if (state.hunt.answeredIds.size >= getHuntTargetCount()) {
+        return;
+      }
+
+      if (runtime.isFile) {
+        setScannerStatus(
+          "Deze versie kan de camera hier niet openen. Gebruik de gedeelde spelpagina of vul de locatiecode in.",
+          "is-error"
+        );
+        showFeedback(
+          "De camera is hier niet beschikbaar. Met de locatiecode kan je wel verder spelen.",
+          "is-error"
+        );
+        return;
+      }
+
+      if (!runtime.canUseCamera) {
+        setScannerStatus(
+          "De camera is momenteel niet beschikbaar op deze pagina.",
+          "is-error"
+        );
+        showFeedback(
+          "Open de game opnieuw zoals je ze van de begeleider of het event kreeg.",
+          "is-error"
+        );
+        return;
+      }
+
+      const detector = await ensureQrDetector();
+
+      if (!detector) {
+        setScannerStatus(
+          "Scannen lukt op dit toestel niet. Gebruik de locatiecode om verder te spelen.",
+          "is-error"
+        );
+        showFeedback("De locatiecode blijft wel bruikbaar als alternatief.", "is-error");
+        return;
+      }
+
+      if (state.hunt.stream) {
+        return;
+      }
+
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: {
+            facingMode: { ideal: "environment" }
+          },
+          audio: false
+        });
+
+        state.hunt.stream = stream;
+        huntVideoEl.srcObject = stream;
+        await huntVideoEl.play();
+
+        setScannerStatus("Scanner actief. Open nu de code van je volgende locatie.", "is-neutral");
+        showFeedback("Scan de code van de volgende stop om je vraag te openen.", "is-neutral");
+        state.hunt.scanFrameId = window.requestAnimationFrame(scanVideoFrame);
+      } catch (error) {
+        setScannerStatus(
+          "Geen toegang tot de camera. Probeer opnieuw of gebruik de locatiecode.",
+          "is-error"
+        );
+        showFeedback("De camera kon niet gestart worden.", "is-error");
+      }
+    }
+
+    function showHuntQuestion(question) {
+      state.hunt.currentQuestion = question;
+      state.hunt.attemptsRemaining = 3;
+      state.hunt.locked = false;
+      showHuntView("question");
+      huntQuestionCounterEl.textContent =
+        "Vraag " + String(getHuntQuestionNumber(question)) + " van " + String(getHuntTargetCount());
+      huntQuestionLocationEl.textContent = question.location;
+      huntQuestionTextEl.textContent = question.question;
+      setHuntQuestionMessage("", "is-neutral");
+      updateStatus();
+      updateHuntProgressUI();
+      huntAnswerListEl.innerHTML = question.answers
+        .map((answer, index) => {
+          return `
+            <button class="answer-btn" type="button" data-answer-index="${index}">
+              ${answer}
+            </button>
+          `;
+        })
+        .join("");
+
+      Array.from(huntAnswerListEl.querySelectorAll(".answer-btn")).forEach((button) => {
+        button.addEventListener("click", () => answerHuntQuestion(Number(button.dataset.answerIndex)));
+      });
+    }
+
+    function showHuntSuccess() {
+      const remaining = Math.max(0, getHuntTargetCount() - state.hunt.answeredIds.size);
+
+      showHuntView("success");
+      huntSuccessTextEl.textContent =
+        remaining > 0
+          ? "Je score staat nu op " +
+            String(state.hunt.score) +
+            ". Scan nog " +
+            String(remaining) +
+            (remaining === 1 ? " campusstop" : " campusstops") +
+            " om de hunt af te werken."
+          : "Alle campusstops zijn afgewerkt.";
+      updateStatus();
+      showFeedback("Prima! Scan nu een andere QR-code voor je volgende campusstop.", "is-success");
+    }
+
+    function showHuntFinish() {
+      stopHuntScanner();
+      state.hunt.attemptsRemaining = 3;
+      showHuntView("finish");
+      huntFinalScoreEl.textContent =
+        "Je score is " +
+        String(state.hunt.score) +
+        " op " +
+        String(getHuntTargetCount()) +
+        ".";
+      updateStatus();
+      showFeedback("The Green Hunt is voltooid. Je mag je prijs afhalen bij de stand.", "is-success");
+    }
+
+    function handleHuntScan(rawValue) {
+      const currentTime = Date.now();
+
+      if (
+        rawValue === state.hunt.lastScanValue &&
+        currentTime - state.hunt.lastScanAt < 1500
+      ) {
+        return;
+      }
+
+      state.hunt.lastScanValue = rawValue;
+      state.hunt.lastScanAt = currentTime;
+
+      const questionId = extractQuestionId(rawValue);
+
+      if (!questionId) {
+        setScannerStatus("Deze code werd niet herkend als Green Hunt-locatie.", "is-error");
+        showFeedback("Deze code hoort niet bij een geldige locatie in de hunt.", "is-error");
+        return;
+      }
+
+      if (state.hunt.answeredIds.has(questionId)) {
+        setScannerStatus("Deze locatie is al voltooid. Kies een andere stop.", "is-error");
+        showFeedback("Je hebt deze locatie al afgerond.", "is-error");
+        return;
+      }
+
+      const question = getHuntQuestionMap().get(questionId);
+
+      if (!question) {
+        setScannerStatus("Voor deze locatie werd geen vraag gevonden.", "is-error");
+        showFeedback("Deze locatie heeft momenteel geen geldige vraag.", "is-error");
+        return;
+      }
+
+      stopHuntScanner();
+      setScannerStatus("Locatie herkend. Je vraag wordt geopend.", "is-success");
+      showFeedback("Beantwoord de vraag om verder te spelen.", "is-neutral");
+      showHuntQuestion(question);
+    }
+
+    function answerHuntQuestion(selectedIndex) {
+      if (
+        state.currentMode !== "hunt" ||
+        !state.hunt.currentQuestion ||
+        state.hunt.locked
+      ) {
+        return;
+      }
+
+      state.hunt.locked = true;
+      const question = state.hunt.currentQuestion;
+      const answerButtons = Array.from(huntAnswerListEl.querySelectorAll(".answer-btn"));
+      const isCorrect = selectedIndex === question.correctAnswer;
+
+      if (isCorrect) {
+        answerButtons.forEach((button) => {
+          const answerIndex = Number(button.dataset.answerIndex);
+          button.disabled = true;
+
+          if (answerIndex === question.correctAnswer) {
+            button.classList.add("is-correct");
+          } else {
+            button.classList.add("is-muted");
+          }
+        });
+
+        state.hunt.score += 1;
+        state.hunt.answeredIds.add(question.id);
+        setHuntQuestionMessage("Juist! Deze campusstop is binnen.", "is-success");
+        updateStatus();
+
+        schedule(() => {
+          state.hunt.currentQuestion = null;
+          state.hunt.locked = false;
+
+          if (state.hunt.answeredIds.size >= getHuntTargetCount()) {
+            showHuntFinish();
+            return;
+          }
+
+          showHuntSuccess();
+        }, 720);
+
+        return;
+      }
+
+      state.hunt.attemptsRemaining = Math.max(0, state.hunt.attemptsRemaining - 1);
+
+      answerButtons.forEach((button) => {
+        const answerIndex = Number(button.dataset.answerIndex);
+        button.disabled = true;
+
+        if (answerIndex === selectedIndex) {
+          button.classList.add("is-wrong");
+        } else {
+          button.classList.add("is-muted");
+        }
+      });
+
+      updateStatus();
+
+      if (state.hunt.attemptsRemaining > 0) {
+        showFeedback(
+          "Niet juist. Je hebt nog " +
+            String(state.hunt.attemptsRemaining) +
+            (state.hunt.attemptsRemaining === 1 ? " poging." : " pogingen."),
+          "is-error"
+        );
+        setHuntQuestionMessage(
+          "Nog " +
+            String(state.hunt.attemptsRemaining) +
+            (state.hunt.attemptsRemaining === 1 ? " poging" : " pogingen") +
+            ". Probeer opnieuw.",
+          "is-error"
+        );
+
+        schedule(() => {
+          answerButtons.forEach((button) => {
+            button.disabled = false;
+            button.classList.remove("is-wrong", "is-muted");
+          });
+          state.hunt.locked = false;
+        }, 620);
+
+        return;
+      }
+
+      state.hunt.answeredIds.add(question.id);
+      showFeedback("Drie keer fout. Deze stop is afgesloten, scan nu de volgende QR-code.", "is-error");
+      setHuntQuestionMessage(
+        "Je drie pogingen zijn op. Deze campusstop telt als gespeeld en je gaat terug naar de scanner.",
+        "is-error"
+      );
+
+      schedule(() => {
+        state.hunt.currentQuestion = null;
+        state.hunt.locked = false;
+        state.hunt.attemptsRemaining = 3;
+        updateStatus();
+
+        if (state.hunt.answeredIds.size >= getHuntTargetCount()) {
+          showHuntFinish();
+          return;
+        }
+
+        startHuntScanner();
+      }, 900);
+    }
+
+    function restartHuntGame() {
+      resetHuntState();
+      showHuntView("intro");
+      updateStatus();
+      setScannerStatus("Geef cameratoegang om je eerste campusstop te openen.", "is-neutral");
+
+      if (runtime.isFile) {
+        showFeedback("Gebruik op dit toestel gerust de QR-link of code om verder te spelen.", "is-neutral");
+      } else {
+        showFeedback("Scan 5 campusstops, scoor zo hoog mogelijk en haal je prijs op het einde op.", "is-neutral");
+      }
+    }
+
+    function restartCurrentGame() {
+      clearPendingTimers();
+
+      if (state.currentMode === "hunt") {
+        restartHuntGame();
+        return;
+      }
+
+      if (state.currentMode === "memory") {
+        restartMemoryGame();
+      }
+    }
+
+    modeButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        openGame(button.dataset.mode);
+      });
+    });
+
+    restartBtn.addEventListener("click", restartCurrentGame);
+    backToMenuBtn.addEventListener("click", showStartScreen);
+    huntStartGameBtn.addEventListener("click", startHuntScanner);
+    huntBackHomeIntroBtn.addEventListener("click", showStartScreen);
+    startScannerBtn.addEventListener("click", startHuntScanner);
+    stopScannerBtn.addEventListener("click", () => {
+      stopHuntScanner();
+      setScannerStatus("Scanner gestopt. Start opnieuw wanneer je klaar bent.", "is-neutral");
+    });
+    huntNextScanBtn.addEventListener("click", startHuntScanner);
+    huntPlayAgainBtn.addEventListener("click", restartHuntGame);
+    huntBackHomeBtn.addEventListener("click", showStartScreen);
+
+    manualQrForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      handleHuntScan(manualQrInput.value);
+      manualQrInput.value = "";
+    });
+
+    installRuntimeEnhancements();
+    showStartScreen();
+    loadGameData();
+    updateHuntProgressUI();
+
+    if (runtime.canRegisterServiceWorker) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("sw.js").catch((error) => {
+          console.warn("SW reg failed", error);
+        });
+      });
+    }
+  </script>
 </body>
 </html>

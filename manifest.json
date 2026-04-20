@@ -1,0 +1,20 @@
+{
+  "name": "Challenge 10 Games",
+  "short_name": "Challenge10",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0d9488",
+  "icons": [
+    {
+      "src": "memes/IMG_2581_Edited.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "memes/IMG_2581_Edited.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}

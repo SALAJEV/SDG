@@ -1,9 +1,10 @@
-const CACHE_NAME = "challenge-10-games-v6";
+const CACHE_NAME = "challenge-10-games-v7";
 const ASSETS = [
   "./",
   "./index.html",
   "./style.css",
   "./data.json",
+  "./hunt-questions.js",
   "./manifest.json",
   "./sw.js",
   "./memes/IMG_2528_Edited.jpg",
@@ -35,6 +36,30 @@ self.addEventListener("activate", (event) => {
 });
 
 self.addEventListener("fetch", (event) => {
+  if (event.request.method !== "GET") {
+    return;
+  }
+
+  const requestUrl = new URL(event.request.url);
+  const shouldPreferNetwork =
+    event.request.mode === "navigate" ||
+    requestUrl.pathname.endsWith("/index.html") ||
+    requestUrl.pathname.endsWith("/data.json") ||
+    requestUrl.pathname.endsWith("/hunt-questions.js");
+
+  if (shouldPreferNetwork) {
+    event.respondWith(
+      fetch(event.request)
+        .then((response) => {
+          const responseClone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseClone));
+          return response;
+        })
+        .catch(() => caches.match(event.request))
+    );
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request).then((response) => {
       return response || fetch(event.request);

@@ -37,7 +37,7 @@
 
             <article class="overview-card">
               <span class="overview-label">Green Hunt</span>
-              <strong class="overview-value">5 stops</strong>
+              <strong id="hunt-overview-count" class="overview-value">0 vragen</strong>
               <p class="overview-text">Ga van locatie naar locatie en speel stap voor stap naar je eindscore.</p>
             </article>
 
@@ -92,7 +92,7 @@
             Trek met je medestudenten over de campus, open per locatie een vraag en speel naar je score.
           </span>
           <span class="mode-meta">
-            <span class="meta-pill">5 campusstops</span>
+            <span id="hunt-mode-count" class="meta-pill">0 QR-vragen</span>
             <span class="meta-pill">Score op vragen</span>
             <span class="meta-pill">Prijs aan de stand</span>
           </span>
@@ -146,7 +146,7 @@
         </div>
         <div class="status-card">
           <span id="secondary-label" class="status-label">Voortgang</span>
-          <strong id="secondary-value" class="status-value">0/5</strong>
+          <strong id="secondary-value" class="status-value">0/0</strong>
         </div>
         <button id="restart" class="restart-btn" type="button">Opnieuw starten</button>
       </section>
@@ -169,8 +169,8 @@
               <div class="hunt-feature-grid">
                 <article class="hunt-feature-card">
                   <span class="overview-label">Vragen</span>
-                  <strong class="overview-value">5</strong>
-                  <p class="overview-text">Elke QR-code opent 1 aparte vraag op een campuslocatie.</p>
+                  <strong id="hunt-feature-count" class="overview-value">0</strong>
+                  <p class="overview-text">Elke QR-code opent 1 aparte Green Hunt-vraag.</p>
                 </article>
 
                 <article class="hunt-feature-card">
@@ -182,7 +182,7 @@
                 <article class="hunt-feature-card">
                   <span class="overview-label">Beloning</span>
                   <strong class="overview-value">Prijs</strong>
-                  <p class="overview-text">Na je vijfde campusstop verschijnt meteen je prijsscherm.</p>
+                  <p class="overview-text">Na je laatste vraag verschijnt meteen je prijsscherm.</p>
                 </article>
               </div>
 
@@ -206,7 +206,7 @@
                 <article class="step-item">
                   <span class="step-number">3</span>
                   <div>
-                    <strong>Werk de 5 stops af</strong>
+                    <strong>Werk alle vragen af</strong>
                     <p>Na de laatste vraag krijg je je score en zie je dat je je prijs mag afhalen.</p>
                   </div>
                 </article>
@@ -223,12 +223,12 @@
             <article class="hunt-stage-card scanner-stage-card">
               <div class="hunt-stage-header">
                 <p class="panel-kicker">Scan QR-code</p>
-                <span id="hunt-scan-counter" class="hunt-stage-tag">0 / 5 afgerond</span>
+                <span id="hunt-scan-counter" class="hunt-stage-tag">0 / 0 afgerond</span>
               </div>
 
               <h2 class="question-title">Scan je volgende Green Hunt-code</h2>
               <p class="scanner-description">
-                Richt je camera op een QR-code op de VIVES-campus. Zodra de code herkend wordt, opent de juiste vraag.
+                Richt je camera op een Green Hunt QR-code. Zodra de code herkend wordt, opent de juiste vraag.
               </p>
 
               <div class="scanner-preview">
@@ -242,11 +242,11 @@
                   aria-label="Camera preview voor de campusscanner"
                 ></video>
                 <div class="scanner-frame" aria-hidden="true">
-                  <span>Richt je camera op de QR-code van je campusstop</span>
+                  <span>Richt je camera op je Green Hunt QR-code</span>
                 </div>
               </div>
 
-              <p id="scanner-status" class="scanner-status">Geef cameratoegang om je eerste campusstop te openen.</p>
+              <p id="scanner-status" class="scanner-status">Geef cameratoegang om je eerste Green Hunt-vraag te openen.</p>
 
               <div class="scanner-actions">
                 <button id="start-scanner" class="restart-btn" type="button">Scanner starten</button>
@@ -273,14 +273,14 @@
           <div id="hunt-question-view" class="hunt-view" hidden>
             <article class="hunt-stage-card question-stage-card">
               <div class="hunt-stage-header">
-                <p id="hunt-question-counter" class="panel-kicker">Vraag 1 van 5</p>
+                <p id="hunt-question-counter" class="panel-kicker">Vraag 1 van 0</p>
                 <span id="hunt-question-location" class="hunt-stage-tag">Locatie</span>
               </div>
 
               <div class="progress-shell" aria-label="Voortgang van de hunt">
                 <div class="progress-label-row">
                   <span class="question-counter">Voortgang</span>
-                  <span id="hunt-progress-label" class="question-counter">1 / 5</span>
+                  <span id="hunt-progress-label" class="question-counter">0 / 0</span>
                 </div>
                 <div class="progress-bar">
                   <span id="hunt-progress-fill" class="progress-fill"></span>
@@ -288,6 +288,7 @@
               </div>
 
               <h2 id="hunt-question-text" class="question-title">Vraag</h2>
+              <p id="hunt-question-hint" class="question-support" hidden></p>
               <p id="hunt-attempt-caption" class="question-support">Je hebt nog 3 pogingen voor deze vraag.</p>
               <div id="hunt-answer-list" class="answer-list"></div>
               <p id="hunt-question-message" class="hunt-inline-message" hidden></p>
@@ -297,7 +298,7 @@
           <div id="hunt-success-view" class="hunt-view" hidden>
             <article class="hunt-stage-card hunt-success-card">
               <div class="success-burst" aria-hidden="true">+</div>
-              <p class="badge">Campusstop afgerond</p>
+              <p class="badge">Green Hunt-vraag afgerond</p>
               <h2 class="finish-title">Prima, deze vraag is binnen.</h2>
               <p id="hunt-success-text" class="finish-score">
                 Scan een andere QR-code om door te gaan naar je volgende stop.
@@ -314,10 +315,10 @@
               <div class="finish-emblem" aria-hidden="true">+</div>
               <p class="badge">The Green Hunt voltooid</p>
               <h2 class="finish-title">Top gedaan. Je mag je prijs afhalen aan de VIVES-stand</h2>
-              <p id="hunt-final-score" class="finish-score">Je score is 0 op 5.</p>
+              <p id="hunt-final-score" class="finish-score">Je score is 0 op 0.</p>
 
               <div class="finish-meta">
-                <span class="meta-pill">5 stops afgewerkt</span>
+                <span id="hunt-finish-count-pill" class="meta-pill">0 vragen afgewerkt</span>
                 <span class="meta-pill">Score meteen zichtbaar</span>
                 <span class="meta-pill">Klaar voor de stand</span>
               </div>
@@ -354,8 +355,14 @@
     </section>
   </main>
 
+  <script src="hunt-questions.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
   <script>
+    const BUNDLED_HUNT_QUESTIONS =
+      Array.isArray(window.HUNT_QUESTIONS) && window.HUNT_QUESTIONS.length
+        ? window.HUNT_QUESTIONS
+        : [];
+
     const DEFAULT_GAME_DATA = {
       memoryImages: [
         "IMG_2528_Edited.jpg",
@@ -367,75 +374,14 @@
         "\u041c\u0438\u0448\u043a\u0438.jpg",
         "\u0421\u0430\u043d\u043a\u0442-\u041f\u0435\u0442\u0435\u0440\u0431\u0443\u0440\u0433.jpg"
       ],
-      huntQuestions: [
-        {
-          id: "GH-01",
-          location: "Campusingang",
-          question: "Je start je lesdag op VIVES Kortrijk. Wat is de slimste duurzame keuze voor je drinkfles?",
-          answers: [
-            "Elke dag een nieuwe plastic fles kopen",
-            "Een herbruikbare fles navullen aan een drinkpunt",
-            "De fles thuis laten en niets drinken"
-          ],
-          correctAnswer: 1,
-          points: 20
-        },
-        {
-          id: "GH-02",
-          location: "Fietsenstalling",
-          question: "Wat is voor veel VIVES-studenten meestal de meest duurzame manier om naar de campus te komen?",
-          answers: [
-            "Met de fiets of te voet",
-            "Alleen met de auto voor een korte rit",
-            "Met een scooter voor elk traject"
-          ],
-          correctAnswer: 0,
-          points: 20
-        },
-        {
-          id: "GH-03",
-          location: "Studentenrestaurant",
-          question: "Hoe beperk je tijdens de middag op campus het best voedselverspilling?",
-          answers: [
-            "Meer nemen dan je nodig hebt",
-            "Porties kiezen die je echt opeet",
-            "Eten weggooien zodra het minder warm is"
-          ],
-          correctAnswer: 1,
-          points: 20
-        },
-        {
-          id: "GH-04",
-          location: "Leercentrum",
-          question: "Je bent klaar met laden na een lange studiedag. Wat is dan de slimste energiegewoonte?",
-          answers: [
-            "Je lader laten insteken tot de volgende dag",
-            "Je lader uittrekken zodra je toestel voldoende opgeladen is",
-            "Altijd meerdere stopcontacten bezet houden"
-          ],
-          correctAnswer: 1,
-          points: 20
-        },
-        {
-          id: "GH-05",
-          location: "Campusgroen",
-          question: "Wat helpt het meest om de campus van VIVES Kortrijk proper en aangenaam te houden?",
-          answers: [
-            "Afval laten liggen tot iemand anders het opraapt",
-            "Groene zones respecteren en je afval meteen weggooien",
-            "Blikjes naast een vuilnisbak zetten als die bijna vol is"
-          ],
-          correctAnswer: 1,
-          points: 20
-        }
-      ]
+      huntQuestions: BUNDLED_HUNT_QUESTIONS
     };
 
     const gameConfigs = {
       hunt: {
         badge: "Rond de campus",
         title: "The Green Hunt",
-        subtitle: "Scan QR-codes op 5 campusstops, beantwoord de vragen en speel naar je score."
+        subtitle: "Scan QR-codes, beantwoord de vragen en speel naar je score."
       },
       memory: {
         badge: "Geheugen challenge",
@@ -458,6 +404,10 @@
     const feedbackEl = document.getElementById("feedback");
     const restartBtn = document.getElementById("restart");
     const backToMenuBtn = document.getElementById("back-to-menu");
+    const huntOverviewCountEl = document.getElementById("hunt-overview-count");
+    const huntModeCountEl = document.getElementById("hunt-mode-count");
+    const huntFeatureCountEl = document.getElementById("hunt-feature-count");
+    const huntFinishCountPillEl = document.getElementById("hunt-finish-count-pill");
 
     const huntGameEl = document.getElementById("hunt-game");
     const huntIntroViewEl = document.getElementById("hunt-intro-view");
@@ -477,6 +427,7 @@
     const huntQuestionCounterEl = document.getElementById("hunt-question-counter");
     const huntQuestionLocationEl = document.getElementById("hunt-question-location");
     const huntQuestionTextEl = document.getElementById("hunt-question-text");
+    const huntQuestionHintEl = document.getElementById("hunt-question-hint");
     const huntAttemptCaptionEl = document.getElementById("hunt-attempt-caption");
     const huntAnswerListEl = document.getElementById("hunt-answer-list");
     const huntQuestionMessageEl = document.getElementById("hunt-question-message");
@@ -572,6 +523,10 @@
       return "memes/" + encodeURIComponent(fileName);
     }
 
+    function formatCountLabel(count, singular, plural) {
+      return String(count) + " " + (count === 1 ? singular : plural);
+    }
+
     function normalizeGameData(data) {
       const memoryImages =
         Array.isArray(data.memoryImages) && data.memoryImages.length
@@ -588,15 +543,65 @@
 
       return {
         memoryImages: memoryImages.length ? memoryImages : DEFAULT_GAME_DATA.memoryImages,
-        huntQuestions: huntQuestions.map((question, index) => ({
-          id: String(question.id || "GH-0" + (index + 1)).trim().toUpperCase(),
-          location: String(question.location || "Campuslocatie").trim(),
-          question: String(question.question || "Vraag").trim(),
-          answers: Array.isArray(question.answers) ? question.answers.map((answer) => String(answer)) : [],
-          correctAnswer: Number.isInteger(question.correctAnswer) ? question.correctAnswer : 0,
-          points: Number.isFinite(question.points) ? Number(question.points) : 20
-        }))
+        huntQuestions: huntQuestions.map((question, index) => {
+          const answers = Array.isArray(question.answers)
+            ? question.answers.map((answer) => String(answer))
+            : [];
+          const correctAnswer =
+            Number.isInteger(question.correctAnswer) &&
+            question.correctAnswer >= 0 &&
+            question.correctAnswer < answers.length
+              ? question.correctAnswer
+              : 0;
+
+          return {
+            id: String(question.id || "GH-" + String(index + 1).padStart(2, "0"))
+              .trim()
+              .toUpperCase(),
+            location: String(question.location || "SDG-vraag").trim(),
+            question: String(question.question || "Vraag").trim(),
+            hint: typeof question.hint === "string" ? question.hint.trim() : "",
+            answers,
+            correctAnswer,
+            points: Number.isFinite(question.points) ? Number(question.points) : 20
+          };
+        })
       };
+    }
+
+    function getHuntTargetCount() {
+      return getHuntQuestions().length;
+    }
+
+    function getHuntSubtitle() {
+      const total = getHuntTargetCount();
+      return total
+        ? "Scan QR-codes, beantwoord " + formatCountLabel(total, "SDG-vraag", "SDG-vragen") + " en speel naar je score."
+        : gameConfigs.hunt.subtitle;
+    }
+
+    function syncHuntCopy() {
+      const total = getHuntTargetCount();
+
+      if (huntOverviewCountEl) {
+        huntOverviewCountEl.textContent = formatCountLabel(total, "vraag", "vragen");
+      }
+
+      if (huntModeCountEl) {
+        huntModeCountEl.textContent = formatCountLabel(total, "QR-vraag", "QR-vragen");
+      }
+
+      if (huntFeatureCountEl) {
+        huntFeatureCountEl.textContent = String(total);
+      }
+
+      if (huntFinishCountPillEl) {
+        huntFinishCountPillEl.textContent = formatCountLabel(total, "vraag afgewerkt", "vragen afgewerkt");
+      }
+
+      if (state.currentMode === "hunt") {
+        gameSubtitleEl.textContent = getHuntSubtitle();
+      }
     }
 
     function installRuntimeEnhancements() {
@@ -616,6 +621,7 @@
       if (runtime.isFile) {
         dataLoadPromise = Promise.resolve(normalizeGameData(DEFAULT_GAME_DATA)).then((data) => {
           state.gameData = data;
+          syncHuntCopy();
           return data;
         });
 
@@ -632,10 +638,12 @@
         })
         .then((data) => {
           state.gameData = normalizeGameData(data);
+          syncHuntCopy();
           return state.gameData;
         })
         .catch(() => {
           state.gameData = normalizeGameData(DEFAULT_GAME_DATA);
+          syncHuntCopy();
           return state.gameData;
         });
 
@@ -666,10 +674,6 @@
       }
 
       return questions[questionNumber - 1] ? questions[questionNumber - 1].id : null;
-    }
-
-    function getHuntTargetCount() {
-      return Math.min(5, getHuntQuestions().length);
     }
 
     function getHuntQuestionNumber(question) {
@@ -753,7 +757,7 @@
       document.title = config.title + " | Challenge 10";
       gameBadgeEl.textContent = config.badge;
       gameTitleEl.textContent = config.title;
-      gameSubtitleEl.textContent = config.subtitle;
+      gameSubtitleEl.textContent = mode === "hunt" ? getHuntSubtitle() : config.subtitle;
     }
 
     async function openGame(mode) {
@@ -1193,6 +1197,13 @@
         "Vraag " + String(getHuntQuestionNumber(question)) + " van " + String(getHuntTargetCount());
       huntQuestionLocationEl.textContent = question.location;
       huntQuestionTextEl.textContent = question.question;
+      if (question.hint) {
+        huntQuestionHintEl.hidden = false;
+        huntQuestionHintEl.textContent = "Hint: " + question.hint;
+      } else {
+        huntQuestionHintEl.hidden = true;
+        huntQuestionHintEl.textContent = "";
+      }
       setHuntQuestionMessage("", "is-neutral");
       updateStatus();
       updateHuntProgressUI();
@@ -1221,11 +1232,11 @@
             String(state.hunt.score) +
             ". Scan nog " +
             String(remaining) +
-            (remaining === 1 ? " campusstop" : " campusstops") +
+            (remaining === 1 ? " Green Hunt-code" : " Green Hunt-codes") +
             " om de hunt af te werken."
-          : "Alle campusstops zijn afgewerkt.";
+          : "Alle Green Hunt-vragen zijn afgewerkt.";
       updateStatus();
-      showFeedback("Prima! Scan nu een andere QR-code voor je volgende campusstop.", "is-success");
+      showFeedback("Prima! Scan nu een andere QR-code voor je volgende vraag.", "is-success");
     }
 
     function showHuntFinish() {
@@ -1258,22 +1269,22 @@
       const questionId = extractQuestionId(rawValue);
 
       if (!questionId) {
-        setScannerStatus("Deze code werd niet herkend als Green Hunt-locatie.", "is-error");
-        showFeedback("Deze code hoort niet bij een geldige locatie in de hunt.", "is-error");
+        setScannerStatus("Deze code werd niet herkend als geldige Green Hunt-vraag.", "is-error");
+        showFeedback("Deze code hoort niet bij een geldige Green Hunt-vraag.", "is-error");
         return;
       }
 
       if (state.hunt.answeredIds.has(questionId)) {
-        setScannerStatus("Deze locatie is al voltooid. Kies een andere stop.", "is-error");
-        showFeedback("Je hebt deze locatie al afgerond.", "is-error");
+        setScannerStatus("Deze vraag is al voltooid. Kies een andere QR-code.", "is-error");
+        showFeedback("Je hebt deze vraag al afgerond.", "is-error");
         return;
       }
 
       const question = getHuntQuestionMap().get(questionId);
 
       if (!question) {
-        setScannerStatus("Voor deze locatie werd geen vraag gevonden.", "is-error");
-        showFeedback("Deze locatie heeft momenteel geen geldige vraag.", "is-error");
+        setScannerStatus("Voor deze QR-code werd geen vraag gevonden.", "is-error");
+        showFeedback("Deze QR-code heeft momenteel geen geldige vraag.", "is-error");
         return;
       }
 
@@ -1311,7 +1322,7 @@
 
         state.hunt.score += 1;
         state.hunt.answeredIds.add(question.id);
-        setHuntQuestionMessage("Juist! Deze campusstop is binnen.", "is-success");
+        setHuntQuestionMessage("Juist! Deze Green Hunt-vraag is binnen.", "is-success");
         updateStatus();
 
         schedule(() => {
@@ -1371,9 +1382,9 @@
       }
 
       state.hunt.answeredIds.add(question.id);
-      showFeedback("Drie keer fout. Deze stop is afgesloten, scan nu de volgende QR-code.", "is-error");
+      showFeedback("Drie keer fout. Deze vraag is afgesloten, scan nu de volgende QR-code.", "is-error");
       setHuntQuestionMessage(
-        "Je drie pogingen zijn op. Deze campusstop telt als gespeeld en je gaat terug naar de scanner.",
+        "Je drie pogingen zijn op. Deze vraag telt als gespeeld en je gaat terug naar de scanner.",
         "is-error"
       );
 
@@ -1396,12 +1407,17 @@
       resetHuntState();
       showHuntView("intro");
       updateStatus();
-      setScannerStatus("Geef cameratoegang om je eerste campusstop te openen.", "is-neutral");
+      setScannerStatus("Geef cameratoegang om je eerste Green Hunt-vraag te openen.", "is-neutral");
 
       if (runtime.isFile) {
         showFeedback("Gebruik op dit toestel gerust de QR-link of code om verder te spelen.", "is-neutral");
       } else {
-        showFeedback("Scan 5 campusstops, scoor zo hoog mogelijk en haal je prijs op het einde op.", "is-neutral");
+        showFeedback(
+          "Scan " +
+            formatCountLabel(getHuntTargetCount(), "Green Hunt-code", "Green Hunt-codes") +
+            ", scoor zo hoog mogelijk en haal je prijs op het einde op.",
+          "is-neutral"
+        );
       }
     }
 
@@ -1444,6 +1460,7 @@
     });
 
     installRuntimeEnhancements();
+    syncHuntCopy();
     showStartScreen();
     loadGameData();
     updateHuntProgressUI();

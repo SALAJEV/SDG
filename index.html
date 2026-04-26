@@ -8,8 +8,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="theme-color" content="#0d9488">
   <title>Challenge 10 Games</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="apple-touch-icon" href="media/SDG_17.jpg">
+  <link rel="stylesheet" href="/style.css">
+  <link rel="apple-touch-icon" href="/media/SDG_17.jpg">
 </head>
 <body>
   <main class="app-shell" data-mode="menu">
@@ -21,7 +21,7 @@
     <section id="poster-screen" class="screen poster-screen" hidden>
       <article class="poster-card">
         <p class="badge">Challenge 10</p>
-        <h1>Welkom bij The Green Hunt</h1>
+        <h1 id="poster-title" class="home-link-title" data-home-trigger="true" role="button" tabindex="0">Welkom bij The Green Hunt</h1>
         <p id="poster-message" class="subtitle">
           Bezoek de stand van Challenge 10 in hal 4 om deze poster te spelen.
         </p>
@@ -36,13 +36,12 @@
         <header class="hero hero-start">
           <div class="eyebrow-row">
             <p class="badge">Challenge 10</p>
-            <span class="hero-chip">Hogeschool VIVES Kortrijk</span>
           </div>
 
-          <h1>Scoor punten met een duurzame campuschallenge op VIVES Kortrijk.</h1>
+          <h1 id="start-title" class="home-link-title" data-home-trigger="true" role="button" tabindex="0">Scoor punten met een duurzame campuschallenge op VIVES Kortrijk.</h1>
           <p class="subtitle">
-            Kies tussen <strong>The Green Hunt</strong> op de campus of een snelle ronde <strong>memorie</strong>.
-            Alles is gemaakt voor studenten: kort, duidelijk, mobiel en leuk genoeg om meteen met je vrienden te starten.
+            Kies tussen <strong>The Green Hunt</strong> op de campus of een ronde <strong>memorie</strong>.
+            Alles is duidelijk opgebouwd en vlot speelbaar op je smartphone.
           </p>
 
           <p id="event-status-note" class="event-status-note" hidden></p>
@@ -75,30 +74,30 @@
             <article class="step-item">
               <span class="step-number">1</span>
               <div>
-                <strong>Kies je vibe</strong>
-                <p>Ga voor een actieve hunt op campus of warm eerst op met een snelle memory game.</p>
+                <strong>Kies een spel</strong>
+                <p>Start met The Green Hunt of speel eerst Memorie.</p>
               </div>
             </article>
 
             <article class="step-item">
               <span class="step-number">2</span>
               <div>
-                <strong>Speel zonder gedoe</strong>
-                <p>De flow neemt je vanzelf mee van start tot score, helemaal op smartphone.</p>
+                <strong>Volg de stappen</strong>
+                <p>Het spel begeleidt je van start tot einde op je smartphone.</p>
               </div>
             </article>
 
             <article class="step-item">
               <span class="step-number">3</span>
               <div>
-                <strong>Laat je score zien</strong>
-                <p>Je voortgang en eindresultaat blijven altijd duidelijk zichtbaar tijdens het spelen.</p>
+                <strong>Bekijk je resultaat</strong>
+                <p>Je score en voortgang blijven tijdens het spelen duidelijk zichtbaar.</p>
               </div>
             </article>
           </div>
 
           <p class="panel-note">
-            Ontworpen voor VIVES-studenten die snel willen starten, samen willen spelen en alles makkelijk op gsm willen volgen.
+            Ontworpen voor VIVES-studenten en eenvoudig te gebruiken tijdens het event.
           </p>
         </aside>
       </div>
@@ -147,20 +146,15 @@
           <div class="hero-head-stack">
             <div class="eyebrow-row">
               <p id="game-badge" class="badge">Challenge 10</p>
-              <span class="hero-chip hero-chip-soft">Voor VIVES-studenten</span>
             </div>
 
             <div class="hero-copy">
-              <h1 id="game-title">The Green Hunt</h1>
+              <h1 id="game-title" class="home-link-title" data-home-trigger="true" role="button" tabindex="0">The Green Hunt</h1>
               <p id="game-subtitle" class="subtitle"></p>
             </div>
           </div>
         </div>
 
-        <div class="hero-info-strip" aria-label="Spelinfo">
-          <span class="info-pill">Gemaakt voor smartphone</span>
-          <span class="info-pill">Speelbaar tijdens het VIVES-event</span>
-        </div>
       </header>
 
       <section class="status-row" aria-label="Spelstatus">
@@ -180,7 +174,6 @@
             <article class="hunt-stage-card hunt-intro-card">
               <div class="hunt-stage-header">
                 <p class="panel-kicker">The Green Hunt</p>
-                <span class="hunt-stage-tag">VIVES Kortrijk</span>
               </div>
 
               <h2 class="question-title">Scan een QR-code op campus en open je eerste vraag.</h2>
@@ -379,9 +372,39 @@
 
       <p id="feedback" class="feedback" aria-live="polite"></p>
     </section>
+
+    <footer class="site-disclaimer" aria-label="Disclaimer">
+      <div class="disclaimer-copy">
+        <p id="disclaimer-text" class="disclaimer-text">
+          Deze site is gemaakt door studenten van Hogeschool VIVES Kortrijk uit de richting Business Management & Entrepreneurship, eerste bachelor.
+        </p>
+        <p id="terms-text" class="terms-text">
+          Gebruiksvoorwaarden: deze website is uitsluitend bedoeld voor educatieve en eventgebonden doeleinden. Inhoud, scoreweergave en spelverloop kunnen aangepast worden zonder voorafgaande melding.
+        </p>
+      </div>
+      <div class="vives-logo-badge">
+        <img
+          src="/media/Logo%20VIVES%20Hogeschool%20-%20Smile.png"
+          alt="Hogeschool VIVES Kortrijk"
+          class="vives-logo"
+          loading="lazy"
+        >
+      </div>
+    </footer>
+
+    <dialog id="app-dialog" class="app-dialog">
+      <form method="dialog" class="dialog-card">
+        <p id="app-dialog-title" class="dialog-title">Opgelet</p>
+        <p id="app-dialog-message" class="dialog-message"></p>
+        <div class="dialog-actions">
+          <button id="app-dialog-cancel" class="ghost-btn" type="button" value="cancel">Annuleren</button>
+          <button id="app-dialog-confirm" class="restart-btn" type="button" value="default">OK</button>
+        </div>
+      </form>
+    </dialog>
   </main>
 
-  <script src="hunt-questions.js"></script>
+  <script src="/hunt-questions.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
   <script>
     const BUNDLED_HUNT_QUESTIONS =
@@ -397,7 +420,7 @@
         posterClosed: "{location} gevonden. The Green Hunt is afgelopen. Speel Memorie of volg ons op Instagram.",
         posterButton: "Start op de website",
         heroTitle: "Speel mee met The Green Hunters",
-        heroSubtitle: "Scan posters, beantwoord vragen of speel Memorie. Alles werkt snel en vlot op je smartphone.",
+        heroSubtitle: "Scan posters, beantwoord vragen of speel Memorie. Alles werkt duidelijk op je smartphone.",
         overviewGames: "Games",
         greenHunt: "Green Hunt",
         overviewGamesText: "Een QR-hunt en een SDG-memorie.",
@@ -414,7 +437,7 @@
         stepThreeText: "Laat je resultaat zien aan de stand.",
         panelNote: "Gemaakt voor het VIVES-event.",
         huntKicker: "Campus hunt",
-        huntText: "Scan posters en beantwoord 5 korte vragen.",
+        huntText: "Scan posters en beantwoord 5 vragen.",
         huntClosedText: "The Green Hunt is afgelopen. Speel Memorie of volg ons op Instagram.",
         huntCount: "QR-vragen",
         scoreQuestions: "Score",
@@ -437,8 +460,8 @@
         time: "Tijd",
         pairs: "Paren",
         turns: "Beurten",
-        huntIntroTitle: "Start en scan je eerste poster.",
-        huntIntroText: "Vul je naam in, scan een QR-code en kies het juiste antwoord.",
+        huntIntroTitle: "Scan je eerste poster.",
+        huntIntroText: "Vul je naam in, scan een QR-code en beantwoord de vraag.",
         questions: "Vragen",
         questionsText: "Elke poster opent 1 vraag.",
         attempts: "Pogingen",
@@ -503,6 +526,8 @@
         finalScore: "{name} eindigde met {score} punten.",
         finishCount: "{count} vraag{plural} klaar",
         timePill: "Tijd {time}",
+        disclaimerText: "Deze site is gemaakt door studenten van Hogeschool VIVES Kortrijk uit de richting Business Management & Entrepreneurship, eerste bachelor.",
+        termsText: "Gebruiksvoorwaarden: deze website is uitsluitend bedoeld voor educatieve en eventgebonden doeleinden. Inhoud, scoreweergave en spelverloop kunnen aangepast worden zonder voorafgaande melding.",
         eventClosedFull: "The Green Hunt is afgelopen. Speel Memorie of volg ons op Instagram."
       },
       en: {
@@ -512,7 +537,7 @@
         posterClosed: "{location} found. The Green Hunt is over. Play Memory or follow us on Instagram.",
         posterButton: "Start on the website",
         heroTitle: "Play with The Green Hunters",
-        heroSubtitle: "Scan posters, answer questions, or play Memory. Everything works fast on your phone.",
+        heroSubtitle: "Scan posters, answer questions, or play Memory. Everything works clearly on your phone.",
         overviewGames: "Games",
         greenHunt: "Green Hunt",
         overviewGamesText: "A QR hunt and an SDG memory game.",
@@ -529,7 +554,7 @@
         stepThreeText: "Show your result at the stand.",
         panelNote: "Made for the VIVES event.",
         huntKicker: "Campus hunt",
-        huntText: "Scan posters and answer 5 quick questions.",
+        huntText: "Scan posters and answer 5 questions.",
         huntClosedText: "The Green Hunt is over. Play Memory or follow us on Instagram.",
         huntCount: "QR questions",
         scoreQuestions: "Score",
@@ -552,8 +577,8 @@
         time: "Time",
         pairs: "Pairs",
         turns: "Turns",
-        huntIntroTitle: "Start and scan your first poster.",
-        huntIntroText: "Enter your name, scan a QR code, and pick the right answer.",
+        huntIntroTitle: "Scan your first poster.",
+        huntIntroText: "Enter your name, scan a QR code, and answer the question.",
         questions: "Questions",
         questionsText: "Each poster opens 1 question.",
         attempts: "Tries",
@@ -618,9 +643,24 @@
         finalScore: "{name} finished with {score} points.",
         finishCount: "{count} question{plural} done",
         timePill: "Time {time}",
+        disclaimerText: "This site was created by first-year bachelor students of Hogeschool VIVES Kortrijk in Business Management & Entrepreneurship.",
+        termsText: "Terms of use: this website is intended solely for educational and event-related purposes. Content, scoring, and gameplay may be changed without prior notice.",
         eventClosedFull: "The Green Hunt is over. Play Memory or follow us on Instagram."
       }
     };
+
+    translations.nl.posterButton = "Naar startpagina";
+    translations.en.posterButton = "Go to start page";
+    translations.nl.confirmLeaveTitle = "Terug naar start?";
+    translations.en.confirmLeaveTitle = "Back to start?";
+    translations.nl.confirmLeaveMessage = "Je spel is nog bezig. Ben je zeker dat je wilt teruggaan naar de startpagina?";
+    translations.en.confirmLeaveMessage = "Your game is still in progress. Are you sure you want to return to the start page?";
+    translations.nl.cancel = "Annuleren";
+    translations.en.cancel = "Cancel";
+    translations.nl.confirm = "Verder";
+    translations.en.confirm = "Continue";
+    translations.nl.scanErrorTitle = "QR-code probleem";
+    translations.en.scanErrorTitle = "QR code issue";
 
     const memoryFactsEn = {
       1: "700 million people live on less than $2 a day.",
@@ -798,6 +838,12 @@
     const huntFinishTimePillEl = document.getElementById("hunt-finish-time-pill");
     const huntProgressFillEl = document.getElementById("hunt-progress-fill");
     const huntProgressLabelEl = document.getElementById("hunt-progress-label");
+    const homeTriggerEls = Array.from(document.querySelectorAll("[data-home-trigger='true']"));
+    const appDialogEl = document.getElementById("app-dialog");
+    const appDialogTitleEl = document.getElementById("app-dialog-title");
+    const appDialogMessageEl = document.getElementById("app-dialog-message");
+    const appDialogCancelBtn = document.getElementById("app-dialog-cancel");
+    const appDialogConfirmBtn = document.getElementById("app-dialog-confirm");
 
     const memoryGameEl = document.getElementById("memory-game");
     const memoryGridEl = document.getElementById("memory-grid");
@@ -854,6 +900,10 @@
         scanContext: null,
         lastScanValue: "",
         lastScanAt: 0
+      },
+      ui: {
+        dialogResolve: null,
+        suppressNextPopstate: false
       }
     };
 
@@ -874,6 +924,91 @@
     function showFeedback(message, stateClass) {
       feedbackEl.textContent = message;
       feedbackEl.className = "feedback " + stateClass;
+    }
+
+    function closeAppDialog(result) {
+      if (typeof state.ui.dialogResolve === "function") {
+        const resolve = state.ui.dialogResolve;
+        state.ui.dialogResolve = null;
+
+        if (appDialogEl.open) {
+          appDialogEl.close();
+        }
+
+        resolve(result);
+      }
+    }
+
+    function openAppDialog(options = {}) {
+      const {
+        title = currentLang === "en" ? "Notice" : "Opgelet",
+        message = "",
+        confirmText = t("confirm"),
+        cancelText = t("cancel"),
+        showCancel = false
+      } = options;
+
+      if (typeof state.ui.dialogResolve === "function") {
+        closeAppDialog(false);
+      }
+
+      appDialogTitleEl.textContent = title;
+      appDialogMessageEl.textContent = message;
+      appDialogConfirmBtn.textContent = confirmText;
+      appDialogCancelBtn.textContent = cancelText;
+      appDialogCancelBtn.hidden = !showCancel;
+
+      return new Promise((resolve) => {
+        state.ui.dialogResolve = resolve;
+        appDialogEl.showModal();
+      });
+    }
+
+    function showScanErrorDialog(message) {
+      return openAppDialog({
+        title: t("scanErrorTitle"),
+        message,
+        confirmText: "OK",
+        showCancel: false
+      });
+    }
+
+    function hasActiveGameProgress() {
+      if (state.currentMode === "hunt") {
+        return !!state.hunt.playerName || state.hunt.answeredIds.size > 0 || state.hunt.startedAt > 0;
+      }
+
+      if (state.currentMode === "memory") {
+        return state.memory.turns > 0 || state.memory.pairsFound > 0;
+      }
+
+      return false;
+    }
+
+    async function confirmLeaveActiveGame() {
+      if (!hasActiveGameProgress()) {
+        return true;
+      }
+
+      return openAppDialog({
+        title: t("confirmLeaveTitle"),
+        message: t("confirmLeaveMessage"),
+        confirmText: t("confirm"),
+        cancelText: t("cancel"),
+        showCancel: true
+      });
+    }
+
+    async function navigateHomeWithGuard() {
+      const canLeave = await confirmLeaveActiveGame();
+
+      if (!canLeave) {
+        return false;
+      }
+
+      showStartScreen(true);
+      showFeedback("", "is-neutral");
+      return true;
     }
 
     function getInitialLanguage() {
@@ -978,6 +1113,8 @@
       setText(".certificate-name", "player");
       setText("#hunt-final-score", "defaultScore");
       setAllText(".finish-meta .meta-pill", ["finishCount", "timePill", "completed"]);
+      setText("#disclaimer-text", "disclaimerText");
+      setText("#terms-text", "termsText");
 
       syncHuntCopy();
       updateStatus();
@@ -1005,7 +1142,7 @@
     }
 
     function toSrc(fileName) {
-      return "media/" + encodeURIComponent(fileName);
+      return (runtime.isFile ? "media/" : "/media/") + encodeURIComponent(fileName);
     }
 
     function escapeHtml(value) {
@@ -1076,6 +1213,10 @@
 
       state.hunt.score = shouldShowScore ? calculateHuntScore(elapsedMs) : 0;
       return state.hunt.score;
+    }
+
+    function commitHuntScore(elapsedMs = getHuntElapsedMs()) {
+      return refreshHuntScore(elapsedMs);
     }
 
     function normalizeGameData(data) {
@@ -1194,7 +1335,7 @@
       if (runtime.canRegisterServiceWorker) {
         const manifestLink = document.createElement("link");
         manifestLink.rel = "manifest";
-        manifestLink.href = "manifest.json";
+        manifestLink.href = "/manifest.json";
         document.head.appendChild(manifestLink);
       }
     }
@@ -1214,7 +1355,7 @@
         return dataLoadPromise;
       }
 
-      dataLoadPromise = fetch("data.json", { cache: "no-store" })
+      dataLoadPromise = fetch("/data.json", { cache: "no-store" })
         .then((response) => {
           if (!response.ok) {
             throw new Error("Kon data.json niet laden.");
@@ -1312,9 +1453,8 @@
 
     function updateStatus() {
       if (state.currentMode === "hunt") {
-        const liveScore = refreshHuntScore();
         primaryLabelEl.textContent = t("score");
-        primaryValueEl.textContent = String(liveScore);
+        primaryValueEl.textContent = String(state.hunt.score);
         secondaryLabelEl.textContent = t("time");
         secondaryValueEl.textContent = formatElapsedTime(getHuntElapsedMs());
         updateHuntProgressUI();
@@ -1390,6 +1530,20 @@
       return "/" + String(questionId || "").toLowerCase();
     }
 
+    function getCurrentRouteForState() {
+      if (state.currentMode === "hunt") {
+        return state.hunt.currentQuestion
+          ? routePathForQuestion(state.hunt.currentQuestion.id)
+          : routePathForMode("hunt");
+      }
+
+      if (state.currentMode === "memory") {
+        return routePathForMode("memory");
+      }
+
+      return "/";
+    }
+
     function pushRoute(path) {
       if (runtime.isFile || window.location.pathname === path) {
         return;
@@ -1402,6 +1556,9 @@
       clearPendingTimers();
       stopHuntScanner();
       stopHuntTimer(false);
+      if (appDialogEl.open && typeof state.ui.dialogResolve === "function") {
+        closeAppDialog(false);
+      }
       state.currentMode = null;
       appShell.dataset.mode = "menu";
       document.title = t("pageTitle");
@@ -1822,6 +1979,7 @@
           showHuntView("scanner");
           updateStatus();
           showFeedback(t("alreadyDone"), "is-error");
+          showScanErrorDialog(t("alreadyDone"));
           return;
         }
 
@@ -2037,7 +2195,7 @@
       showHuntView("finish");
       const playerName = state.hunt.playerName || t("player");
       const elapsedTime = formatElapsedTime(state.hunt.elapsedMs);
-      const finalScore = refreshHuntScore(state.hunt.elapsedMs);
+      const finalScore = commitHuntScore(state.hunt.elapsedMs);
       huntCertificateNameEl.textContent = playerName;
       huntCertificateDateEl.textContent =
         t("achievedOn", { date: formatCertificateDate(new Date()) });
@@ -2084,12 +2242,14 @@
       if (!questionId) {
         setScannerStatus(t("invalidCode"), "is-error");
         showFeedback(t("invalidCode"), "is-error");
+        showScanErrorDialog(t("invalidCode"));
         return;
       }
 
       if (state.hunt.answeredIds.has(questionId)) {
         setScannerStatus(t("alreadyDone"), "is-error");
         showFeedback(t("alreadyDone"), "is-error");
+        showScanErrorDialog(t("alreadyDone"));
         return;
       }
 
@@ -2098,6 +2258,7 @@
       if (!question) {
         setScannerStatus(t("noQuestion"), "is-error");
         showFeedback(t("noQuestion"), "is-error");
+        showScanErrorDialog(t("noQuestion"));
         return;
       }
 
@@ -2135,7 +2296,7 @@
         });
 
         state.hunt.correctAnswers += 1;
-        refreshHuntScore();
+        commitHuntScore();
         state.hunt.answeredIds.add(question.id);
         setHuntQuestionMessage(t("correct"), "is-success");
         updateStatus();
@@ -2157,6 +2318,7 @@
 
       state.hunt.wrongAnswers += 1;
       state.hunt.attemptsRemaining = Math.max(0, state.hunt.attemptsRemaining - 1);
+      commitHuntScore();
 
       answerButtons.forEach((button) => {
         const answerIndex = Number(button.dataset.answerIndex);
@@ -2260,7 +2422,7 @@
       }
 
       state.hunt.playerName = playerName;
-      refreshHuntScore(0);
+      commitHuntScore(0);
       startHuntTimer();
       startHuntScanner();
     }
@@ -2294,7 +2456,24 @@
       });
     });
 
-    posterStartHuntBtn.addEventListener("click", () => openGame("hunt"));
+    posterStartHuntBtn.addEventListener("click", () => showStartScreen(true));
+    appDialogConfirmBtn.addEventListener("click", () => closeAppDialog(true));
+    appDialogCancelBtn.addEventListener("click", () => closeAppDialog(false));
+    appDialogEl.addEventListener("cancel", (event) => {
+      event.preventDefault();
+      closeAppDialog(false);
+    });
+    homeTriggerEls.forEach((element) => {
+      element.addEventListener("click", async () => {
+        await navigateHomeWithGuard();
+      });
+      element.addEventListener("keydown", async (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          await navigateHomeWithGuard();
+        }
+      });
+    });
     huntPlayerForm.addEventListener("submit", (event) => {
       event.preventDefault();
       startHuntWithPlayer();
@@ -2305,14 +2484,28 @@
     applyLanguage();
     updateHuntProgressUI();
     handleRouteChange();
-    window.addEventListener("popstate", () => {
+    window.addEventListener("popstate", async () => {
+      if (state.ui.suppressNextPopstate) {
+        state.ui.suppressNextPopstate = false;
+        return;
+      }
+
+      const canLeave = await confirmLeaveActiveGame();
+
+      if (!canLeave) {
+        state.ui.suppressNextPopstate = true;
+        const restorePath = getCurrentRouteForState();
+        window.history.pushState({ path: restorePath }, "", restorePath);
+        return;
+      }
+
       handleRouteChange();
     });
     window.setInterval(syncHuntCopy, 60000);
 
     if (runtime.canRegisterServiceWorker) {
       window.addEventListener("load", () => {
-        navigator.serviceWorker.register("sw.js").catch((error) => {
+        navigator.serviceWorker.register("/sw.js").catch((error) => {
           console.warn("SW reg failed", error);
         });
       });

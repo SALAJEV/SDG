@@ -314,6 +314,14 @@ h1 {
   max-width: 14ch;
 }
 
+.home-link-title {
+  cursor: pointer;
+}
+
+.home-link-title:hover {
+  opacity: 0.88;
+}
+
 .subtitle {
   margin: 0;
   max-width: 62ch;
@@ -1393,6 +1401,102 @@ h1 {
   color: var(--danger);
   border-color: rgba(214, 64, 69, 0.16);
   background: rgba(255, 244, 244, 0.94);
+}
+
+.site-disclaimer {
+  margin-top: 24px;
+  padding-top: 18px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: end;
+  border-top: 1px solid rgba(14, 40, 54, 0.1);
+}
+
+.disclaimer-copy {
+  min-width: 0;
+}
+
+.disclaimer-text,
+.terms-text {
+  margin: 0;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+.disclaimer-text {
+  font-size: 0.78rem;
+}
+
+.terms-text {
+  margin-top: 8px;
+  font-size: 0.68rem;
+}
+
+.vives-logo-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid rgba(14, 40, 54, 0.08);
+  box-shadow: 0 10px 20px rgba(8, 19, 30, 0.08);
+}
+
+.vives-logo {
+  display: block;
+  width: auto;
+  max-width: 132px;
+  max-height: 42px;
+  object-fit: contain;
+}
+
+.app-dialog {
+  width: min(100% - 24px, 420px);
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.app-dialog::backdrop {
+  background: rgba(8, 19, 30, 0.56);
+  backdrop-filter: blur(4px);
+}
+
+.dialog-card {
+  display: grid;
+  gap: 14px;
+  padding: 22px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(14, 40, 54, 0.1);
+  box-shadow: var(--shadow-strong);
+}
+
+.dialog-title {
+  margin: 0;
+  color: var(--ink);
+  font-size: 1.15rem;
+  font-weight: 900;
+}
+
+.dialog-message {
+  margin: 0;
+  color: var(--ink-soft);
+  line-height: 1.55;
+}
+
+.dialog-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.dialog-actions .ghost-btn,
+.dialog-actions .restart-btn {
+  flex: 1 1 150px;
 }
 
 @keyframes rise-in {
@@ -2874,6 +2978,15 @@ h2,
     font-size: clamp(0.5rem, 2.6vw, 0.64rem);
     line-height: 1.08;
   }
+
+  .site-disclaimer {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .vives-logo-badge {
+    justify-self: start;
+  }
 }
 
 @media (max-width: 480px) {
@@ -2910,6 +3023,10 @@ h2,
 
   .status-row {
     top: 50px;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .app-shell[data-mode="hunt"] .status-row {
     grid-template-columns: 1fr 1fr;
   }
 

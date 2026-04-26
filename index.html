@@ -37,7 +37,7 @@
         <p class="badge">Challenge 10</p>
         <h1 id="poster-title" class="home-link-title" data-home-trigger="true" role="button" tabindex="0">Welkom bij The Green Hunters</h1>
         <p id="poster-message" class="subtitle">
-          Bezoek de stand van Challenge 10 in hal 4 om deze poster te spelen.
+          Ga naar stand Challenge 10 in hal 4 en start de hunt.
         </p>
         <div class="finish-actions">
           <button id="poster-start-hunt" class="restart-btn" type="button">Start via de website</button>
@@ -52,25 +52,48 @@
             <p class="badge">Challenge 10</p>
           </div>
 
-          <h1 id="start-title" class="home-link-title" data-home-trigger="true" role="button" tabindex="0">Scoor punten met een duurzame campuschallenge op VIVES Kortrijk.</h1>
+          <h1 id="start-title" class="home-link-title" data-home-trigger="true" role="button" tabindex="0">Speel The Green Hunters en ontdek de campus op een slimme manier.</h1>
           <p class="subtitle">
-            Speel The Green Hunt op de campus, scan posters en beantwoord de vragen rechtstreeks op je smartphone.
+            Scan posters op de campus, beantwoord sterke SDG-vragen en toon op het einde je certificaat aan de stand.
           </p>
 
           <p id="event-status-note" class="event-status-note" hidden></p>
 
           <section class="start-copy" aria-label="Overzicht van de challenge">
-            <p class="start-paragraph" id="start-overview-prize">Na afloop krijg je een certificaat. Daarmee kun je aan de stand tonen dat je het spel hebt voltooid.</p>
+            <p class="start-paragraph" id="start-overview-prize">Rond je de hunt af, dan krijg je meteen een certificaat dat je aan de stand kunt tonen.</p>
           </section>
         </header>
 
       </div>
 
-      <section class="mode-actions mode-actions-home" aria-label="Kies een game">
-        <button id="start-hunt-mode" class="mode-action mode-action-hunt" type="button" data-mode="hunt">
-          <strong id="start-hunt-title" class="mode-action-title">The Green Hunters</strong>
-          <span id="hunt-mode-count" class="mode-action-meta">0 QR-vragen</span>
-        </button>
+      <section class="home-hunt-entry" aria-label="Start The Green Hunters">
+        <article class="hunt-stage-card hunt-intro-card home-hunt-card">
+          <div class="hunt-stage-header">
+            <p class="panel-kicker">The Green Hunters</p>
+            <span id="hunt-mode-count" class="hunt-stage-tag">0 QR-vragen</span>
+          </div>
+
+          <h2 id="start-hunt-home-title" class="question-title">Start meteen met de hunt</h2>
+          <p class="question-support">
+            <span id="start-hunt-home-text">Vul je naam in, start de hunt en scan daarna de eerste poster op de campus.</span>
+          </p>
+
+          <form id="start-hunt-quick-form" class="player-form quick-start-form">
+            <label class="manual-label" for="start-hunt-quick-name">Jouw naam</label>
+            <div class="manual-row">
+              <input
+                id="start-hunt-quick-name"
+                class="manual-input"
+                name="start-hunt-quick-name"
+                type="text"
+                placeholder="Typ je naam"
+                autocomplete="name"
+                required
+              >
+              <button id="start-hunt-quick-button" class="restart-btn" type="submit">Start de hunt</button>
+            </div>
+          </form>
+        </article>
       </section>
 
     </section>
@@ -108,7 +131,7 @@
 
               <h2 class="question-title">Hoe werkt The Green Hunters?</h2>
               <p class="question-support">
-                Zoek op de campus een poster met een letter zoals P van People of Planet. Scan de QR-code op die poster en open zo je vraag.
+                Zoek een Green Hunters-poster op de campus, scan de QR-code en beantwoord de vraag op je smartphone.
               </p>
 
               <div class="step-list step-list-compact">
@@ -116,7 +139,7 @@
                   <span class="step-number">1</span>
                   <div>
                     <strong>Zoek een poster</strong>
-                    <p>Kijk uit naar een poster met een duidelijke letter en scan daarna de QR-code. Elke QR-code opent 1 aparte Green Hunt-vraag.</p>
+                    <p>Kijk uit naar een Green Hunters-poster op de campus en scan de QR-code. Elke poster opent een nieuwe vraag.</p>
                   </div>
                 </article>
 
@@ -124,34 +147,34 @@
                   <span class="step-number">2</span>
                   <div>
                     <strong>Beantwoord de vraag</strong>
-                    <p>Na het scannen verschijnt een vraag op je scherm. Geef het juiste antwoord om punten te verdienen. Per vraag krijg je 3 kansen.</p>
+                    <p>Na het scannen krijg je meteen een vraag. Kies het juiste antwoord en scoor punten. Je hebt 3 kansen per vraag.</p>
                   </div>
                 </article>
 
                 <article class="step-item">
                   <span class="step-number">3</span>
                   <div>
-                    <strong>Verzamel punten</strong>
-                    <p>Hoe beter en sneller je speelt, hoe hoger je score. Na je laatste vraag krijg je meteen je certificaat en overzicht.</p>
+                    <strong>Speel voor je score</strong>
+                    <p>Hoe sneller en juister je speelt, hoe hoger je score. Na je laatste vraag krijg je meteen je resultaat en certificaat.</p>
                   </div>
                 </article>
               </div>
 
               <div class="finish-actions">
                 <form id="hunt-player-form" class="player-form">
-                  <p class="panel-kicker">Speler login</p>
-                  <label class="manual-label" for="hunt-player-name">Naam speler</label>
+                  <p class="panel-kicker">Klaar om te starten?</p>
+                  <label class="manual-label" for="hunt-player-name">Jouw naam</label>
                   <div class="manual-row">
                     <input
                       id="hunt-player-name"
                       class="manual-input"
                       name="hunt-player-name"
                       type="text"
-                      placeholder="Vul je naam in"
+                      placeholder="Typ je naam"
                       autocomplete="name"
                       required
                     >
-                    <button id="hunt-start-game" class="restart-btn" type="submit">Start The Green Hunters</button>
+                    <button id="hunt-start-game" class="restart-btn" type="submit">Start de hunt</button>
                   </div>
                 </form>
               </div>
@@ -166,7 +189,7 @@
               </div>
 
               <p class="scanner-description">
-                Richt je camera op een Green Hunt QR-code. Zodra de code herkend wordt, opent de juiste vraag.
+                Richt je camera op een Green Hunters QR-code. Zodra de code herkend wordt, verschijnt de volgende vraag.
               </p>
               <p id="hunt-scan-hint" class="hunt-inline-message scanner-hint-box"></p>
 
@@ -181,7 +204,7 @@
                   aria-label="Camera preview voor de campusscanner"
                 ></video>
                 <div class="scanner-frame" aria-hidden="true">
-                  <span>Richt je camera op je Green Hunt QR-code</span>
+                  <span>Richt je camera op de QR-code</span>
                 </div>
               </div>
 
@@ -216,14 +239,14 @@
           <div id="hunt-success-view" class="hunt-view" hidden>
             <article class="hunt-stage-card hunt-success-card">
               <div class="success-burst" aria-hidden="true">+</div>
-              <p class="badge">Green Hunt-vraag afgerond</p>
-              <h2 class="finish-title">Prima, deze vraag is binnen.</h2>
+              <p class="badge">Vraag afgerond</p>
+              <h2 class="finish-title">Nice, deze vraag is binnen.</h2>
               <p id="hunt-success-text" class="finish-score">
-                Scan een andere QR-code om door te gaan naar je volgende stop.
+                Scan de volgende poster en speel verder.
               </p>
 
               <div class="finish-actions">
-                <button id="hunt-next-scan" class="restart-btn" type="button">Scan volgende QR-code</button>
+                <button id="hunt-next-scan" class="restart-btn" type="button">Scan volgende poster</button>
               </div>
             </article>
           </div>
@@ -337,33 +360,35 @@
       nl: {
         pageTitle: "The Green Hunters",
         posterTitle: "Welkom bij The Green Hunters",
-        posterOpen: "Kom naar stand Challenge 10 in hal 4 om mee te spelen.",
+        posterOpen: "Ga naar stand Challenge 10 in hal 4 en start de hunt.",
         posterClosed: "{location} gevonden. The Green Hunt is afgelopen. Volg ons op Instagram.",
         posterButton: "Start op de website",
         heroTitle: "The Green Hunters",
-        heroSubtitle: "Speel The Green Hunt op de campus, scan posters en beantwoord de vragen rechtstreeks op je smartphone.",
+        heroSubtitle: "Scan posters op de campus, beantwoord sterke SDG-vragen en toon op het einde je certificaat aan de stand.",
+        homeHuntTitle: "Start meteen met de hunt",
+        homeHuntText: "Vul je naam in, start de hunt en scan daarna de eerste poster op de campus.",
         overviewGames: "Games",
         greenHunt: "Green Hunt",
-        overviewGamesText: "Je kunt kiezen tussen een campusspel met QR-codes en een korte memory game over de SDG's.",
-        overviewHuntText: "Tijdens de hunt scan je posters op de campus. Elke poster opent een vraag die je meteen op je scherm beantwoordt.",
+        overviewGamesText: "The Green Hunters is een campuschallenge die je volledig op je smartphone speelt.",
+        overviewHuntText: "Tijdens de hunt scan je posters op de campus. Elke poster opent een nieuwe vraag die je meteen kunt beantwoorden.",
         overviewReward: "Beloning",
         overviewPrize: "Prijs",
-        overviewPrizeText: "Na afloop krijg je een certificaat. Daarmee kun je aan de stand tonen dat je het spel hebt voltooid.",
+        overviewPrizeText: "Rond je de hunt af, dan krijg je meteen een certificaat dat je aan de stand kunt tonen.",
         stepsTitle: "Zo werkt het",
-        stepOneTitle: "Kies je spel",
-        stepOneText: "Kies of je de campus wilt verkennen met The Green Hunt, of liever start met een korte memory game.",
-        stepTwoTitle: "Speel",
-        stepTwoText: "De site begeleidt je stap voor stap. Je ziet telkens duidelijk wat je moet doen om verder te gaan.",
-        stepThreeTitle: "Toon je score",
-        stepThreeText: "Onderweg zie je je score en tijd. Op het einde krijg je een overzicht van je resultaat.",
-        panelNote: "Deze website is gemaakt om het spel snel en duidelijk speelbaar te maken tijdens het VIVES-event.",
+        stepOneTitle: "Start de hunt",
+        stepOneText: "Vul je naam in en trek meteen de campus op.",
+        stepTwoTitle: "Scan en antwoord",
+        stepTwoText: "Elke poster opent een nieuwe vraag. Alles werkt snel en rechtstreeks op je smartphone.",
+        stepThreeTitle: "Scoor en finish",
+        stepThreeText: "Hou je score bij en verzamel op het einde je certificaat.",
+        panelNote: "Deze site is gemaakt om de hunt vlot, duidelijk en leuk speelbaar te maken tijdens het VIVES-event.",
         huntKicker: "Campus hunt",
-        huntText: "Scan posters en beantwoord 5 vragen.",
+        huntText: "Scan posters, antwoord slim en scoor punten.",
         huntClosedText: "The Green Hunt is afgelopen. Volg ons op Instagram.",
         huntCount: "QR-vragen",
         scoreQuestions: "Score",
         prizeStand: "Prijs aan stand",
-        startHunt: "Start hunt",
+        startHunt: "Start de hunt",
         memoryKicker: "SDG-spel",
         memoryTitle: "Memorie",
         memoryText: "Koppel elk SDG-logo aan het juiste weetje.",
@@ -384,31 +409,31 @@
         pairs: "Paren",
         turns: "Beurten",
         huntIntroTitle: "Hoe werkt The Green Hunters?",
-        huntIntroText: "Zoek op de campus een poster met een letter zoals P van People of Planet. Scan de QR-code op die poster en open zo je vraag.",
+        huntIntroText: "Zoek een Green Hunters-poster op de campus, scan de QR-code en beantwoord de vraag op je smartphone.",
         questions: "Vragen",
-        questionsText: "Elke poster opent 1 vraag.",
+        questionsText: "Elke poster opent een nieuwe vraag.",
         attempts: "Pogingen",
         attemptsText: "Je krijgt 3 kansen per vraag.",
         rewardText: "Na de laatste vraag krijg je je certificaat.",
         scanCode: "Zoek een poster",
-        scanCodeText: "Kijk uit naar een poster met een duidelijke letter en scan daarna de QR-code. Elke QR-code opent 1 aparte Green Hunt-vraag.",
-        answerQuestion: "Beantwoord",
-        answerQuestionText: "Na het scannen verschijnt een vraag op je scherm. Geef het juiste antwoord om punten te verdienen. Per vraag krijg je 3 kansen.",
-        finishAll: "Verzamel punten",
-        finishAllText: "Hoe beter en sneller je speelt, hoe hoger je score. Na je laatste vraag krijg je meteen je certificaat en overzicht.",
-        playerLogin: "Speler",
-        playerName: "Naam",
-        playerPlaceholder: "Je naam",
+        scanCodeText: "Kijk uit naar een Green Hunters-poster op de campus en scan de QR-code. Elke poster opent een nieuwe vraag.",
+        answerQuestion: "Geef je antwoord",
+        answerQuestionText: "Na het scannen krijg je meteen een vraag. Kies het juiste antwoord en scoor punten.",
+        finishAll: "Speel voor je score",
+        finishAllText: "Hoe sneller en juister je speelt, hoe hoger je score. Na je laatste vraag krijg je je resultaat en certificaat.",
+        playerLogin: "Klaar om te starten?",
+        playerName: "Jouw naam",
+        playerPlaceholder: "Typ je naam",
         blockedPlayerName: "Je mag niet verder spelen, want met de naam 67 kun je blijkbaar niet serieus zijn.",
-        startGreenHunt: "Start The Green Hunters",
+        startGreenHunt: "Start de hunt",
         scanQr: "Scan QR-code",
         scanCounter: "afgerond",
         scanTitle: "Scan de volgende poster",
-        scanText: "Richt je camera op de QR-code.",
+        scanText: "Richt je camera op de QR-code en open de volgende vraag.",
         scanHintLead: "Volgende hint",
         scanHintText: "{label}: {hint}",
         scanHintFallback: "Je mag eender welke nog niet beantwoorde poster scannen.",
-        otherPosterStillGood: "Dit is {found} in plaats van {expected}, maar deze poster is ook juist. Je kunt deze vraag gewoon doen.",
+        otherPosterStillGood: "Je vond {found} in plaats van {expected}, maar dat is nog steeds een juiste poster. Je kunt gewoon verder spelen.",
         scanFrame: "Richt je camera op de QR-code",
         questionOf: "{count} juist",
         location: "Locatie",
@@ -418,14 +443,14 @@
         resultSummary: "{count}/{total} juiste antwoorden",
         attemptsLeft: "Nog {count} poging{plural}.",
         doneBadge: "Vraag afgerond",
-        successTitle: "Goed gedaan.",
-        nextScan: "Scan volgende QR-code",
+        successTitle: "Nice, deze vraag is binnen.",
+        nextScan: "Scan volgende poster",
         certificate: "Certificaat",
         huntComplete: "The Green Hunters voltooid",
         achievedBy: "Behaald door",
         player: "Speler",
-        defaultScore: "Je eindscore verschijnt hier.",
-        certificateNote: "Toon dit certificaat aan onze stand.",
+        defaultScore: "Je eindscore verschijnt hier zodra je klaar bent.",
+        certificateNote: "Toon dit certificaat aan onze stand om je deelname te laten checken.",
         completed: "Klaar voor de stand",
         memoryHeading: "Koppel logo en weetje.",
         memoryIntro: "Draai twee kaarten om. Zoek het SDG-logo dat bij het weetje hoort.",
@@ -436,58 +461,60 @@
         rightPair: "Juist paar.",
         wrongPair: "Geen paar. Probeer opnieuw.",
         closedNotice: "The Green Hunt is afgelopen. Volg ons op Instagram.",
-        nameRequired: "Vul eerst je naam in.",
+        nameRequired: "Vul eerst je naam in om te starten.",
         cameraUnavailable: "Camera niet beschikbaar.",
-        scanUnavailable: "Scannen lukt niet op dit toestel.",
-        cameraError: "Camera kon niet starten.",
+        scanUnavailable: "Scannen werkt niet op dit toestel.",
+        cameraError: "De camera kon niet starten.",
         scanNext: "Scan de volgende poster.",
-        invalidCode: "Deze QR-code hoort niet bij het spel.",
-        alreadyDone: "Deze vraag is al beantwoord.",
-        noQuestion: "Geen vraag gevonden.",
+        invalidCode: "Deze QR-code hoort niet bij The Green Hunters.",
+        alreadyDone: "Die vraag heb je al afgewerkt.",
+        noQuestion: "Voor deze QR-code werd geen vraag gevonden.",
         recognized: "Poster herkend.",
-        answerToContinue: "Beantwoord de vraag.",
+        answerToContinue: "Top, beantwoord nu de vraag.",
         correct: "Juist.",
-        wrongAttempts: "Niet juist. Nog {count} poging{plural}.",
-        closedAfterMisses: "Vraag afgesloten. Scan de volgende poster.",
-        gameComplete: "The Green Hunt is klaar. Toon je certificaat.",
+        wrongAttempts: "Nog niet juist. Je hebt nog {count} poging{plural}.",
+        closedAfterMisses: "Deze vraag is afgesloten. Scan de volgende poster.",
+        gameComplete: "The Green Hunt is klaar. Toon je certificaat aan de stand.",
         achievedOn: "Behaald op {date} - Challenge 10",
-        finalScore: "{name} eindigde met {score} punten.",
-        finishCount: "{count} vraag{plural} klaar",
+        finalScore: "{name} sloot af met {score} punten.",
+        finishCount: "{count} vraag{plural} afgewerkt",
         timePill: "Tijd {time}",
-        disclaimerText: "Deze site is gemaakt door studenten van Hogeschool VIVES Kortrijk uit de richting Business Management & Entrepreneurship, eerste bachelor.",
-        termsText: "Gebruiksvoorwaarden: deze website is uitsluitend bedoeld voor educatieve en eventgebonden doeleinden. Inhoud, scoreweergave en spelverloop kunnen aangepast worden zonder voorafgaande melding.",
+        disclaimerText: "Deze site is gemaakt door studenten van Hogeschool VIVES Kortrijk uit de opleiding Business Management & Entrepreneurship.",
+        termsText: "Gebruiksvoorwaarden: deze website is bedoeld voor educatieve en eventgebonden doeleinden. Inhoud, score en spelverloop kunnen aangepast worden zonder voorafgaande melding.",
         eventClosedFull: "The Green Hunt is afgelopen. Volg ons op Instagram."
       },
       en: {
         pageTitle: "The Green Hunters",
         posterTitle: "Welcome to The Green Hunters",
-        posterOpen: "Go to the Challenge 10 stand in hall 4 to play.",
+        posterOpen: "Head to the Challenge 10 stand in hall 4 and start the hunt.",
         posterClosed: "{location} found. The Green Hunt is over. Follow us on Instagram.",
         posterButton: "Start on the website",
         heroTitle: "The Green Hunters",
-        heroSubtitle: "Play The Green Hunt on campus, scan posters, and answer the questions directly on your phone.",
+        heroSubtitle: "Scan posters around campus, answer sharp SDG questions, and show your certificate at the stand when you finish.",
+        homeHuntTitle: "Jump straight into the hunt",
+        homeHuntText: "Enter your name, start the hunt, and scan your first poster on campus.",
         overviewGames: "Games",
         greenHunt: "Green Hunt",
-        overviewGamesText: "You can play a QR-based campus game across VIVES Kortrijk.",
-        overviewHuntText: "During the hunt, you scan posters on campus. Each poster opens a question that you answer on your screen.",
+        overviewGamesText: "The Green Hunters is a campus challenge built to play fully on your phone.",
+        overviewHuntText: "During the hunt, you scan posters across campus. Each poster unlocks a new question right on your screen.",
         overviewReward: "Reward",
         overviewPrize: "Prize",
-        overviewPrizeText: "At the end, you receive a certificate that shows you completed the game.",
+        overviewPrizeText: "Finish the hunt and you instantly receive a certificate to show at the stand.",
         stepsTitle: "How it works",
-        stepOneTitle: "Choose a game",
-        stepOneText: "Start The Green Hunt and follow the posters across campus.",
-        stepTwoTitle: "Play",
-        stepTwoText: "The site guides you step by step. You always see clearly what to do next.",
-        stepThreeTitle: "Show your score",
-        stepThreeText: "During the game, you can follow your score and time. At the end, you get a clear summary of your result.",
-        panelNote: "This website was made to keep the game clear and easy to play during the VIVES event.",
+        stepOneTitle: "Start the hunt",
+        stepOneText: "Enter your name and head straight onto campus.",
+        stepTwoTitle: "Scan and answer",
+        stepTwoText: "Every poster opens a new question. Everything runs fast and smoothly on your phone.",
+        stepThreeTitle: "Score and finish",
+        stepThreeText: "Track your score and grab your certificate at the end.",
+        panelNote: "This website was built to keep the hunt fast, clear, and fun during the VIVES event.",
         huntKicker: "Campus hunt",
-        huntText: "Scan posters and answer 5 questions.",
+        huntText: "Scan posters, answer smart, and build your score.",
         huntClosedText: "The Green Hunt is over. Follow us on Instagram.",
         huntCount: "QR questions",
         scoreQuestions: "Score",
         prizeStand: "Prize at stand",
-        startHunt: "Start hunt",
+        startHunt: "Start the hunt",
         memoryKicker: "SDG game",
         memoryTitle: "Memory",
         memoryText: "Match each SDG logo with the right fact.",
@@ -508,31 +535,31 @@
         pairs: "Pairs",
         turns: "Turns",
         huntIntroTitle: "How does The Green Hunters work?",
-        huntIntroText: "Look around campus for a poster with a letter such as P for People or Planet. Scan that poster's QR code to open your question.",
+        huntIntroText: "Find a Green Hunters poster on campus, scan the QR code, and answer the question on your phone.",
         questions: "Questions",
-        questionsText: "Each poster opens 1 question.",
+        questionsText: "Each poster opens a new question.",
         attempts: "Tries",
         attemptsText: "You get 3 tries per question.",
         rewardText: "After the last question, you get your certificate.",
         scanCode: "Find a poster",
-        scanCodeText: "Look for a poster with a clear letter and then scan the QR code. Each QR code opens 1 separate Green Hunt question.",
-        answerQuestion: "Answer",
-        answerQuestionText: "After scanning, a question appears on your screen. Answer correctly to earn points. You get 3 tries per question.",
-        finishAll: "Collect points",
-        finishAllText: "The better and faster you play, the higher your score. After your last question, you immediately get your certificate and overview.",
-        playerLogin: "Player",
-        playerName: "Name",
-        playerPlaceholder: "Your name",
+        scanCodeText: "Look for a Green Hunters poster on campus and scan the QR code. Every poster unlocks a new question.",
+        answerQuestion: "Give your answer",
+        answerQuestionText: "Once you scan, the question appears instantly. Pick the right answer and score points.",
+        finishAll: "Play for your score",
+        finishAllText: "The faster and more accurately you play, the higher your score. After the final question, you get your result and certificate.",
+        playerLogin: "Ready to play?",
+        playerName: "Your name",
+        playerPlaceholder: "Type your name",
         blockedPlayerName: "You may not continue playing, because with the name 67 you apparently cannot be serious.",
-        startGreenHunt: "Start The Green Hunters",
+        startGreenHunt: "Start the hunt",
         scanQr: "Scan QR code",
         scanCounter: "done",
         scanTitle: "Scan the next poster",
-        scanText: "Point your camera at the QR code.",
+        scanText: "Point your camera at the QR code to unlock the next question.",
         scanHintLead: "Next hint",
         scanHintText: "{label}: {hint}",
         scanHintFallback: "You may scan any poster you have not answered yet.",
-        otherPosterStillGood: "This is {found} instead of {expected}, but it is still a correct poster. You can continue with this question.",
+        otherPosterStillGood: "You found {found} instead of {expected}, but it is still a valid poster. You can keep going with this question.",
         scanFrame: "Point your camera at the QR code",
         questionOf: "{count} correct",
         location: "Location",
@@ -542,14 +569,14 @@
         resultSummary: "{count}/{total} correct answers",
         attemptsLeft: "{count} tr{plural} left.",
         doneBadge: "Question done",
-        successTitle: "Well done.",
-        nextScan: "Scan next QR code",
+        successTitle: "Nice, that one is done.",
+        nextScan: "Scan next poster",
         certificate: "Certificate",
         huntComplete: "The Green Hunters completed",
         achievedBy: "Achieved by",
         player: "Player",
-        defaultScore: "Your final score will appear here.",
-        certificateNote: "Show this certificate at our stand.",
+        defaultScore: "Your final score appears here once you finish.",
+        certificateNote: "Show this certificate at our stand so we can check your completion.",
         completed: "Ready for the stand",
         memoryHeading: "Match logo and fact.",
         memoryIntro: "Flip two cards. Find the SDG logo that matches the fact.",
@@ -560,26 +587,26 @@
         rightPair: "Correct pair.",
         wrongPair: "No match. Try again.",
         closedNotice: "The Green Hunt is over. Follow us on Instagram.",
-        nameRequired: "Enter your name first.",
+        nameRequired: "Enter your name to get started.",
         cameraUnavailable: "Camera unavailable.",
         scanUnavailable: "Scanning does not work on this device.",
-        cameraError: "Camera could not start.",
+        cameraError: "The camera could not start.",
         scanNext: "Scan the next poster.",
-        invalidCode: "This QR code is not part of the game.",
-        alreadyDone: "This question is already answered.",
-        noQuestion: "No question found.",
+        invalidCode: "This QR code does not belong to The Green Hunters.",
+        alreadyDone: "You already completed that question.",
+        noQuestion: "No question was found for this QR code.",
         recognized: "Poster found.",
-        answerToContinue: "Answer the question.",
+        answerToContinue: "Great, answer the question.",
         correct: "Correct.",
-        wrongAttempts: "Not correct. {count} tr{plural} left.",
-        closedAfterMisses: "Question closed. Scan the next poster.",
-        gameComplete: "The Green Hunt is complete. Show your certificate.",
+        wrongAttempts: "Not quite. You still have {count} tr{plural} left.",
+        closedAfterMisses: "This question is closed. Scan the next poster.",
+        gameComplete: "The Green Hunt is complete. Show your certificate at the stand.",
         achievedOn: "Achieved on {date} - Challenge 10",
         finalScore: "{name} finished with {score} points.",
-        finishCount: "{count} question{plural} done",
+        finishCount: "{count} question{plural} completed",
         timePill: "Time {time}",
-        disclaimerText: "This site was created by first-year bachelor students of Hogeschool VIVES Kortrijk in Business Management & Entrepreneurship.",
-        termsText: "Terms of use: this website is intended solely for educational and event-related purposes. Content, scoring, and gameplay may be changed without prior notice.",
+        disclaimerText: "This site was created by students from Hogeschool VIVES Kortrijk in Business Management & Entrepreneurship.",
+        termsText: "Terms of use: this website is intended for educational and event-related purposes. Content, scoring, and gameplay may change without prior notice.",
         eventClosedFull: "The Green Hunt is over. Follow us on Instagram."
       }
     };
@@ -731,6 +758,8 @@
     const gameScreen = document.getElementById("game-screen");
     const modeButtons = Array.from(document.querySelectorAll("button[data-mode]"));
     const huntModeButton = document.getElementById("start-hunt-mode");
+    const startHuntQuickForm = document.getElementById("start-hunt-quick-form");
+    const startHuntQuickNameInput = document.getElementById("start-hunt-quick-name");
     const eventStatusNoteEl = document.getElementById("event-status-note");
     const gameTitleEl = document.getElementById("game-title");
     const gameSubtitleEl = document.getElementById("game-subtitle");
@@ -1040,13 +1069,15 @@
       setText("#poster-start-hunt", "posterButton");
       setText(".hero-start h1", "heroTitle");
       setText(".hero-start .subtitle", "heroSubtitle");
-      setText("#start-hunt-kicker", "huntKicker");
-      document.getElementById("start-hunt-title").textContent = "The Green Hunters";
-      setText("#start-memory-kicker", "memoryKicker");
-      setText("#start-memory-title", "memoryTitle");
-      document.getElementById("start-memory-meta").textContent = t("sdgs") + " · " + t("cards");
+      setText("#start-hunt-home-title", "homeHuntTitle");
+      setText("#start-hunt-home-text", "homeHuntText");
+      const startHuntTitleEl = document.getElementById("start-hunt-title");
+
+      if (startHuntTitleEl) {
+        startHuntTitleEl.textContent = "The Green Hunters";
+      }
+
       setText("#start-hunt-cta", "startGreenHunt");
-      setText("#start-memory-cta", "startMemory");
       setText(".hero-chip-soft", "studentChip");
       setAllText(".hero-info-strip .info-pill", ["phoneInfo", "eventInfo"]);
       setText("#primary-label", state.currentMode === "hunt" ? "score" : state.currentMode === "memory" ? "pairs" : "points");
@@ -1055,8 +1086,11 @@
       setText(".hunt-intro-card .question-support", "huntIntroText");
       setText("#hunt-start-game", "startGreenHunt");
       setText("label[for='hunt-player-name']", "playerName");
+      setText("label[for='start-hunt-quick-name']", "playerName");
+      setText("#start-hunt-quick-button", "startGreenHunt");
       setText(".player-form .panel-kicker", "playerLogin");
       huntPlayerNameInput.placeholder = t("playerPlaceholder");
+      startHuntQuickNameInput.placeholder = t("playerPlaceholder");
       setText(".scanner-stage-card .panel-kicker", "scanQr");
       setText(".scanner-description", "scanText");
       setText(".scanner-frame span", "scanFrame");
@@ -1068,9 +1102,6 @@
       setText("#hunt-finish-view .finish-title", "huntComplete");
       setText(".certificate-label", "achievedBy");
       setText(".certificate-note", "certificateNote");
-      setText(".memory-intro .question-title", "memoryHeading");
-      setText(".memory-copy", "memoryIntro");
-      memoryGridEl.setAttribute("aria-label", t("memoryGridLabel"));
       setText("#start-overview-prize", "overviewPrizeText");
       setAllText(".hunt-feature-card .overview-label", ["questions", "attempts", "overviewReward"]);
       setAllText(".hunt-feature-card .overview-text", ["questionsText", "attemptsText", "rewardText"]);
@@ -1654,38 +1685,13 @@
         return;
       }
 
-      clearPendingTimers();
-      stopHuntScanner();
-
       if (mode === "memory") {
-        if (!Array.isArray(state.gameData.memoryPairs) || !state.gameData.memoryPairs.length) {
-          state.gameData = normalizeGameData(DEFAULT_GAME_DATA);
-        }
-
-        state.currentMode = mode;
-        appShell.dataset.mode = mode;
-        startScreen.hidden = true;
-        posterScreen.hidden = true;
-        gameScreen.hidden = false;
-        huntGameEl.hidden = true;
-        memoryGameEl.hidden = false;
-        applyGameMeta(mode);
-        restartCurrentGame();
-
-        loadGameData()
-          .then(() => {
-            if (state.currentMode === "memory") {
-              restartMemoryGame();
-            }
-          })
-          .catch(() => {});
-
-        if (shouldPushRoute) {
-          pushRoute(routePathForMode(mode));
-        }
-
+        showStartScreen(shouldPushRoute);
         return;
       }
+
+      clearPendingTimers();
+      stopHuntScanner();
 
       await loadGameData();
 
@@ -2093,11 +2099,7 @@
       }
 
       if (path === "/memorie" || path === "/memorie/") {
-        if (state.currentMode === "memory") {
-          return;
-        }
-
-        await openGame("memory", false);
+        showStartScreen(false);
         return;
       }
 
@@ -2537,23 +2539,32 @@
       }
     }
 
-    function startHuntWithPlayer() {
-      const playerName = huntPlayerNameInput.value.trim();
+    async function startHuntWithPlayer(playerNameOverride = null, inputEl = huntPlayerNameInput) {
+      const playerName = (playerNameOverride == null ? huntPlayerNameInput.value : playerNameOverride).trim();
 
       if (!playerName) {
-        huntPlayerNameInput.focus();
+        inputEl.focus();
         showFeedback(t("nameRequired"), "is-error");
         return;
       }
 
       if (playerName === "67") {
-        huntPlayerNameInput.focus();
-        huntPlayerNameInput.select();
+        inputEl.focus();
+
+        if (typeof inputEl.select === "function") {
+          inputEl.select();
+        }
+
         showFeedback(t("blockedPlayerName"), "is-error");
         return;
       }
 
+      if (state.currentMode !== "hunt") {
+        await openGame("hunt", true);
+      }
+
       state.hunt.playerName = playerName;
+      huntPlayerNameInput.value = playerName;
       commitHuntScore(0);
       startHuntTimer();
       startHuntScanner();
@@ -2606,9 +2617,13 @@
         }
       });
     });
-    huntPlayerForm.addEventListener("submit", (event) => {
+    huntPlayerForm.addEventListener("submit", async (event) => {
       event.preventDefault();
-      startHuntWithPlayer();
+      await startHuntWithPlayer();
+    });
+    startHuntQuickForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      await startHuntWithPlayer(startHuntQuickNameInput.value, startHuntQuickNameInput);
     });
     huntNextScanBtn.addEventListener("click", startHuntScanner);
 

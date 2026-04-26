@@ -4551,6 +4551,11 @@ h2,
   margin-top: 0;
 }
 
+.home-hunt-entry,
+.home-hunt-card {
+  width: 100%;
+}
+
 .mode-actions-home {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }

@@ -4,45 +4,45 @@ const HUNT_QUESTION_GROUPS = [
     location: "People",
     questions: [
       {
-        question: "Hoe beïnvloeden structurele ongelijkheden binnen gezondheidszorgsystemen SDG 3?",
-        hint: "Ongelijkheid zorgt dat sommige groepen slechtere zorg krijgen.",
+        question: "Hoe beinvloeden structurele ongelijkheden in gezondheidszorgsystemen SDG 3?",
+        hint: "Ongelijkheid zorgt ervoor dat sommige groepen slechtere zorg krijgen.",
         answers: [
-          "A. Ze versnellen toegang tot zorg voor iedereen",
-          "B. Ze creëren disproportionele gezondheidsuitkomsten tussen bevolkingsgroepen",
-          "C. Ze verminderen de druk op ziekenhuizen",
-          "D. Ze verhogen de efficiëntie van preventieve zorg"
+          "A. Ze versnellen de toegang tot zorg voor iedereen",
+          "B. Ze zorgen voor ongelijke gezondheidsuitkomsten tussen bevolkingsgroepen",
+          "C. Ze verminderen automatisch de druk op ziekenhuizen",
+          "D. Ze maken preventieve zorg altijd efficienter"
         ],
         correctAnswer: 1
       },
       {
-        question: "In welke mate doorbreekt onderwijs (SDG 4) intergenerationele armoede?",
-        hint: "Onderwijs helpt, maar is geen magische oplossing.",
+        question: "In welke mate kan onderwijs (SDG 4) intergenerationele armoede doorbreken?",
+        hint: "Onderwijs helpt sterk, maar niet los van de context.",
         answers: [
-          "A. Altijd volledig en direct",
-          "B. Enkel in ontwikkelde landen",
-          "C. Sterk, maar afhankelijk van economische en sociale context",
-          "D. Nauwelijks, omdat inkomen onafhankelijk is van onderwijs"
+          "A. Altijd volledig en meteen",
+          "B. Alleen in welvarende landen",
+          "C. Sterk, maar afhankelijk van sociale en economische context",
+          "D. Nauwelijks, want inkomen staat los van onderwijs"
         ],
         correctAnswer: 2
       },
       {
-        question: "Wat is een risico bij het implementeren van gendergelijkheid (SDG 5)?",
-        hint: "Veranderingen botsen soms met tradities.",
+        question: "Welk risico kan opduiken bij het versterken van gendergelijkheid (SDG 5)?",
+        hint: "Maatschappelijke verandering roept soms weerstand op.",
         answers: [
           "A. Overmatige economische groei",
           "B. Culturele weerstand en sociale backlash",
-          "C. Verminderde participatie van vrouwen",
-          "D. Afname van onderwijsniveaus"
+          "C. Minder participatie van vrouwen",
+          "D. Lagere onderwijsniveaus"
         ],
         correctAnswer: 1
       },
       {
-        question: "Waarom zijn basisvoorzieningen cruciaal voor sociale stabiliteit?",
-        hint: "Basisvoorzieningen zorgen voor minder conflict.",
+        question: "Waarom zijn basisvoorzieningen zo belangrijk voor sociale stabiliteit?",
+        hint: "Toegang tot basisnoden verlaagt spanningen.",
         answers: [
-          "A. Ze verhogen enkel economische output",
-          "B. Ze verminderen ongelijkheid en spanningen binnen gemeenschappen",
-          "C. Ze hebben geen effect op sociale relaties",
+          "A. Ze verhogen alleen de economische output",
+          "B. Ze verminderen ongelijkheid en spanningen in gemeenschappen",
+          "C. Ze hebben geen invloed op sociale relaties",
           "D. Ze vervangen politieke structuren"
         ],
         correctAnswer: 1
@@ -54,44 +54,44 @@ const HUNT_QUESTION_GROUPS = [
     location: "Planet",
     questions: [
       {
-        question: "Wat is de grootste uitdaging bij klimaatneutraliteit (SDG 13)?",
-        hint: "Groei tegenover duurzaamheid is de kern.",
+        question: "Wat is een grote uitdaging bij klimaatneutraliteit (SDG 13)?",
+        hint: "De spanning tussen groei en grenzen speelt hier mee.",
         answers: [
           "A. Overproductie van groene energie",
-          "B. Balans tussen economische groei en ecologische grenzen",
-          "C. Gebrek aan technologie",
-          "D. Te weinig internationale regelgeving"
+          "B. De balans tussen economische groei en ecologische grenzen",
+          "C. Een volledig gebrek aan technologie",
+          "D. Alleen een tekort aan internationale regels"
         ],
         correctAnswer: 1
       },
       {
-        question: "Waarom falen sommige biodiversiteitsstrategieën (SDG 15)?",
-        hint: "Regels bestaan, maar worden niet altijd nageleefd.",
+        question: "Waarom mislukken sommige biodiversiteitsstrategien (SDG 15)?",
+        hint: "Regels alleen zijn niet genoeg.",
         answers: [
-          "A. Te veel financiering",
-          "B. Onvoldoende handhaving en economische belangen",
-          "C. Overmatige publieke steun",
-          "D. Te strikte wetgeving"
+          "A. Er is te veel financiering",
+          "B. Handhaving blijft zwak en economische belangen wegen door",
+          "C. Er is te veel publieke steun",
+          "D. De wetgeving is altijd te streng"
         ],
         correctAnswer: 1
       },
       {
-        question: "Welk ecologisch risico brengt hernieuwbare energie met zich mee?",
+        question: "Welk ecologisch risico hangt samen met hernieuwbare energie?",
         hint: "Denk aan lithium, kobalt en andere grondstoffen.",
         answers: [
-          "A. Geen enkel risico",
+          "A. Er is geen enkel risico",
           "B. Overbevissing",
           "C. Intensieve grondstoffenwinning voor technologie",
-          "D. Verminderde energie-efficiëntie"
+          "D. Minder energie-efficiëntie"
         ],
         correctAnswer: 2
       },
       {
-        question: "Wat is een kernprobleem bij de circulaire economie?",
-        hint: "Ons systeem is nog lineair opgebouwd.",
+        question: "Wat is een kernprobleem van de circulaire economie?",
+        hint: "Ons huidige systeem is nog sterk lineair opgebouwd.",
         answers: [
           "A. Te lage productie",
-          "B. Moeilijke integratie in lineaire industriële systemen",
+          "B. Moeilijke integratie in lineaire industriesystemen",
           "C. Overconsumptie van duurzame goederen",
           "D. Gebrek aan consumenten"
         ],
@@ -104,43 +104,43 @@ const HUNT_QUESTION_GROUPS = [
     location: "Prosperity",
     questions: [
       {
-        question: "Wat is een risico van economische groei (SDG 8)?",
-        hint: "Groei verdeelt zich niet altijd eerlijk.",
+        question: "Welk risico kan economische groei (SDG 8) met zich meebrengen?",
+        hint: "Groei wordt niet altijd eerlijk verdeeld.",
         answers: [
           "A. Altijd dalende werkgelegenheid",
-          "B. Toename van ongelijkheid",
-          "C. Verminderde innovatie",
+          "B. Een toename van ongelijkheid",
+          "C. Minder innovatie",
           "D. Minder globalisering"
         ],
         correctAnswer: 1
       },
       {
-        question: "Hoe beïnvloedt technologie inclusieve welvaart?",
-        hint: "Technologie heeft een dubbel effect.",
+        question: "Hoe beinvloedt technologie inclusieve welvaart?",
+        hint: "Technologie heeft vaak een dubbel effect.",
         answers: [
-          "A. Ze elimineert ongelijkheid volledig",
-          "B. Ze versterkt altijd ongelijkheid",
-          "C. Ze kan zowel kansen creëren als ongelijkheid vergroten",
-          "D. Ze heeft geen impact"
+          "A. Ze werkt ongelijkheid altijd volledig weg",
+          "B. Ze versterkt ongelijkheid altijd",
+          "C. Ze kan kansen creeren en tegelijk ongelijkheid vergroten",
+          "D. Ze heeft geen echte impact"
         ],
         correctAnswer: 2
       },
       {
         question: "Wat is een uitdaging voor duurzame steden (SDG 11)?",
-        hint: "Steden moeten én leefbaar én betaalbaar blijven.",
+        hint: "Steden moeten tegelijk leefbaar en betaalbaar blijven.",
         answers: [
           "A. Te weinig inwoners",
-          "B. Balans tussen betaalbaarheid en leefbaarheid",
+          "B. De balans tussen betaalbaarheid en leefbaarheid",
           "C. Overmatige ruimte",
           "D. Gebrek aan infrastructuur wereldwijd"
         ],
         correctAnswer: 1
       },
       {
-        question: "Wat is een spanning binnen SDG 9 (industrie & innovatie)?",
-        hint: "Globalisering kan botsen met lokale economie.",
+        question: "Welke spanning zit vaak in SDG 9 rond industrie en innovatie?",
+        hint: "Globale logica botst soms met lokale belangen.",
         answers: [
-          "A. Lokale vs globale economische belangen",
+          "A. Lokale versus globale economische belangen",
           "B. Te weinig productie",
           "C. Overmatige regelgeving zonder effect",
           "D. Gebrek aan arbeid"
@@ -155,45 +155,45 @@ const HUNT_QUESTION_GROUPS = [
     questions: [
       {
         question: "Wat is het effect van corruptie op SDG 16?",
-        hint: "Corruptie ondermijnt vertrouwen en instellingen.",
+        hint: "Corruptie tast vertrouwen en instellingen aan.",
         answers: [
-          "A. Versnelt beleid",
-          "B. Verzwakt instituties en vertrouwen",
-          "C. Verhoogt transparantie",
-          "D. Verbetert rechtssystemen"
+          "A. Ze versnelt beleid",
+          "B. Ze verzwakt instellingen en vertrouwen",
+          "C. Ze verhoogt transparantie",
+          "D. Ze verbetert rechtssystemen"
         ],
         correctAnswer: 1
       },
       {
-        question: "Hoe beïnvloeden sterke rechtsstelsels ongelijkheid?",
-        hint: "Iedereen gelijk voor de wet.",
+        question: "Hoe kunnen sterke rechtsstelsels ongelijkheid beinvloeden?",
+        hint: "Gelijke rechten maken een verschil.",
         answers: [
           "A. Ze vergroten ongelijkheid",
           "B. Ze hebben geen effect",
-          "C. Ze kunnen ongelijkheid verminderen door gelijke rechten",
+          "C. Ze kunnen ongelijkheid verminderen via gelijke rechten",
           "D. Ze beperken economische groei"
         ],
         correctAnswer: 2
       },
       {
-        question: "Wat is het effect van conflict op SDG's?",
-        hint: "Conflict veroorzaakt een domino-effect.",
+        question: "Wat is het effect van conflict op de SDG's?",
+        hint: "Conflict raakt veel meer dan één domein.",
         answers: [
           "A. Geen impact",
-          "B. Enkel lokaal effect",
-          "C. Belemmert brede ontwikkeling en meerdere SDG's",
-          "D. Verbetert samenwerking"
+          "B. Alleen een lokaal effect",
+          "C. Het belemmert brede ontwikkeling en meerdere SDG's tegelijk",
+          "D. Het verbetert samenwerking"
         ],
         correctAnswer: 2
       },
       {
-        question: "Wat is de spanning rond digitale surveillance?",
-        hint: "Dit is een klassieke trade-off.",
+        question: "Welke spanning zit in het debat rond digitale surveillance?",
+        hint: "Het gaat om een bekende trade-off.",
         answers: [
-          "A. Vrijheid vs veiligheid",
-          "B. Technologie vs economie",
-          "C. Privacy vs klimaat",
-          "D. Werk vs innovatie"
+          "A. Vrijheid versus veiligheid",
+          "B. Technologie versus economie",
+          "C. Privacy versus klimaat",
+          "D. Werk versus innovatie"
         ],
         correctAnswer: 0
       }
@@ -204,8 +204,8 @@ const HUNT_QUESTION_GROUPS = [
     location: "Partnership",
     questions: [
       {
-        question: "Wat is een uitdaging voor internationale samenwerking (SDG 17)?",
-        hint: "Politiek speelt altijd mee.",
+        question: "Wat is een grote uitdaging voor internationale samenwerking (SDG 17)?",
+        hint: "Politieke belangen spelen altijd mee.",
         answers: [
           "A. Te weinig landen",
           "B. Geopolitieke spanningen",
@@ -216,10 +216,10 @@ const HUNT_QUESTION_GROUPS = [
       },
       {
         question: "Wat is een risico van publiek-private samenwerking?",
-        hint: "Bedrijfsbelangen en publieke belangen kunnen botsen.",
+        hint: "Publieke en private belangen lopen niet altijd gelijk.",
         answers: [
           "A. Te weinig innovatie",
-          "B. Onevenwichtige machtsverdeling en belangen",
+          "B. Onevenwichtige machtsverdeling en botsende belangen",
           "C. Gebrek aan financiering",
           "D. Te strikte regelgeving"
         ],
@@ -227,18 +227,18 @@ const HUNT_QUESTION_GROUPS = [
       },
       {
         question: "Wat is essentieel bij kennisdeling?",
-        hint: "Anders werkt samenwerking niet.",
+        hint: "Samenwerking werkt alleen als beide kanten winnen.",
         answers: [
           "A. Eenzijdige overdracht",
           "B. Wederzijds voordeel en respect",
-          "C. Enkel technologische focus",
+          "C. Alleen focus op technologie",
           "D. Beperkte toegang"
         ],
         correctAnswer: 1
       },
       {
-        question: "Wat is een obstakel bij globale vs lokale doelen?",
-        hint: "Er is vaak een verschil tussen theorie en praktijk.",
+        question: "Wat is vaak een obstakel tussen globale en lokale doelen?",
+        hint: "De praktijk loopt niet altijd gelijk met het beleid.",
         answers: [
           "A. Te veel lokale autonomie",
           "B. Moeilijke afstemming tussen beleid en uitvoering",

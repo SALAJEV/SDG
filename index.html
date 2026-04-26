@@ -9,10 +9,23 @@
   <meta name="theme-color" content="#0d9488">
   <title>Challenge 10 Games</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="apple-touch-icon" href="memes/IMG_2581_Edited.jpg">
+  <link rel="apple-touch-icon" href="media/SDG_17.jpg">
 </head>
 <body>
   <main class="app-shell" data-mode="menu">
+    <section id="poster-screen" class="screen poster-screen" hidden>
+      <article class="poster-card">
+        <p class="badge">Challenge 10</p>
+        <h1>Welkom bij The Green Hunt</h1>
+        <p id="poster-message" class="subtitle">
+          Bezoek de stand van Challenge 10 in hal 4 om deze poster te spelen.
+        </p>
+        <div class="finish-actions">
+          <button id="poster-start-hunt" class="restart-btn" type="button">Start via de website</button>
+        </div>
+      </article>
+    </section>
+
     <section id="start-screen" class="screen screen-start">
       <div class="hero-grid">
         <header class="hero hero-start">
@@ -103,11 +116,11 @@
           <span class="mode-kicker">Geheugen challenge</span>
           <strong class="mode-title">Memorie</strong>
           <span class="mode-text">
-            Ideaal tussen twee activiteiten door: draai de kaarten om, onthoud de beelden en los alles op in zo weinig mogelijk beurten.
+            Koppel elk SDG-logo aan het juiste weetje en los de volledige set op in zo weinig mogelijk beurten.
           </span>
           <span class="mode-meta">
-            <span class="meta-pill">Rustige modus</span>
-            <span class="meta-pill">8 kaarten</span>
+            <span class="meta-pill">17 SDG's</span>
+            <span class="meta-pill">34 kaarten</span>
             <span class="meta-pill">Score op beurten</span>
           </span>
           <span class="mode-cta">Start memorie</span>
@@ -213,7 +226,21 @@
               </div>
 
               <div class="finish-actions">
-                <button id="hunt-start-game" class="restart-btn" type="button">Start The Green Hunt</button>
+                <form id="hunt-player-form" class="player-form">
+                  <label class="manual-label" for="hunt-player-name">Naam speler</label>
+                  <div class="manual-row">
+                    <input
+                      id="hunt-player-name"
+                      class="manual-input"
+                      name="hunt-player-name"
+                      type="text"
+                      placeholder="Vul je naam in"
+                      autocomplete="name"
+                      required
+                    >
+                    <button id="hunt-start-game" class="restart-btn" type="submit">Start The Green Hunt</button>
+                  </div>
+                </form>
                 <button id="hunt-back-home-intro" class="ghost-btn" type="button">Terug naar start</button>
               </div>
             </article>
@@ -261,7 +288,7 @@
                     class="manual-input"
                     name="manual-qr-input"
                     type="text"
-                    placeholder="Bijvoorbeeld q=1 voor random of GH-01"
+                    placeholder="Bijvoorbeeld q=1"
                     autocomplete="off"
                   >
                   <button class="ghost-btn" type="submit">Open vraag</button>
@@ -319,7 +346,7 @@
 
               <div class="finish-meta">
                 <span id="hunt-finish-count-pill" class="meta-pill">0 vragen afgewerkt</span>
-                <span class="meta-pill">Score meteen zichtbaar</span>
+                <span id="hunt-finish-time-pill" class="meta-pill">Tijd 00:00</span>
                 <span class="meta-pill">Klaar voor de stand</span>
               </div>
 
@@ -336,13 +363,13 @@
         <div class="memory-shell">
           <article class="memory-intro">
             <p class="panel-kicker">Memorie</p>
-            <h2 class="question-title">Even wachten op vrienden? Speel een snelle ronde.</h2>
+            <h2 class="question-title">Koppel elk SDG-logo aan het juiste weetje.</h2>
             <p class="memory-copy">
-              Deze modus is ideaal tussen twee campusactiviteiten door. Onthoud de kaarten, hou je beurten laag en werk de set af.
+              Alle kaarten liggen eerst omgedraaid. Zoek telkens het juiste paar: een SDG-logo en het bijhorende weetje.
             </p>
             <div class="memory-tags">
-              <span class="meta-pill">8 kaarten</span>
-              <span class="meta-pill">Focus op geheugen</span>
+              <span class="meta-pill">34 kaarten</span>
+              <span class="meta-pill">17 juiste paren</span>
               <span class="meta-pill">Beurten tellen mee</span>
             </div>
           </article>
@@ -364,15 +391,92 @@
         : [];
 
     const DEFAULT_GAME_DATA = {
-      memoryImages: [
-        "IMG_2528_Edited.jpg",
-        "IMG_2581_Edited.jpg",
-        "\u041c\u043e\u0440\u0435.jpg",
-        "\u041c\u043e\u0441\u043a\u0432\u0430.jpg",
-        "\u0413\u043e\u0440\u044b.jpg",
-        "\u0417\u0438\u043c\u0430.jpg",
-        "\u041c\u0438\u0448\u043a\u0438.jpg",
-        "\u0421\u0430\u043d\u043a\u0442-\u041f\u0435\u0442\u0435\u0440\u0431\u0443\u0440\u0433.jpg"
+      memoryPairs: [
+        {
+          sdg: 1,
+          image: "SDG_1.jpg",
+          fact: "700 miljoen mensen minder dan $2 per dag hebben om te overleven."
+        },
+        {
+          sdg: 2,
+          image: "SDG_2.png",
+          fact: "Er elke dag genoeg voedsel wordt geproduceerd voor iedereen, maar er toch elke dag meer dan 800 miljoen mensen hongerlijden."
+        },
+        {
+          sdg: 3,
+          image: "SDG_3.jpg",
+          fact: "Er 5 miljoen kinderen sterven voor hun 5e verjaardag."
+        },
+        {
+          sdg: 4,
+          image: "SDG_4.png",
+          fact: "Meer dan 60 miljoen kinderen niet naar school gaan."
+        },
+        {
+          sdg: 5,
+          image: "SDG_5.jpg",
+          fact: "Vrouwen gemiddeld 20% minder verdienen en 1/3 geweld ervaart in hun leven."
+        },
+        {
+          sdg: 6,
+          image: "SDG_6.jpg",
+          fact: "2 miljard mensen geen schoon drinkbaar water hebben."
+        },
+        {
+          sdg: 7,
+          image: "SDG_7.jpg",
+          fact: "675 miljoen mensen zonder elektriciteit leven."
+        },
+        {
+          sdg: 8,
+          image: "SDG_8.jpg",
+          fact: "Er 160 miljoen kinderen werken."
+        },
+        {
+          sdg: 9,
+          image: "SDG_9.jpg",
+          fact: "Miljoenen mensen in de wereld geen internet hebben in hun leven."
+        },
+        {
+          sdg: 10,
+          image: "SDG_10.jpg",
+          fact: "De rijkste 1% meer bezit dan de rest van de wereld."
+        },
+        {
+          sdg: 11,
+          image: "SDG_11.jpg",
+          fact: "1 miljard mensen in sloppenwijken wonen."
+        },
+        {
+          sdg: 12,
+          image: "SDG_12.jpg",
+          fact: "Ongeveer 1/3 van al het geproduceerde voedsel wereldwijd verloren gaat of verspild wordt."
+        },
+        {
+          sdg: 13,
+          image: "SDG_13.jpg",
+          fact: "Als we zo verdergaan met vervuilen sommige delen van de aarde onbewoonbaar worden verklaard tegen 2100."
+        },
+        {
+          sdg: 14,
+          image: "SDG_14.jpg",
+          fact: "Er jaarlijks 100.000 zeedieren sterven doordat ze stikken in plastic."
+        },
+        {
+          sdg: 15,
+          image: "SDG_15.jpg",
+          fact: "Er elke 2 seconden een voetbalveld aan bomen wordt ontbost."
+        },
+        {
+          sdg: 16,
+          image: "SDG_16.jpg",
+          fact: "Er 100 miljoen mensen op de vlucht zijn voor conflicten."
+        },
+        {
+          sdg: 17,
+          image: "SDG_17.jpg",
+          fact: "Sommige landen beloven om 0,7% van hun inkomen te investeren in ontwikkelingshulp, maar die belofte soms niet nakomen."
+        }
       ],
       huntQuestions: BUNDLED_HUNT_QUESTIONS
     };
@@ -386,12 +490,15 @@
       memory: {
         badge: "Geheugen challenge",
         title: "Memorie",
-        subtitle: "Een snelle studentengame voor tussendoor: draai de kaarten om en vind alle gelijke foto's."
+        subtitle: "Draai de kaarten om en koppel elk SDG-logo aan het juiste weetje."
       }
     };
 
     const appShell = document.querySelector(".app-shell");
     const startScreen = document.getElementById("start-screen");
+    const posterScreen = document.getElementById("poster-screen");
+    const posterMessageEl = document.getElementById("poster-message");
+    const posterStartHuntBtn = document.getElementById("poster-start-hunt");
     const gameScreen = document.getElementById("game-screen");
     const modeButtons = Array.from(document.querySelectorAll(".mode-card"));
     const gameBadgeEl = document.getElementById("game-badge");
@@ -417,7 +524,8 @@
     const huntFinishViewEl = document.getElementById("hunt-finish-view");
     const huntVideoEl = document.getElementById("hunt-video");
     const scannerStatusEl = document.getElementById("scanner-status");
-    const huntStartGameBtn = document.getElementById("hunt-start-game");
+    const huntPlayerForm = document.getElementById("hunt-player-form");
+    const huntPlayerNameInput = document.getElementById("hunt-player-name");
     const huntBackHomeIntroBtn = document.getElementById("hunt-back-home-intro");
     const huntScanCounterEl = document.getElementById("hunt-scan-counter");
     const startScannerBtn = document.getElementById("start-scanner");
@@ -434,6 +542,7 @@
     const huntSuccessTextEl = document.getElementById("hunt-success-text");
     const huntNextScanBtn = document.getElementById("hunt-next-scan");
     const huntFinalScoreEl = document.getElementById("hunt-final-score");
+    const huntFinishTimePillEl = document.getElementById("hunt-finish-time-pill");
     const huntPlayAgainBtn = document.getElementById("hunt-play-again");
     const huntBackHomeBtn = document.getElementById("hunt-back-home");
     const huntProgressFillEl = document.getElementById("hunt-progress-fill");
@@ -475,6 +584,10 @@
         answeredIds: new Set(),
         currentQuestion: null,
         locked: false,
+        playerName: "",
+        startedAt: 0,
+        elapsedMs: 0,
+        timerIntervalId: null,
         stream: null,
         detector: null,
         scanFrameId: null,
@@ -520,11 +633,19 @@
     }
 
     function toSrc(fileName) {
-      return "memes/" + encodeURIComponent(fileName);
+      return "media/" + encodeURIComponent(fileName);
     }
 
     function formatCountLabel(count, singular, plural) {
       return String(count) + " " + (count === 1 ? singular : plural);
+    }
+
+    function formatElapsedTime(milliseconds) {
+      const totalSeconds = Math.max(0, Math.floor(milliseconds / 1000));
+      const minutes = Math.floor(totalSeconds / 60);
+      const seconds = totalSeconds % 60;
+
+      return String(minutes).padStart(2, "0") + ":" + String(seconds).padStart(2, "0");
     }
 
     function normalizeGameData(data) {
@@ -668,10 +789,6 @@
       return questionPool.length ? pickRandom(questionPool) : null;
     }
 
-    function isRandomQuestionCandidate(candidate) {
-      return /^(?:[/?])?Q=1$/i.test(String(candidate || "").trim());
-    }
-
     function getQuestionIdFromSequenceNumber(sequenceNumber) {
       const questionNumber = Number.parseInt(sequenceNumber, 10);
 
@@ -680,7 +797,7 @@
       }
 
       const questions = getHuntQuestions();
-      const directId = "GH-" + String(questionNumber).padStart(2, "0");
+      const directId = "Q=" + String(questionNumber);
       const questionMap = getHuntQuestionMap();
 
       if (questionMap.has(directId)) {
@@ -724,8 +841,8 @@
       if (state.currentMode === "hunt") {
         primaryLabelEl.textContent = "Score";
         primaryValueEl.textContent = String(state.hunt.score);
-        secondaryLabelEl.textContent = "Pogingen";
-        secondaryValueEl.textContent = String(state.hunt.attemptsRemaining);
+        secondaryLabelEl.textContent = "Tijd";
+        secondaryValueEl.textContent = formatElapsedTime(getHuntElapsedMs());
         updateHuntProgressUI();
         return;
       }
@@ -754,16 +871,68 @@
       huntVideoEl.srcObject = null;
     }
 
+    function getHuntElapsedMs() {
+      if (!state.hunt.startedAt) {
+        return state.hunt.elapsedMs;
+      }
+
+      return Date.now() - state.hunt.startedAt;
+    }
+
+    function startHuntTimer() {
+      stopHuntTimer(false);
+      state.hunt.startedAt = Date.now();
+      state.hunt.elapsedMs = 0;
+      state.hunt.timerIntervalId = window.setInterval(updateStatus, 1000);
+      updateStatus();
+    }
+
+    function stopHuntTimer(keepElapsed) {
+      if (state.hunt.timerIntervalId) {
+        window.clearInterval(state.hunt.timerIntervalId);
+        state.hunt.timerIntervalId = null;
+      }
+
+      if (keepElapsed && state.hunt.startedAt) {
+        state.hunt.elapsedMs = Date.now() - state.hunt.startedAt;
+      }
+
+      state.hunt.startedAt = 0;
+    }
+
     function showStartScreen() {
       clearPendingTimers();
       stopHuntScanner();
+      stopHuntTimer(false);
       state.currentMode = null;
       appShell.dataset.mode = "menu";
       document.title = "Challenge 10 Games";
+      posterScreen.hidden = true;
       startScreen.hidden = false;
       gameScreen.hidden = true;
       huntGameEl.hidden = true;
       memoryGameEl.hidden = true;
+    }
+
+    function showPosterScreen(questionId) {
+      clearPendingTimers();
+      stopHuntScanner();
+      stopHuntTimer(false);
+      state.currentMode = null;
+      appShell.dataset.mode = "menu";
+      document.title = "Poster gescand | Challenge 10";
+      posterScreen.hidden = false;
+      startScreen.hidden = true;
+      gameScreen.hidden = true;
+      huntGameEl.hidden = true;
+      memoryGameEl.hidden = true;
+
+      const question = getHuntQuestionMap().get(questionId);
+      const locationLabel = question ? question.location : "deze poster";
+      posterMessageEl.textContent =
+        "Je hebt " +
+        locationLabel +
+        " gevonden. Bezoek de stand van Challenge 10 in hal 4 om deze poster te spelen.";
     }
 
     function applyGameMeta(mode) {
@@ -781,6 +950,7 @@
       state.currentMode = mode;
       appShell.dataset.mode = mode;
       startScreen.hidden = true;
+      posterScreen.hidden = true;
       gameScreen.hidden = false;
       huntGameEl.hidden = mode !== "hunt";
       memoryGameEl.hidden = mode !== "memory";
@@ -928,10 +1098,14 @@
       state.hunt.answeredIds = new Set();
       state.hunt.currentQuestion = null;
       state.hunt.locked = false;
+      state.hunt.playerName = "";
+      stopHuntTimer(false);
+      state.hunt.elapsedMs = 0;
       state.hunt.lastScanValue = "";
       state.hunt.lastScanAt = 0;
       huntAnswerListEl.innerHTML = "";
       manualQrInput.value = "";
+      huntPlayerNameInput.value = "";
       setHuntQuestionMessage("", "is-neutral");
       updateHuntProgressUI();
     }
@@ -1024,16 +1198,6 @@
 
       try {
         const url = new URL(rawText, window.location.href);
-        const qParam = String(url.searchParams.get("q") || "").trim();
-
-        if (qParam === "1") {
-          const randomQuestionId = getRandomHuntQuestionId();
-
-          if (randomQuestionId) {
-            return randomQuestionId;
-          }
-        }
-
         candidates.push(
           url.searchParams.get("id") || "",
           url.searchParams.get("code") || "",
@@ -1055,14 +1219,6 @@
 
         if (!normalizedCandidate) {
           continue;
-        }
-
-        if (isRandomQuestionCandidate(normalizedCandidate)) {
-          const randomQuestionId = getRandomHuntQuestionId();
-
-          if (randomQuestionId) {
-            return randomQuestionId;
-          }
         }
 
         if (questionMap.has(normalizedCandidate)) {
@@ -1100,14 +1256,14 @@
     }
 
     async function openHuntFromLinkedUrl() {
+      await loadGameData();
       const linkedQuestionId = extractQuestionId(window.location.href);
 
       if (!linkedQuestionId) {
         return;
       }
 
-      await openGame("hunt");
-      handleHuntScan(linkedQuestionId);
+      showPosterScreen(linkedQuestionId);
     }
 
     async function scanVideoFrame() {
@@ -1284,14 +1440,21 @@
 
     function showHuntFinish() {
       stopHuntScanner();
+      stopHuntTimer(true);
       state.hunt.attemptsRemaining = 3;
       showHuntView("finish");
+      const playerLabel = state.hunt.playerName ? state.hunt.playerName + ", je score" : "Je score";
+      const elapsedTime = formatElapsedTime(state.hunt.elapsedMs);
       huntFinalScoreEl.textContent =
-        "Je score is " +
+        playerLabel +
+        " is " +
         String(state.hunt.score) +
         " op " +
         String(getHuntTargetCount()) +
+        ". Tijd: " +
+        elapsedTime +
         ".";
+      huntFinishTimePillEl.textContent = "Tijd " + elapsedTime;
       updateStatus();
       showFeedback("The Green Hunt is voltooid. Je mag je prijs afhalen bij de stand.", "is-success");
     }
@@ -1464,6 +1627,20 @@
       }
     }
 
+    function startHuntWithPlayer() {
+      const playerName = huntPlayerNameInput.value.trim();
+
+      if (!playerName) {
+        huntPlayerNameInput.focus();
+        showFeedback("Vul eerst je naam in om The Green Hunt te starten.", "is-error");
+        return;
+      }
+
+      state.hunt.playerName = playerName;
+      startHuntTimer();
+      startHuntScanner();
+    }
+
     function restartCurrentGame() {
       clearPendingTimers();
 
@@ -1485,7 +1662,11 @@
 
     restartBtn.addEventListener("click", restartCurrentGame);
     backToMenuBtn.addEventListener("click", showStartScreen);
-    huntStartGameBtn.addEventListener("click", startHuntScanner);
+    posterStartHuntBtn.addEventListener("click", () => openGame("hunt"));
+    huntPlayerForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      startHuntWithPlayer();
+    });
     huntBackHomeIntroBtn.addEventListener("click", showStartScreen);
     startScannerBtn.addEventListener("click", startHuntScanner);
     stopScannerBtn.addEventListener("click", () => {

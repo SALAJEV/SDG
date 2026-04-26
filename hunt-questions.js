@@ -1,6 +1,6 @@
 const HUNT_QUESTION_GROUPS = [
   {
-    id: "GH-01",
+    id: "q=1",
     location: "People",
     questions: [
       {
@@ -50,7 +50,7 @@ const HUNT_QUESTION_GROUPS = [
     ]
   },
   {
-    id: "GH-02",
+    id: "q=2",
     location: "Planet",
     questions: [
       {
@@ -100,7 +100,7 @@ const HUNT_QUESTION_GROUPS = [
     ]
   },
   {
-    id: "GH-03",
+    id: "q=3",
     location: "Prosperity",
     questions: [
       {
@@ -150,7 +150,7 @@ const HUNT_QUESTION_GROUPS = [
     ]
   },
   {
-    id: "GH-04",
+    id: "q=4",
     location: "Peace",
     questions: [
       {
@@ -200,7 +200,7 @@ const HUNT_QUESTION_GROUPS = [
     ]
   },
   {
-    id: "GH-05",
+    id: "q=5",
     location: "Partnership",
     questions: [
       {

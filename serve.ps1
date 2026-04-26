@@ -2,7 +2,7 @@ param(
   [int]$Port = 8000
 )
 
-$scriptRoot = Split-Path -LiteralPath $MyInvocation.MyCommand.Path -Parent
+$scriptRoot = if ($PSScriptRoot) { $PSScriptRoot } else { Split-Path -Path $MyInvocation.MyCommand.Path -Parent }
 $rootPath = [System.IO.Path]::GetFullPath($scriptRoot).TrimEnd('\') + '\'
 $prefix = "http://localhost:$Port/"
 
@@ -65,8 +65,10 @@ try {
           $bytes = [System.IO.File]::ReadAllBytes($fullPath)
           $response.StatusCode = 200
         } else {
-          $response.StatusCode = 404
-          $bytes = [System.Text.Encoding]::UTF8.GetBytes("Not found")
+          $fullPath = Join-Path -Path $rootPath -ChildPath "index.html"
+          $response.ContentType = $contentTypes[".html"]
+          $bytes = [System.IO.File]::ReadAllBytes($fullPath)
+          $response.StatusCode = 200
         }
       }
 

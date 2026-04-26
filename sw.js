@@ -1,4 +1,4 @@
-const CACHE_NAME = "challenge-10-games-v8";
+const CACHE_NAME = "challenge-10-games-v13";
 const ASSETS = [
   "./",
   "./index.html",
@@ -7,14 +7,23 @@ const ASSETS = [
   "./hunt-questions.js",
   "./manifest.json",
   "./sw.js",
-  "./memes/IMG_2528_Edited.jpg",
-  "./memes/IMG_2581_Edited.jpg",
-  "./memes/%D0%93%D0%BE%D1%80%D1%8B.jpg",
-  "./memes/%D0%97%D0%B8%D0%BC%D0%B0.jpg",
-  "./memes/%D0%9C%D0%B8%D1%88%D0%BA%D0%B8.jpg",
-  "./memes/%D0%9C%D0%BE%D1%80%D0%B5.jpg",
-  "./memes/%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0.jpg",
-  "./memes/%D0%A1%D0%B0%D0%BD%D0%BA%D1%82-%D0%9F%D0%B5%D1%82%D0%B5%D1%80%D0%B1%D1%83%D1%80%D0%B3.jpg"
+  "./media/SDG_1.jpg",
+  "./media/SDG_2.png",
+  "./media/SDG_3.jpg",
+  "./media/SDG_4.png",
+  "./media/SDG_5.jpg",
+  "./media/SDG_6.jpg",
+  "./media/SDG_7.jpg",
+  "./media/SDG_8.jpg",
+  "./media/SDG_9.jpg",
+  "./media/SDG_10.jpg",
+  "./media/SDG_11.jpg",
+  "./media/SDG_12.jpg",
+  "./media/SDG_13.jpg",
+  "./media/SDG_14.jpg",
+  "./media/SDG_15.jpg",
+  "./media/SDG_16.jpg",
+  "./media/SDG_17.jpg"
 ];
 
 self.addEventListener("install", (event) => {

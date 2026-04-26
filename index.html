@@ -7,9 +7,22 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="theme-color" content="#0d9488">
+  <script>
+    (function () {
+      const currentUrl = new URL(window.location.href);
+      let baseHref = new URL(".", currentUrl).href;
+
+      if (/\/(?:memorie|greenhunt|gh-[^/]+)\/?$/i.test(currentUrl.pathname)) {
+        baseHref = new URL("../", currentUrl).href;
+      }
+
+      window.__APP_BASE_HREF__ = baseHref;
+      document.write('<base href="' + baseHref.replace(/"/g, "&quot;") + '">');
+    })();
+  </script>
   <title>Challenge 10 Games</title>
-  <link rel="stylesheet" href="/style.css">
-  <link rel="apple-touch-icon" href="/media/SDG_17.jpg">
+  <link rel="stylesheet" href="style.css">
+  <link rel="apple-touch-icon" href="media/SDG_17.jpg">
 </head>
 <body>
   <main class="app-shell" data-mode="menu">
@@ -131,12 +144,6 @@
         </button>
       </section>
 
-      <section class="social-strip" aria-label="Green Hunters online">
-        <span>Blijf na de challenge verbonden met The Green Hunters.</span>
-        <a href="https://www.instagram.com/greenhunters___/" target="_blank" rel="noopener noreferrer">
-          Instagram @greenhunters___
-        </a>
-      </section>
     </section>
 
     <section id="game-screen" class="screen screen-game" hidden>
@@ -372,13 +379,20 @@
         <p id="disclaimer-text" class="disclaimer-text">
           Deze site is gemaakt door studenten van Hogeschool VIVES Kortrijk uit de richting Business Management & Entrepreneurship, eerste bachelor.
         </p>
+        <p id="makers-text" class="terms-text">
+          Makers: Anzor Salajev, Mouhamed Bouabid, Hamza Bdirina, Thomas Verschaeve en Yasmina Ouassou.
+        </p>
+        <p class="terms-text">
+          <span id="footer-social-text">Volg The Green Hunters online:</span>
+          <a class="footer-link" href="https://www.instagram.com/greenhunters___/" target="_blank" rel="noopener noreferrer">Instagram @greenhunters___</a>
+        </p>
         <p id="terms-text" class="terms-text">
           Gebruiksvoorwaarden: deze website is uitsluitend bedoeld voor educatieve en eventgebonden doeleinden. Inhoud, scoreweergave en spelverloop kunnen aangepast worden zonder voorafgaande melding.
         </p>
       </div>
       <div class="vives-logo-badge">
         <img
-          src="/media/Logo%20VIVES%20Hogeschool%20-%20Smile.png"
+          src="media/Logo%20VIVES%20Hogeschool%20-%20Smile.png"
           alt="Hogeschool VIVES Kortrijk"
           class="vives-logo"
           loading="lazy"
@@ -398,7 +412,7 @@
     </dialog>
   </main>
 
-  <script src="/hunt-questions.js"></script>
+  <script src="hunt-questions.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
   <script>
     const BUNDLED_HUNT_QUESTIONS =
@@ -445,6 +459,8 @@
         turnsCount: "Beurten",
         startMemory: "Start Memorie",
         socialText: "Volg The Green Hunters online.",
+        footerSocialText: "Volg The Green Hunters online:",
+        makersText: "Makers: Anzor Salajev, Mouhamed Bouabid, Hamza Bdirina, Thomas Verschaeve en Yasmina Ouassou.",
         studentChip: "Voor VIVES-studenten",
         phoneInfo: "Voor smartphone",
         eventInfo: "Voor het VIVES-event",
@@ -562,6 +578,8 @@
         turnsCount: "Turns",
         startMemory: "Start Memory",
         socialText: "Follow The Green Hunters online.",
+        footerSocialText: "Follow The Green Hunters online:",
+        makersText: "Makers: Anzor Salajev, Mouhamed Bouabid, Hamza Bdirina, Thomas Verschaeve and Yasmina Ouassou.",
         studentChip: "For VIVES students",
         phoneInfo: "For phones",
         eventInfo: "For the VIVES event",
@@ -844,6 +862,7 @@
     const runtime = {
       protocol: window.location.protocol,
       isFile: window.location.protocol === "file:",
+      appBaseHref: window.__APP_BASE_HREF__ || new URL(".", window.location.href).href,
       canRegisterServiceWorker:
         "serviceWorker" in navigator &&
         (window.location.protocol === "http:" || window.location.protocol === "https:"),
@@ -852,6 +871,11 @@
         !!navigator.mediaDevices &&
         typeof navigator.mediaDevices.getUserMedia === "function"
     };
+
+    runtime.appBasePath = (() => {
+      const { pathname } = new URL(runtime.appBaseHref);
+      return pathname !== "/" ? pathname.replace(/\/$/, "") : "";
+    })();
 
     let pendingTimers = [];
     let dataLoadPromise = null;
@@ -909,12 +933,51 @@
       pendingTimers.push(timerId);
     }
 
+    function buildAppUrl(relativePath = "") {
+      const normalizedPath = String(relativePath || "").replace(/^\/+/, "");
+      return new URL(normalizedPath, runtime.appBaseHref).href;
+    }
+
+    function buildAppPath(relativePath = "/") {
+      const normalizedPath = String(relativePath || "/");
+
+      if (normalizedPath === "/") {
+        return runtime.appBasePath ? runtime.appBasePath + "/" : "/";
+      }
+
+      return runtime.appBasePath + (normalizedPath.startsWith("/") ? normalizedPath : "/" + normalizedPath);
+    }
+
+    function stripAppBase(pathname = "/") {
+      if (!runtime.appBasePath) {
+        return pathname || "/";
+      }
+
+      if (pathname === runtime.appBasePath) {
+        return "/";
+      }
+
+      if (pathname.startsWith(runtime.appBasePath + "/")) {
+        return pathname.slice(runtime.appBasePath.length) || "/";
+      }
+
+      return pathname || "/";
+    }
+
     function clearPendingTimers() {
       pendingTimers.forEach((timerId) => window.clearTimeout(timerId));
       pendingTimers = [];
     }
 
     function showFeedback(message, stateClass) {
+      if (message === t("scanNext")) {
+        feedbackEl.hidden = true;
+        feedbackEl.textContent = "";
+        feedbackEl.className = "feedback";
+        return;
+      }
+
+      feedbackEl.hidden = !message;
       feedbackEl.textContent = message;
       feedbackEl.className = "feedback " + stateClass;
     }
@@ -1063,7 +1126,6 @@
       setText(".mode-card-memory .mode-text", "memoryText");
       setText(".mode-card-hunt .mode-cta", "startHunt");
       setText(".mode-card-memory .mode-cta", "startMemory");
-      setText(".social-strip span", "socialText");
       setText(".hero-chip-soft", "studentChip");
       setAllText(".hero-info-strip .info-pill", ["phoneInfo", "eventInfo"]);
       setText("#primary-label", state.currentMode === "hunt" ? "score" : state.currentMode === "memory" ? "pairs" : "points");
@@ -1106,6 +1168,8 @@
       setText("#hunt-final-score", "defaultScore");
       setAllText(".finish-meta .meta-pill", ["finishCount", "timePill", "completed"]);
       setText("#disclaimer-text", "disclaimerText");
+      setText("#makers-text", "makersText");
+      setText("#footer-social-text", "footerSocialText");
       setText("#terms-text", "termsText");
 
       syncHuntCopy();
@@ -1134,7 +1198,7 @@
     }
 
     function toSrc(fileName) {
-      return (runtime.isFile ? "media/" : "/media/") + encodeURIComponent(fileName);
+      return buildAppUrl("media/" + encodeURIComponent(fileName));
     }
 
     function escapeHtml(value) {
@@ -1327,7 +1391,7 @@
       if (runtime.canRegisterServiceWorker) {
         const manifestLink = document.createElement("link");
         manifestLink.rel = "manifest";
-        manifestLink.href = "/manifest.json";
+        manifestLink.href = buildAppUrl("manifest.json");
         document.head.appendChild(manifestLink);
       }
     }
@@ -1347,7 +1411,7 @@
         return dataLoadPromise;
       }
 
-      dataLoadPromise = fetch("/data.json", { cache: "no-store" })
+      dataLoadPromise = fetch(buildAppUrl("data.json"), { cache: "no-store" })
         .then((response) => {
           if (!response.ok) {
             throw new Error("Kon data.json niet laden.");
@@ -1508,18 +1572,18 @@
 
     function routePathForMode(mode) {
       if (mode === "memory") {
-        return "/memorie/";
+        return buildAppPath("/memorie/");
       }
 
       if (mode === "hunt") {
-        return "/greenhunt/";
+        return buildAppPath("/greenhunt/");
       }
 
-      return "/";
+      return buildAppPath("/");
     }
 
     function routePathForQuestion(questionId) {
-      return "/" + String(questionId || "").toLowerCase();
+      return buildAppPath("/" + String(questionId || "").toLowerCase());
     }
 
     function getCurrentRouteForState() {
@@ -1954,7 +2018,7 @@
 
     async function handleRouteChange() {
       await loadGameData();
-      const path = window.location.pathname.toLowerCase();
+      const path = stripAppBase(window.location.pathname).toLowerCase();
       const linkedQuestionId = extractQuestionId(window.location.href);
 
       if (linkedQuestionId) {
@@ -2496,7 +2560,7 @@
 
     if (runtime.canRegisterServiceWorker) {
       window.addEventListener("load", () => {
-        navigator.serviceWorker.register("/sw.js").catch((error) => {
+        navigator.serviceWorker.register(buildAppUrl("sw.js")).catch((error) => {
           console.warn("SW reg failed", error);
         });
       });

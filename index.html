@@ -20,7 +20,7 @@
       document.write('<base href="' + baseHref.replace(/"/g, "&quot;") + '">');
     })();
   </script>
-  <title>Challenge 10 Games</title>
+  <title>The Green Hunters</title>
   <link rel="stylesheet" href="style.css">
   <link rel="apple-touch-icon" href="media/SDG_17.jpg">
 </head>
@@ -34,7 +34,7 @@
     <section id="poster-screen" class="screen poster-screen" hidden>
       <article class="poster-card">
         <p class="badge">Challenge 10</p>
-        <h1 id="poster-title" class="home-link-title" data-home-trigger="true" role="button" tabindex="0">Welkom bij The Green Hunt</h1>
+        <h1 id="poster-title" class="home-link-title" data-home-trigger="true" role="button" tabindex="0">Welkom bij The Green Hunters</h1>
         <p id="poster-message" class="subtitle">
           Bezoek de stand van Challenge 10 in hal 4 om deze poster te spelen.
         </p>
@@ -63,58 +63,40 @@
           </section>
         </header>
 
-        <aside class="hero-panel hero-panel-plain">
-          <p class="panel-kicker">Zo werkt het</p>
-
-          <ol class="text-steps">
-            <li class="text-step">
-              <strong class="step-heading">Kies een spel</strong>
-              <span class="step-body">Kies of je de campus wilt verkennen met The Green Hunt, of liever start met een korte memory game.</span>
-            </li>
-            <li class="text-step">
-              <strong class="step-heading">Volg de stappen</strong>
-              <span class="step-body">De site begeleidt je stap voor stap. Je ziet telkens duidelijk wat je moet doen om verder te gaan.</span>
-            </li>
-            <li class="text-step">
-              <strong class="step-heading">Bekijk je resultaat</strong>
-              <span class="step-body">Onderweg zie je je score en tijd. Op het einde krijg je een overzicht van je resultaat.</span>
-            </li>
-          </ol>
-
-          <p class="panel-note">
-            Deze website is gemaakt om het spel snel en duidelijk speelbaar te maken tijdens het VIVES-event.
-          </p>
-        </aside>
       </div>
 
-      <section class="mode-grid" aria-label="Kies een game">
-        <button class="mode-card mode-card-hunt" type="button" data-mode="hunt">
-          <span class="mode-kicker">Rond de campus</span>
-          <strong class="mode-title">The Green Hunt</strong>
-          <span id="hunt-mode-text" class="mode-text">
-            Trek met je medestudenten over de campus, scan per locatie een vraag en speel rechtstreeks naar je eindscore.
-          </span>
-          <span class="mode-meta">
-            <span id="hunt-mode-count" class="meta-pill">0 QR-vragen</span>
-            <span class="meta-pill">Score op vragen</span>
-            <span class="meta-pill">Prijs aan de stand</span>
-          </span>
-          <span class="mode-cta">Start speurtocht</span>
-        </button>
+      <section class="mode-explainer" aria-label="Zo werkt The Green Hunters">
+        <article class="mode-explainer-card">
+          <p id="hunt-explainer-kicker" class="panel-kicker">Zo werkt het</p>
+          <h2 id="hunt-explainer-title" class="explainer-title">Hoe werkt The Green Hunters?</h2>
+          <p id="hunt-explainer-intro" class="explainer-text">
+            Op de campus hangen posters met een letter zoals P van People of Planet. Zoek zo'n poster, scan de QR-code en open je vraag.
+          </p>
+          <div class="explainer-steps">
+            <p class="explainer-step"><strong id="hunt-step-one-label">1. Zoek een poster</strong> <span id="hunt-step-one-text">Kijk op de campus uit naar een poster met een duidelijke letter zoals P.</span></p>
+            <p class="explainer-step"><strong id="hunt-step-two-label">2. Scan en antwoord</strong> <span id="hunt-step-two-text">Scan de QR-code op de poster en beantwoord meteen de vraag die op je scherm verschijnt.</span></p>
+            <p class="explainer-step"><strong id="hunt-step-three-label">3. Verzamel punten</strong> <span id="hunt-step-three-text">Voor elk juist antwoord verzamel je punten. Hoe beter en sneller je speelt, hoe hoger je score.</span></p>
+          </div>
+          <p id="hunt-mode-text" class="explainer-note">
+            Op het einde krijg je een overzicht van je score en kun je tonen dat je het spel hebt voltooid.
+          </p>
+        </article>
 
-        <button class="mode-card mode-card-memory" type="button" data-mode="memory">
-          <span class="mode-kicker">Geheugen challenge</span>
-          <strong class="mode-title">Memorie</strong>
-          <span class="mode-text">
-            Koppel elk SDG-logo aan het juiste weetje en kraak de volledige set in zo weinig mogelijk beurten.
-          </span>
-          <span class="mode-meta">
-            <span class="meta-pill">17 SDG's</span>
-            <span class="meta-pill">34 kaarten</span>
-            <span class="meta-pill">Score op beurten</span>
-          </span>
-          <span class="mode-cta">Start memorie</span>
-        </button>
+        <div class="mode-actions" aria-label="Kies een game">
+          <button id="start-hunt-mode" class="mode-action mode-action-hunt" type="button" data-mode="hunt">
+            <span id="start-hunt-kicker" class="mode-action-kicker">Campusspel</span>
+            <strong id="start-hunt-title" class="mode-action-title">The Green Hunters</strong>
+            <span id="hunt-mode-count" class="mode-action-meta">0 QR-vragen</span>
+            <span id="start-hunt-cta" class="mode-action-cta">Start The Green Hunters</span>
+          </button>
+
+          <button id="start-memory-mode" class="mode-action mode-action-memory" type="button" data-mode="memory">
+            <span id="start-memory-kicker" class="mode-action-kicker">SDG-spel</span>
+            <strong id="start-memory-title" class="mode-action-title">Memorie</strong>
+            <span id="start-memory-meta" class="mode-action-meta">17 SDG's · 34 kaarten</span>
+            <span id="start-memory-cta" class="mode-action-cta">Start memorie</span>
+          </button>
+        </div>
       </section>
 
     </section>
@@ -124,7 +106,7 @@
         <div class="hero-head">
           <div class="hero-head-stack">
             <div class="hero-copy">
-              <h1 id="game-title" class="home-link-title" data-home-trigger="true" role="button" tabindex="0">The Green Hunt</h1>
+              <h1 id="game-title" class="home-link-title" data-home-trigger="true" role="button" tabindex="0">The Green Hunters</h1>
               <p id="game-subtitle" class="subtitle"></p>
             </div>
           </div>
@@ -148,7 +130,7 @@
           <div id="hunt-intro-view" class="hunt-view">
             <article class="hunt-stage-card hunt-intro-card">
               <div class="hunt-stage-header">
-                <p class="panel-kicker">The Green Hunt</p>
+                <p class="panel-kicker">The Green Hunters</p>
               </div>
 
               <h2 class="question-title">Scan een QR-code op campus en open je eerste vraag.</h2>
@@ -217,7 +199,7 @@
                       autocomplete="name"
                       required
                     >
-                    <button id="hunt-start-game" class="restart-btn" type="submit">Start The Green Hunt</button>
+                    <button id="hunt-start-game" class="restart-btn" type="submit">Start The Green Hunters</button>
                   </div>
                 </form>
               </div>
@@ -297,7 +279,7 @@
             <article class="finish-card">
               <div class="finish-emblem" aria-hidden="true">+</div>
               <p class="badge">Certificaat</p>
-              <h2 class="finish-title">The Green Hunt voltooid</h2>
+              <h2 class="finish-title">The Green Hunters voltooid</h2>
               <div class="certificate-panel">
                 <span class="certificate-label">Behaald door</span>
                 <strong id="hunt-certificate-name" class="certificate-name">Speler</strong>
@@ -395,8 +377,8 @@
 
     const translations = {
       nl: {
-        pageTitle: "Challenge 10 Games",
-        posterTitle: "Welkom bij The Green Hunt",
+        pageTitle: "The Green Hunters",
+        posterTitle: "Welkom bij The Green Hunters",
         posterOpen: "Kom naar stand Challenge 10 in hal 4 om mee te spelen.",
         posterClosed: "{location} gevonden. The Green Hunt is afgelopen. Speel Memorie of volg ons op Instagram.",
         posterButton: "Start op de website",
@@ -419,6 +401,15 @@
         panelNote: "Deze website is gemaakt om het spel snel en duidelijk speelbaar te maken tijdens het VIVES-event.",
         huntKicker: "Campus hunt",
         huntText: "Scan posters en beantwoord 5 vragen.",
+        huntExplainerTitle: "Hoe werkt The Green Hunters?",
+        huntExplainerIntro: "Op de campus hangen posters met een letter zoals P van People of Planet. Zoek zo'n poster, scan de QR-code en open je vraag.",
+        huntStepOneLabel: "1. Zoek een poster",
+        huntStepOneText: "Kijk op de campus uit naar een poster met een duidelijke letter zoals P.",
+        huntStepTwoLabel: "2. Scan en antwoord",
+        huntStepTwoText: "Scan de QR-code op de poster en beantwoord meteen de vraag die op je scherm verschijnt.",
+        huntStepThreeLabel: "3. Verzamel punten",
+        huntStepThreeText: "Voor elk juist antwoord verzamel je punten. Hoe beter en sneller je speelt, hoe hoger je score.",
+        huntExplainerNote: "Op het einde krijg je een overzicht van je score en kun je tonen dat je het spel hebt voltooid.",
         huntClosedText: "The Green Hunt is afgelopen. Speel Memorie of volg ons op Instagram.",
         huntCount: "QR-vragen",
         scoreQuestions: "Score",
@@ -459,7 +450,7 @@
         playerLogin: "Speler",
         playerName: "Naam",
         playerPlaceholder: "Je naam",
-        startGreenHunt: "Start The Green Hunt",
+        startGreenHunt: "Start The Green Hunters",
         scanQr: "Scan QR-code",
         scanCounter: "afgerond",
         scanTitle: "Scan de volgende poster",
@@ -476,7 +467,7 @@
         successTitle: "Goed gedaan.",
         nextScan: "Scan volgende QR-code",
         certificate: "Certificaat",
-        huntComplete: "The Green Hunt voltooid",
+        huntComplete: "The Green Hunters voltooid",
         achievedBy: "Behaald door",
         player: "Speler",
         defaultScore: "Je eindscore verschijnt hier.",
@@ -514,8 +505,8 @@
         eventClosedFull: "The Green Hunt is afgelopen. Speel Memorie of volg ons op Instagram."
       },
       en: {
-        pageTitle: "Challenge 10 Games",
-        posterTitle: "Welcome to The Green Hunt",
+        pageTitle: "The Green Hunters",
+        posterTitle: "Welcome to The Green Hunters",
         posterOpen: "Go to the Challenge 10 stand in hall 4 to play.",
         posterClosed: "{location} found. The Green Hunt is over. Play Memory or follow us on Instagram.",
         posterButton: "Start on the website",
@@ -538,6 +529,15 @@
         panelNote: "This website was made to keep the game clear and easy to play during the VIVES event.",
         huntKicker: "Campus hunt",
         huntText: "Scan posters and answer 5 questions.",
+        huntExplainerTitle: "How does The Green Hunters work?",
+        huntExplainerIntro: "Around campus you will find posters with a letter such as P for People or Planet. Find one, scan the QR code, and open your question.",
+        huntStepOneLabel: "1. Find a poster",
+        huntStepOneText: "Look around campus for a poster with a clear letter such as P.",
+        huntStepTwoLabel: "2. Scan and answer",
+        huntStepTwoText: "Scan the poster's QR code and answer the question that appears on your screen.",
+        huntStepThreeLabel: "3. Collect points",
+        huntStepThreeText: "You earn points for every correct answer. The better and faster you play, the higher your score.",
+        huntExplainerNote: "At the end, you receive an overview of your score and can show that you completed the game.",
         huntClosedText: "The Green Hunt is over. Play Memory or follow us on Instagram.",
         huntCount: "QR questions",
         scoreQuestions: "Score",
@@ -578,7 +578,7 @@
         playerLogin: "Player",
         playerName: "Name",
         playerPlaceholder: "Your name",
-        startGreenHunt: "Start The Green Hunt",
+        startGreenHunt: "Start The Green Hunters",
         scanQr: "Scan QR code",
         scanCounter: "done",
         scanTitle: "Scan the next poster",
@@ -595,7 +595,7 @@
         successTitle: "Well done.",
         nextScan: "Scan next QR code",
         certificate: "Certificate",
-        huntComplete: "The Green Hunt completed",
+        huntComplete: "The Green Hunters completed",
         achievedBy: "Achieved by",
         player: "Player",
         defaultScore: "Your final score will appear here.",
@@ -761,7 +761,7 @@
     const gameConfigs = {
       hunt: {
         badge: "Rond de campus",
-        title: "The Green Hunt",
+        title: "The Green Hunters",
         subtitle: "Scan QR-codes, beantwoord de vragen en speel naar je score."
       },
       memory: {
@@ -778,8 +778,8 @@
     const posterMessageEl = document.getElementById("poster-message");
     const posterStartHuntBtn = document.getElementById("poster-start-hunt");
     const gameScreen = document.getElementById("game-screen");
-    const modeButtons = Array.from(document.querySelectorAll(".mode-card"));
-    const huntModeButton = document.querySelector(".mode-card-hunt");
+    const modeButtons = Array.from(document.querySelectorAll("[data-mode]"));
+    const huntModeButton = document.getElementById("start-hunt-mode");
     const eventStatusNoteEl = document.getElementById("event-status-note");
     const huntModeTextEl = document.getElementById("hunt-mode-text");
     const gameTitleEl = document.getElementById("game-title");
@@ -1089,16 +1089,23 @@
       setText("#poster-start-hunt", "posterButton");
       setText(".hero-start h1", "heroTitle");
       setText(".hero-start .subtitle", "heroSubtitle");
-      setText(".hero-panel .panel-kicker", "stepsTitle");
-      setText(".hero-panel .panel-note", "panelNote");
-      setText(".mode-card-hunt .mode-kicker", "huntKicker");
-      setText(".mode-card-hunt .mode-title", "memoryTitle");
-      document.querySelector(".mode-card-hunt .mode-title").textContent = "The Green Hunt";
-      setText(".mode-card-memory .mode-kicker", "memoryKicker");
-      setText(".mode-card-memory .mode-title", "memoryTitle");
-      setText(".mode-card-memory .mode-text", "memoryText");
-      setText(".mode-card-hunt .mode-cta", "startHunt");
-      setText(".mode-card-memory .mode-cta", "startMemory");
+      setText("#hunt-explainer-kicker", "stepsTitle");
+      setText("#hunt-explainer-title", "huntExplainerTitle");
+      setText("#hunt-explainer-intro", "huntExplainerIntro");
+      setText("#hunt-step-one-label", "huntStepOneLabel");
+      setText("#hunt-step-one-text", "huntStepOneText");
+      setText("#hunt-step-two-label", "huntStepTwoLabel");
+      setText("#hunt-step-two-text", "huntStepTwoText");
+      setText("#hunt-step-three-label", "huntStepThreeLabel");
+      setText("#hunt-step-three-text", "huntStepThreeText");
+      setText("#hunt-mode-text", "huntExplainerNote");
+      setText("#start-hunt-kicker", "huntKicker");
+      document.getElementById("start-hunt-title").textContent = "The Green Hunters";
+      setText("#start-memory-kicker", "memoryKicker");
+      setText("#start-memory-title", "memoryTitle");
+      document.getElementById("start-memory-meta").textContent = t("sdgs") + " · " + t("cards");
+      setText("#start-hunt-cta", "startGreenHunt");
+      setText("#start-memory-cta", "startMemory");
       setText(".hero-chip-soft", "studentChip");
       setAllText(".hero-info-strip .info-pill", ["phoneInfo", "eventInfo"]);
       setText("#primary-label", state.currentMode === "hunt" ? "score" : state.currentMode === "memory" ? "pairs" : "points");
@@ -1123,10 +1130,6 @@
       setText(".memory-copy", "memoryIntro");
       memoryGridEl.setAttribute("aria-label", t("memoryGridLabel"));
       setText("#start-overview-prize", "overviewPrizeText");
-      setAllText(".hero-panel .step-heading", ["stepOneTitle", "stepTwoTitle", "stepThreeTitle"]);
-      setAllText(".hero-panel .step-body", ["stepOneText", "stepTwoText", "stepThreeText"]);
-      setAllText(".mode-card-hunt .meta-pill", ["huntCount", "scoreQuestions", "prizeStand"]);
-      setAllText(".mode-card-memory .meta-pill", ["sdgs", "cards", "turnsCount"]);
       setAllText(".hunt-feature-card .overview-label", ["questions", "attempts", "overviewReward"]);
       setAllText(".hunt-feature-card .overview-text", ["questionsText", "attemptsText", "rewardText"]);
       setText(".hunt-feature-card:nth-child(3) .overview-value", "overviewPrize");
@@ -1346,7 +1349,7 @@
       if (huntModeTextEl) {
         huntModeTextEl.textContent = closed
           ? t("huntClosedText")
-          : t("huntText");
+          : t("huntExplainerNote");
       }
 
       if (eventStatusNoteEl) {
@@ -1606,7 +1609,7 @@
       stopHuntTimer(false);
       state.currentMode = null;
       appShell.dataset.mode = "menu";
-      document.title = t("posterTitle") + " | Challenge 10";
+      document.title = t("posterTitle");
       posterScreen.hidden = false;
       startScreen.hidden = true;
       gameScreen.hidden = true;
@@ -1627,8 +1630,8 @@
 
     function applyGameMeta(mode) {
       const config = gameConfigs[mode];
-      const title = mode === "memory" ? t("memoryTitle") : "The Green Hunt";
-      document.title = title + " | Challenge 10";
+      const title = mode === "memory" ? t("memoryTitle") : "The Green Hunters";
+      document.title = title;
       gameTitleEl.textContent = title;
       gameSubtitleEl.textContent = mode === "hunt" ? getHuntSubtitle() : t("memoryText");
     }

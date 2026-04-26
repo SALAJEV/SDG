@@ -519,6 +519,105 @@ h1 {
   gap: 20px;
 }
 
+.mode-explainer {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.mode-explainer-card {
+  padding: 26px 28px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(17, 69, 66, 0.12);
+  box-shadow: 0 18px 44px rgba(8, 19, 30, 0.08);
+}
+
+.explainer-title {
+  margin: 0;
+  font-size: clamp(1.55rem, 2.7vw, 2.35rem);
+  line-height: 1.12;
+}
+
+.explainer-text,
+.explainer-note {
+  margin: 14px 0 0;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+
+.explainer-steps {
+  margin-top: 18px;
+  display: grid;
+  gap: 12px;
+}
+
+.explainer-step {
+  margin: 0;
+  color: var(--ink-soft);
+  line-height: 1.65;
+}
+
+.explainer-step strong {
+  color: var(--ink);
+}
+
+.mode-actions {
+  display: grid;
+  gap: 14px;
+}
+
+.mode-action {
+  display: grid;
+  gap: 10px;
+  padding: 22px 20px;
+  text-align: left;
+  border-radius: 14px;
+  border: 1px solid rgba(17, 69, 66, 0.12);
+  background: rgba(255, 255, 255, 0.88);
+  color: var(--ink);
+  cursor: pointer;
+  box-shadow: 0 14px 32px rgba(8, 19, 30, 0.08);
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.mode-action:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 36px rgba(8, 19, 30, 0.12);
+}
+
+.mode-action-hunt {
+  border-left: 6px solid var(--spruce-700);
+}
+
+.mode-action-memory {
+  border-left: 6px solid var(--sun-400);
+}
+
+.mode-action-kicker {
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.mode-action-title {
+  font-size: 1.3rem;
+  line-height: 1.15;
+}
+
+.mode-action-meta {
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+.mode-action-cta {
+  font-weight: 800;
+  color: var(--spruce-700);
+}
+
 .mode-card {
   position: relative;
   display: flex;
@@ -3103,6 +3202,16 @@ h2,
   .hero-panel-plain {
     padding: 16px;
     border-radius: 10px;
+  }
+
+  .mode-explainer {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .mode-explainer-card,
+  .mode-action {
+    padding: 18px 16px;
   }
 
   .panel-kicker {

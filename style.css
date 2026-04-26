@@ -3059,3 +3059,87 @@ h2,
     border-radius: 12px;
   }
 }
+
+/* Compact start section */
+.screen-start {
+  gap: 16px;
+}
+
+.hero-start {
+  margin-bottom: 0;
+}
+
+.hero-grid {
+  grid-template-columns: minmax(0, 1.5fr) minmax(240px, 0.5fr);
+  gap: 14px;
+}
+
+.hero-start h1 {
+  font-size: clamp(1.75rem, 3vw, 2.45rem);
+  max-width: 12ch;
+}
+
+.hero-start .subtitle {
+  max-width: 44ch;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.overview-grid {
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.overview-card {
+  padding: 13px 14px;
+  min-height: 0;
+}
+
+.overview-value {
+  margin-top: 6px;
+  font-size: clamp(1.15rem, 1.7vw, 1.55rem);
+}
+
+.overview-text {
+  margin-top: 8px;
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
+.hero-panel {
+  padding: 16px 18px;
+}
+
+.panel-kicker {
+  margin-bottom: 10px;
+}
+
+.step-list {
+  gap: 10px;
+}
+
+.step-item {
+  gap: 10px;
+}
+
+.step-item strong {
+  margin-bottom: 2px;
+  font-size: 0.94rem;
+}
+
+.step-item p,
+.panel-note {
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.panel-note {
+  margin-top: 12px;
+  padding: 10px 12px;
+}
+
+.step-number {
+  width: 30px;
+  height: 30px;
+  font-size: 0.85rem;
+}

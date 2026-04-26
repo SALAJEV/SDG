@@ -1,4 +1,4 @@
-const CACHE_NAME = "challenge-10-games-v30";
+const CACHE_NAME = "challenge-10-games-v31";
 const ASSETS = [
   "./",
   "index.html",
@@ -7,6 +7,7 @@ const ASSETS = [
   "hunt-questions.js",
   "manifest.json",
   "sw.js",
+  "media/logo_thegreenhunters.png",
   "media/SDG_1.jpg",
   "media/SDG_2.png",
   "media/SDG_3.jpg",
@@ -22,8 +23,7 @@ const ASSETS = [
   "media/SDG_13.jpg",
   "media/SDG_14.jpg",
   "media/SDG_15.jpg",
-  "media/SDG_16.jpg",
-  "media/SDG_17.jpg"
+  "media/SDG_16.jpg"
 ];
 
 self.addEventListener("install", (event) => {

@@ -856,11 +856,13 @@ h1 {
 
 .game-panel {
   min-height: 360px;
+  width: 100%;
 }
 
 .hunt-shell {
-  max-width: 760px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: none;
+  margin: 0;
 }
 
 .hunt-stage-card {
@@ -989,8 +991,9 @@ h1 {
 }
 
 .app-shell[data-mode="hunt"] .status-row {
-  max-width: 760px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: none;
+  margin: 0;
 }
 
 .app-shell[data-mode="hunt"] .status-card {
@@ -2004,7 +2007,7 @@ h2,
 
 .hero-start {
   padding: clamp(8px, 2vw, 14px) 0;
-  padding-top: 42px;
+  padding-top: 0;
 }
 
 .hero-start h1 {
@@ -2169,7 +2172,7 @@ h2,
 
 .hunt-shell,
 .app-shell[data-mode="hunt"] .status-row {
-  max-width: 820px;
+  max-width: none;
 }
 
 .hunt-intro-card {
@@ -3331,11 +3334,13 @@ h2,
 
 /* Compact start section */
 .screen-start {
-  gap: 16px;
+  gap: 22px;
 }
 
 .hero-start {
   margin-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 10px;
 }
 
 .hero-grid {
@@ -3345,8 +3350,10 @@ h2,
 }
 
 .hero-start h1 {
-  font-size: clamp(2.5rem, 5vw, 4.35rem);
-  line-height: 0.98;
+  margin-top: 8px;
+  margin-bottom: 14px;
+  font-size: clamp(2rem, 4.2vw, 3.35rem);
+  line-height: 1.02;
   max-width: none;
 }
 
@@ -3357,7 +3364,7 @@ h2,
 }
 
 .start-copy {
-  margin-top: 24px;
+  margin-top: 20px;
   gap: 14px;
   max-width: none;
 }
@@ -3401,6 +3408,14 @@ h2,
 }
 
 @media (max-width: 640px) {
+  .screen-start {
+    gap: 18px;
+  }
+
+  .eyebrow-row {
+    margin-top: 0;
+  }
+
   .hero-grid {
     grid-template-columns: 1fr;
     gap: 18px;
@@ -3413,8 +3428,10 @@ h2,
 
   .hero-start h1 {
     max-width: none;
-    font-size: clamp(2.1rem, 12vw, 3.2rem);
-    line-height: 0.98;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    font-size: clamp(1.8rem, 10vw, 2.65rem);
+    line-height: 1.02;
     text-wrap: balance;
     overflow-wrap: normal;
     word-break: normal;
@@ -3442,8 +3459,18 @@ h2,
 }
 
 @media (max-width: 480px) {
+  .app-shell {
+    padding-top: max(8px, env(safe-area-inset-top));
+  }
+
+  .language-switch {
+    margin-bottom: 6px;
+  }
+
   .hero-start h1 {
-    font-size: clamp(1.95rem, 11vw, 2.8rem);
+    margin-top: 4px;
+    margin-bottom: 14px;
+    font-size: clamp(1.7rem, 9.6vw, 2.35rem);
   }
 
   .hero-start .subtitle,

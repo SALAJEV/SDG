@@ -1326,13 +1326,11 @@ h1 {
   width: 100%;
   height: 100%;
   min-height: inherit;
-  transform-style: preserve-3d;
-  transition: transform 340ms ease;
 }
 
 .memory-card.is-revealed .memory-card-inner,
 .memory-card.is-matched .memory-card-inner {
-  transform: rotateY(180deg);
+  transform: none;
 }
 
 .memory-face {
@@ -1340,9 +1338,9 @@ h1 {
   inset: 0;
   border-radius: 10px;
   overflow: hidden;
-  backface-visibility: hidden;
   border: 1px solid rgba(14, 40, 54, 0.12);
   box-shadow: 0 10px 22px rgba(8, 19, 30, 0.12);
+  transition: opacity 220ms ease;
 }
 
 .memory-front {
@@ -1355,6 +1353,8 @@ h1 {
   background:
     linear-gradient(145deg, #0f7b71, #194756);
   color: white;
+  opacity: 1;
+  z-index: 2;
 }
 
 .memory-front-mark {
@@ -1372,8 +1372,9 @@ h1 {
 }
 
 .memory-back {
-  transform: rotateY(180deg);
   background: #dce3ea;
+  opacity: 0;
+  z-index: 1;
 }
 
 .memory-back img {
@@ -1428,6 +1429,17 @@ h1 {
 
 .memory-card.is-matched .memory-face {
   box-shadow: 0 0 0 3px rgba(15, 140, 115, 0.72), var(--shadow-strong);
+}
+
+.memory-card.is-revealed .memory-front,
+.memory-card.is-matched .memory-front {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.memory-card.is-revealed .memory-back,
+.memory-card.is-matched .memory-back {
+  opacity: 1;
 }
 
 .feedback {

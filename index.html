@@ -1687,7 +1687,19 @@
             </span>
           </span>
         </button>
-      `;
+        `;
+    }
+
+    function syncMemoryCardFace(card, isRevealed) {
+      const front = card.querySelector(".memory-front");
+      const back = card.querySelector(".memory-back");
+
+      if (!front || !back) {
+        return;
+      }
+
+      front.hidden = !!isRevealed;
+      back.hidden = !isRevealed;
     }
 
     function resetMemoryTurn() {
@@ -1700,6 +1712,7 @@
       memoryGridEl.innerHTML = state.memory.deck.map(memoryCardMarkup).join("");
 
       Array.from(memoryGridEl.querySelectorAll(".memory-card")).forEach((card) => {
+        syncMemoryCardFace(card, false);
         card.addEventListener("click", () => handleMemoryCardClick(card));
       });
 
@@ -1733,10 +1746,11 @@
         card.classList.contains("is-matched")
       ) {
         return;
-      }
+        }
 
-      card.classList.add("is-revealed");
-      card.setAttribute("aria-label", currentLang === "en" ? "Open card" : "Omgedraaide kaart");
+        card.classList.add("is-revealed");
+        syncMemoryCardFace(card, true);
+        card.setAttribute("aria-label", currentLang === "en" ? "Open card" : "Omgedraaide kaart");
 
       if (!state.memory.firstCard) {
         state.memory.firstCard = card;
@@ -1781,14 +1795,16 @@
       const firstCard = state.memory.firstCard;
       const secondCard = state.memory.secondCard;
 
-      schedule(() => {
-        firstCard.classList.remove("is-revealed");
-        secondCard.classList.remove("is-revealed");
-        firstCard.setAttribute("aria-label", currentLang === "en" ? "Hidden card" : "Verborgen kaart");
-        secondCard.setAttribute("aria-label", currentLang === "en" ? "Hidden card" : "Verborgen kaart");
-        resetMemoryTurn();
-      }, 880);
-    }
+        schedule(() => {
+          firstCard.classList.remove("is-revealed");
+          secondCard.classList.remove("is-revealed");
+          syncMemoryCardFace(firstCard, false);
+          syncMemoryCardFace(secondCard, false);
+          firstCard.setAttribute("aria-label", currentLang === "en" ? "Hidden card" : "Verborgen kaart");
+          secondCard.setAttribute("aria-label", currentLang === "en" ? "Hidden card" : "Verborgen kaart");
+          resetMemoryTurn();
+        }, 880);
+      }
 
     function resetHuntState() {
       stopHuntScanner();

@@ -289,7 +289,7 @@
           <div id="hunt-question-view" class="hunt-view" hidden>
             <article class="hunt-stage-card question-stage-card">
               <div class="hunt-stage-header">
-                <p id="hunt-question-counter" class="panel-kicker">Vraag 1 van 0</p>
+                <p id="hunt-question-counter" class="panel-kicker">0 juist</p>
                 <span id="hunt-question-location" class="hunt-stage-tag">Locatie</span>
               </div>
 
@@ -335,6 +335,20 @@
                 <span class="certificate-label">Behaald door</span>
                 <strong id="hunt-certificate-name" class="certificate-name">Speler</strong>
                 <span id="hunt-certificate-date" class="certificate-date">Challenge 10</span>
+                <div class="certificate-stats">
+                  <div class="certificate-stat">
+                    <span class="certificate-stat-label">Score</span>
+                    <strong id="hunt-certificate-score" class="certificate-stat-value">0</strong>
+                  </div>
+                  <div class="certificate-stat">
+                    <span class="certificate-stat-label">Juiste antwoorden</span>
+                    <strong id="hunt-certificate-correct" class="certificate-stat-value">0</strong>
+                  </div>
+                  <div class="certificate-stat">
+                    <span class="certificate-stat-label">Tijd</span>
+                    <strong id="hunt-certificate-time" class="certificate-stat-value">00:00</strong>
+                  </div>
+                </div>
               </div>
               <p id="hunt-final-score" class="finish-score">Je score is 0 op 0.</p>
               <p class="certificate-note">Toon dit certificaat aan onze stand om je deelname te laten controleren.</p>
@@ -383,7 +397,7 @@
         posterClosed: "{location} gevonden. The Green Hunt is afgelopen. Speel Memorie of volg ons op Instagram.",
         posterButton: "Start op de website",
         heroTitle: "Speel mee met The Green Hunters",
-        heroSubtitle: "Scan posters, beantwoord vragen of speel Memorie. Alles werkt vlot op je smartphone.",
+        heroSubtitle: "Scan posters, beantwoord vragen of speel Memorie. Alles werkt snel en vlot op je smartphone.",
         overviewGames: "Games",
         greenHunt: "Green Hunt",
         overviewGamesText: "Een QR-hunt en een SDG-memorie.",
@@ -400,7 +414,7 @@
         stepThreeText: "Laat je resultaat zien aan de stand.",
         panelNote: "Gemaakt voor het VIVES-event.",
         huntKicker: "Campus hunt",
-        huntText: "Scan de posters en beantwoord 5 vragen.",
+        huntText: "Scan posters en beantwoord 5 korte vragen.",
         huntClosedText: "The Green Hunt is afgelopen. Speel Memorie of volg ons op Instagram.",
         huntCount: "QR-vragen",
         scoreQuestions: "Score",
@@ -423,8 +437,8 @@
         time: "Tijd",
         pairs: "Paren",
         turns: "Beurten",
-        huntIntroTitle: "Scan je eerste poster.",
-        huntIntroText: "Vul je naam in, scan een QR-code en beantwoord de vraag.",
+        huntIntroTitle: "Start en scan je eerste poster.",
+        huntIntroText: "Vul je naam in, scan een QR-code en kies het juiste antwoord.",
         questions: "Vragen",
         questionsText: "Elke poster opent 1 vraag.",
         attempts: "Pogingen",
@@ -433,7 +447,7 @@
         scanCode: "Scan poster",
         scanCodeText: "Gebruik de QR-code op de poster.",
         answerQuestion: "Beantwoord",
-        answerQuestionText: "Een juist antwoord verhoogt je score.",
+        answerQuestionText: "Kies het juiste antwoord.",
         finishAll: "Werk af",
         finishAllText: "Toon je certificaat aan de stand.",
         playerLogin: "Speler",
@@ -445,9 +459,12 @@
         scanTitle: "Scan de volgende poster",
         scanText: "Richt je camera op de QR-code.",
         scanFrame: "Richt je camera op de QR-code",
-        questionOf: "Vraag {current} van {total}",
+        questionOf: "{count} juist",
         location: "Locatie",
         question: "Vraag",
+        correctAnswers: "Juiste antwoorden",
+        correctPill: "{count} juist",
+        resultSummary: "{count}/{total} juiste antwoorden",
         attemptsLeft: "Nog {count} poging{plural}.",
         doneBadge: "Vraag afgerond",
         successTitle: "Goed gedaan.",
@@ -456,7 +473,7 @@
         huntComplete: "The Green Hunt voltooid",
         achievedBy: "Behaald door",
         player: "Speler",
-        defaultScore: "Je score is 0 op 0.",
+        defaultScore: "Je eindscore verschijnt hier.",
         certificateNote: "Toon dit certificaat aan onze stand.",
         completed: "Klaar voor de stand",
         memoryHeading: "Koppel logo en weetje.",
@@ -483,7 +500,7 @@
         closedAfterMisses: "Vraag afgesloten. Scan de volgende poster.",
         gameComplete: "The Green Hunt is klaar. Toon je certificaat.",
         achievedOn: "Behaald op {date} - Challenge 10",
-        finalScore: "{name}, score: {score}/{total}. Tijd: {time}.",
+        finalScore: "{name} eindigde met {score} punten.",
         finishCount: "{count} vraag{plural} klaar",
         timePill: "Tijd {time}",
         eventClosedFull: "The Green Hunt is afgelopen. Speel Memorie of volg ons op Instagram."
@@ -495,7 +512,7 @@
         posterClosed: "{location} found. The Green Hunt is over. Play Memory or follow us on Instagram.",
         posterButton: "Start on the website",
         heroTitle: "Play with The Green Hunters",
-        heroSubtitle: "Scan posters, answer questions, or play Memory. Everything works on your phone.",
+        heroSubtitle: "Scan posters, answer questions, or play Memory. Everything works fast on your phone.",
         overviewGames: "Games",
         greenHunt: "Green Hunt",
         overviewGamesText: "A QR hunt and an SDG memory game.",
@@ -512,7 +529,7 @@
         stepThreeText: "Show your result at the stand.",
         panelNote: "Made for the VIVES event.",
         huntKicker: "Campus hunt",
-        huntText: "Scan the posters and answer 5 questions.",
+        huntText: "Scan posters and answer 5 quick questions.",
         huntClosedText: "The Green Hunt is over. Play Memory or follow us on Instagram.",
         huntCount: "QR questions",
         scoreQuestions: "Score",
@@ -535,8 +552,8 @@
         time: "Time",
         pairs: "Pairs",
         turns: "Turns",
-        huntIntroTitle: "Scan your first poster.",
-        huntIntroText: "Enter your name, scan a QR code, and answer the question.",
+        huntIntroTitle: "Start and scan your first poster.",
+        huntIntroText: "Enter your name, scan a QR code, and pick the right answer.",
         questions: "Questions",
         questionsText: "Each poster opens 1 question.",
         attempts: "Tries",
@@ -545,7 +562,7 @@
         scanCode: "Scan poster",
         scanCodeText: "Use the QR code on the poster.",
         answerQuestion: "Answer",
-        answerQuestionText: "A correct answer raises your score.",
+        answerQuestionText: "Pick the right answer.",
         finishAll: "Finish",
         finishAllText: "Show your certificate at the stand.",
         playerLogin: "Player",
@@ -557,9 +574,12 @@
         scanTitle: "Scan the next poster",
         scanText: "Point your camera at the QR code.",
         scanFrame: "Point your camera at the QR code",
-        questionOf: "Question {current} of {total}",
+        questionOf: "{count} correct",
         location: "Location",
         question: "Question",
+        correctAnswers: "Correct answers",
+        correctPill: "{count} correct",
+        resultSummary: "{count}/{total} correct answers",
         attemptsLeft: "{count} tr{plural} left.",
         doneBadge: "Question done",
         successTitle: "Well done.",
@@ -568,7 +588,7 @@
         huntComplete: "The Green Hunt completed",
         achievedBy: "Achieved by",
         player: "Player",
-        defaultScore: "Your score is 0 out of 0.",
+        defaultScore: "Your final score will appear here.",
         certificateNote: "Show this certificate at our stand.",
         completed: "Ready for the stand",
         memoryHeading: "Match logo and fact.",
@@ -595,7 +615,7 @@
         closedAfterMisses: "Question closed. Scan the next poster.",
         gameComplete: "The Green Hunt is complete. Show your certificate.",
         achievedOn: "Achieved on {date} - Challenge 10",
-        finalScore: "{name}, score: {score}/{total}. Time: {time}.",
+        finalScore: "{name} finished with {score} points.",
         finishCount: "{count} question{plural} done",
         timePill: "Time {time}",
         eventClosedFull: "The Green Hunt is over. Play Memory or follow us on Instagram."
@@ -772,6 +792,9 @@
     const huntFinalScoreEl = document.getElementById("hunt-final-score");
     const huntCertificateNameEl = document.getElementById("hunt-certificate-name");
     const huntCertificateDateEl = document.getElementById("hunt-certificate-date");
+    const huntCertificateScoreEl = document.getElementById("hunt-certificate-score");
+    const huntCertificateCorrectEl = document.getElementById("hunt-certificate-correct");
+    const huntCertificateTimeEl = document.getElementById("hunt-certificate-time");
     const huntFinishTimePillEl = document.getElementById("hunt-finish-time-pill");
     const huntProgressFillEl = document.getElementById("hunt-progress-fill");
     const huntProgressLabelEl = document.getElementById("hunt-progress-label");
@@ -794,6 +817,10 @@
     let pendingTimers = [];
     let dataLoadPromise = null;
     const HUNT_END_AT = new Date("2026-04-27T20:00:00+02:00");
+    const HUNT_SCORE_BASE = 1000;
+    const HUNT_CORRECT_BONUS = 120;
+    const HUNT_WRONG_PENALTY = 45;
+    const HUNT_TIME_PENALTY_PER_SECOND = 2;
     let currentLang = getInitialLanguage();
 
     const state = {
@@ -810,6 +837,8 @@
       },
       hunt: {
         score: 0,
+        correctAnswers: 0,
+        wrongAnswers: 0,
         attemptsRemaining: 3,
         answeredIds: new Set(),
         currentQuestion: null,
@@ -945,6 +974,7 @@
       setAllText(".step-list-compact .step-item p", ["scanCodeText", "answerQuestionText", "finishAllText"]);
       setText("#hunt-question-location", "location");
       setText("#hunt-question-text", "question");
+      setAllText(".certificate-stat-label", ["score", "correctAnswers", "time"]);
       setText(".certificate-name", "player");
       setText("#hunt-final-score", "defaultScore");
       setAllText(".finish-meta .meta-pill", ["finishCount", "timePill", "completed"]);
@@ -1023,6 +1053,29 @@
         hour: "2-digit",
         minute: "2-digit"
       }).format(date);
+    }
+
+    function calculateHuntScore(elapsedMs = getHuntElapsedMs()) {
+      const elapsedSeconds = Math.max(0, Math.floor(elapsedMs / 1000));
+      const score =
+        HUNT_SCORE_BASE +
+        state.hunt.correctAnswers * HUNT_CORRECT_BONUS -
+        state.hunt.wrongAnswers * HUNT_WRONG_PENALTY -
+        elapsedSeconds * HUNT_TIME_PENALTY_PER_SECOND;
+
+      return Math.max(0, Math.round(score));
+    }
+
+    function refreshHuntScore(elapsedMs = getHuntElapsedMs()) {
+      const shouldShowScore =
+        !!state.hunt.playerName ||
+        state.hunt.correctAnswers > 0 ||
+        state.hunt.wrongAnswers > 0 ||
+        state.hunt.elapsedMs > 0 ||
+        state.hunt.startedAt > 0;
+
+      state.hunt.score = shouldShowScore ? calculateHuntScore(elapsedMs) : 0;
+      return state.hunt.score;
     }
 
     function normalizeGameData(data) {
@@ -1240,6 +1293,12 @@
           : "0 / 0 afgerond";
       }
 
+      if (huntQuestionCounterEl && state.hunt.currentQuestion) {
+        huntQuestionCounterEl.textContent = t("questionOf", {
+          count: state.hunt.correctAnswers
+        });
+      }
+
       if (huntAttemptCaptionEl) {
         huntAttemptCaptionEl.textContent =
           t("attemptsLeft", {
@@ -1253,8 +1312,9 @@
 
     function updateStatus() {
       if (state.currentMode === "hunt") {
+        const liveScore = refreshHuntScore();
         primaryLabelEl.textContent = t("score");
-        primaryValueEl.textContent = String(state.hunt.score);
+        primaryValueEl.textContent = String(liveScore);
         secondaryLabelEl.textContent = t("time");
         secondaryValueEl.textContent = formatElapsedTime(getHuntElapsedMs());
         updateHuntProgressUI();
@@ -1572,6 +1632,8 @@
     function resetHuntState() {
       stopHuntScanner();
       state.hunt.score = 0;
+      state.hunt.correctAnswers = 0;
+      state.hunt.wrongAnswers = 0;
       state.hunt.attemptsRemaining = 3;
       state.hunt.answeredIds = new Set();
       state.hunt.currentQuestion = null;
@@ -1925,8 +1987,7 @@
       showHuntView("question");
       huntQuestionCounterEl.textContent =
         t("questionOf", {
-          current: getHuntQuestionNumber(question),
-          total: getHuntTargetCount()
+          count: state.hunt.correctAnswers
         });
       huntQuestionLocationEl.textContent = question.location;
       huntQuestionTextEl.textContent = question.question;
@@ -1962,8 +2023,8 @@
       huntSuccessTextEl.textContent =
         remaining > 0
           ? (currentLang === "en"
-              ? "Score: " + String(state.hunt.score) + ". Scan " + String(remaining) + " more."
-              : "Score: " + String(state.hunt.score) + ". Scan nog " + String(remaining) + ".")
+              ? "Score " + String(state.hunt.score) + ". " + state.hunt.correctAnswers + " correct. Scan " + String(remaining) + " more."
+              : "Score " + String(state.hunt.score) + ". " + state.hunt.correctAnswers + " juist. Scan nog " + String(remaining) + ".")
           : t("gameComplete");
       updateStatus();
       showFeedback(t("scanNext"), "is-success");
@@ -1976,16 +2037,24 @@
       showHuntView("finish");
       const playerName = state.hunt.playerName || t("player");
       const elapsedTime = formatElapsedTime(state.hunt.elapsedMs);
+      const finalScore = refreshHuntScore(state.hunt.elapsedMs);
       huntCertificateNameEl.textContent = playerName;
       huntCertificateDateEl.textContent =
         t("achievedOn", { date: formatCertificateDate(new Date()) });
+      huntCertificateScoreEl.textContent = String(finalScore);
+      huntCertificateCorrectEl.textContent = t("resultSummary", {
+        count: state.hunt.correctAnswers,
+        total: getHuntTargetCount()
+      });
+      huntCertificateTimeEl.textContent = elapsedTime;
       huntFinalScoreEl.textContent =
         t("finalScore", {
           name: playerName,
-          score: state.hunt.score,
-          total: getHuntTargetCount(),
-          time: elapsedTime
+          score: finalScore
         });
+      huntFinishCountPillEl.textContent = t("correctPill", {
+        count: state.hunt.correctAnswers
+      });
       huntFinishTimePillEl.textContent = t("timePill", { time: elapsedTime });
       updateStatus();
       showFeedback(t("gameComplete"), "is-success");
@@ -2065,7 +2134,8 @@
           }
         });
 
-        state.hunt.score += 1;
+        state.hunt.correctAnswers += 1;
+        refreshHuntScore();
         state.hunt.answeredIds.add(question.id);
         setHuntQuestionMessage(t("correct"), "is-success");
         updateStatus();
@@ -2085,6 +2155,7 @@
         return;
       }
 
+      state.hunt.wrongAnswers += 1;
       state.hunt.attemptsRemaining = Math.max(0, state.hunt.attemptsRemaining - 1);
 
       answerButtons.forEach((button) => {
@@ -2189,6 +2260,7 @@
       }
 
       state.hunt.playerName = playerName;
+      refreshHuntScore(0);
       startHuntTimer();
       startHuntScanner();
     }

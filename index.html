@@ -68,17 +68,13 @@
 
       <section class="mode-actions mode-actions-home" aria-label="Kies een game">
         <button id="start-hunt-mode" class="mode-action mode-action-hunt" type="button" data-mode="hunt">
-          <span id="start-hunt-kicker" class="mode-action-kicker">Campusspel</span>
           <strong id="start-hunt-title" class="mode-action-title">The Green Hunters</strong>
           <span id="hunt-mode-count" class="mode-action-meta">0 QR-vragen</span>
-          <span id="start-hunt-cta" class="mode-action-cta">Start The Green Hunters</span>
         </button>
 
         <button id="start-memory-mode" class="mode-action mode-action-memory" type="button" data-mode="memory">
-          <span id="start-memory-kicker" class="mode-action-kicker">SDG-spel</span>
           <strong id="start-memory-title" class="mode-action-title">Memorie</strong>
           <span id="start-memory-meta" class="mode-action-meta">17 SDG's · 34 kaarten</span>
-          <span id="start-memory-cta" class="mode-action-cta">Start memorie</span>
         </button>
       </section>
 
@@ -113,7 +109,6 @@
           <div id="hunt-intro-view" class="hunt-view">
             <article class="hunt-stage-card hunt-intro-card">
               <div class="hunt-stage-header">
-                <p class="panel-kicker">The Green Hunters</p>
               </div>
 
               <h2 class="question-title">Hoe werkt The Green Hunters?</h2>
@@ -178,6 +173,7 @@
               <p class="scanner-description">
                 Richt je camera op een Green Hunt QR-code. Zodra de code herkend wordt, opent de juiste vraag.
               </p>
+              <p id="hunt-scan-hint" class="hunt-inline-message scanner-hint-box"></p>
 
               <div class="scanner-preview">
                 <video
@@ -330,11 +326,16 @@
   </main>
 
   <script src="hunt-questions.js"></script>
+  <script src="hunt-poster-guide.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
   <script>
     const BUNDLED_HUNT_QUESTIONS =
       Array.isArray(window.HUNT_QUESTIONS) && window.HUNT_QUESTIONS.length
         ? window.HUNT_QUESTIONS
+        : [];
+    const BUNDLED_HUNT_POSTER_GUIDE =
+      Array.isArray(window.HUNT_POSTER_GUIDE) && window.HUNT_POSTER_GUIDE.length
+        ? window.HUNT_POSTER_GUIDE
         : [];
 
     const translations = {
@@ -403,11 +404,16 @@
         playerLogin: "Speler",
         playerName: "Naam",
         playerPlaceholder: "Je naam",
+        blockedPlayerName: "Je mag niet verder spelen, want met de naam 67 kun je blijkbaar niet serieus zijn.",
         startGreenHunt: "Start The Green Hunters",
         scanQr: "Scan QR-code",
         scanCounter: "afgerond",
         scanTitle: "Scan de volgende poster",
         scanText: "Richt je camera op de QR-code.",
+        scanHintLead: "Volgende hint",
+        scanHintText: "{label}: {hint}",
+        scanHintFallback: "Je mag eender welke nog niet beantwoorde poster scannen.",
+        otherPosterStillGood: "Dit is {found} in plaats van {expected}, maar deze poster is ook juist. Je kunt deze vraag gewoon doen.",
         scanFrame: "Richt je camera op de QR-code",
         questionOf: "{count} juist",
         location: "Locatie",
@@ -522,11 +528,16 @@
         playerLogin: "Player",
         playerName: "Name",
         playerPlaceholder: "Your name",
+        blockedPlayerName: "You may not continue playing, because with the name 67 you apparently cannot be serious.",
         startGreenHunt: "Start The Green Hunters",
         scanQr: "Scan QR code",
         scanCounter: "done",
         scanTitle: "Scan the next poster",
         scanText: "Point your camera at the QR code.",
+        scanHintLead: "Next hint",
+        scanHintText: "{label}: {hint}",
+        scanHintFallback: "You may scan any poster you have not answered yet.",
+        otherPosterStillGood: "This is {found} instead of {expected}, but it is still a correct poster. You can continue with this question.",
         scanFrame: "Point your camera at the QR code",
         questionOf: "{count} correct",
         location: "Location",
@@ -699,7 +710,8 @@
           fact: "Sommige landen beloven om 0,7% van hun inkomen te investeren in ontwikkelingshulp, maar die belofte soms niet nakomen."
         }
       ],
-      huntQuestions: BUNDLED_HUNT_QUESTIONS
+      huntQuestions: BUNDLED_HUNT_QUESTIONS,
+      huntPosterGuide: BUNDLED_HUNT_POSTER_GUIDE
     };
 
     const gameConfigs = {
@@ -746,6 +758,7 @@
     const huntVideoEl = document.getElementById("hunt-video");
     const huntPlayerForm = document.getElementById("hunt-player-form");
     const huntPlayerNameInput = document.getElementById("hunt-player-name");
+    const huntScanHintEl = document.getElementById("hunt-scan-hint");
     const huntScanCounterEl = document.getElementById("hunt-scan-counter");
     const huntQuestionCounterEl = document.getElementById("hunt-question-counter");
     const huntQuestionLocationEl = document.getElementById("hunt-question-location");
@@ -1052,6 +1065,7 @@
       setText(".scanner-stage-card .panel-kicker", "scanQr");
       setText(".scanner-description", "scanText");
       setText(".scanner-frame span", "scanFrame");
+      updateScannerHint();
       setText(".hunt-success-card .badge", "doneBadge");
       setText(".hunt-success-card .finish-title", "successTitle");
       setText("#hunt-next-scan", "nextScan");
@@ -1192,6 +1206,10 @@
         Array.isArray(data.huntQuestions) && data.huntQuestions.length
           ? data.huntQuestions
           : DEFAULT_GAME_DATA.huntQuestions;
+      const huntPosterGuide =
+        Array.isArray(data.huntPosterGuide) && data.huntPosterGuide.length
+          ? data.huntPosterGuide
+          : DEFAULT_GAME_DATA.huntPosterGuide;
 
       return {
         memoryPairs: memoryPairs
@@ -1227,7 +1245,15 @@
             correctAnswer,
             points: Number.isFinite(question.points) ? Number(question.points) : 20
           };
-        })
+        }),
+        huntPosterGuide: huntPosterGuide
+          .map((entry, index) => ({
+            id: String(entry.id || "Q=" + String(index + 1)).trim().toUpperCase(),
+            label: String(entry.label || entry.location || "Poster " + String(index + 1)).trim(),
+            hintNl: typeof entry.hintNl === "string" ? entry.hintNl.trim() : "",
+            hintEn: typeof entry.hintEn === "string" ? entry.hintEn.trim() : ""
+          }))
+          .filter((entry) => entry.id && entry.label)
       };
     }
 
@@ -1340,6 +1366,70 @@
 
     function getHuntQuestionMap() {
       return new Map(getHuntQuestions().map((question) => [question.id, question]));
+    }
+
+    function getHuntPosterGuide() {
+      const configuredGuide = Array.isArray(state.gameData.huntPosterGuide)
+        ? state.gameData.huntPosterGuide
+        : [];
+
+      if (configuredGuide.length) {
+        return configuredGuide;
+      }
+
+      return getHuntQuestions().map((question) => ({
+        id: question.id,
+        label: question.location,
+        hintNl: "Zoek naar de poster met het label " + question.location + ".",
+        hintEn: "Look for the poster labeled " + question.location + "."
+      }));
+    }
+
+    function getHuntPosterGuideEntry(questionId) {
+      return getHuntPosterGuide().find((entry) => entry.id === questionId) || null;
+    }
+
+    function getSuggestedHuntQuestionId() {
+      const questionMap = getHuntQuestionMap();
+      const nextGuidedEntry = getHuntPosterGuide().find((entry) =>
+        questionMap.has(entry.id) && !state.hunt.answeredIds.has(entry.id)
+      );
+
+      if (nextGuidedEntry) {
+        return nextGuidedEntry.id;
+      }
+
+      const nextQuestion = getHuntQuestions().find((question) => !state.hunt.answeredIds.has(question.id));
+      return nextQuestion ? nextQuestion.id : null;
+    }
+
+    function getPosterHintText(entry) {
+      if (!entry) {
+        return t("scanHintFallback");
+      }
+
+      const hint = currentLang === "en"
+        ? (entry.hintEn || entry.hintNl)
+        : (entry.hintNl || entry.hintEn);
+
+      return t("scanHintText", {
+        label: entry.label,
+        hint: hint || t("scanHintFallback")
+      });
+    }
+
+    function updateScannerHint() {
+      if (!huntScanHintEl) {
+        return;
+      }
+
+      const suggestedQuestionId = getSuggestedHuntQuestionId();
+      const guideEntry = suggestedQuestionId
+        ? getHuntPosterGuideEntry(suggestedQuestionId)
+        : null;
+
+      huntScanHintEl.textContent = t("scanHintLead") + ": " + getPosterHintText(guideEntry);
+      huntScanHintEl.hidden = false;
     }
 
     function getRandomHuntQuestionId() {
@@ -2078,6 +2168,7 @@
     async function startHuntScanner() {
       showHuntView("scanner");
       setHuntQuestionMessage("", "is-neutral");
+      updateScannerHint();
 
       if (isHuntClosed()) {
         stopHuntScanner();
@@ -2277,9 +2368,27 @@
         return;
       }
 
+      const suggestedQuestionId = getSuggestedHuntQuestionId();
+      const suggestedGuideEntry = suggestedQuestionId
+        ? getHuntPosterGuideEntry(suggestedQuestionId)
+        : null;
+      const foundGuideEntry = getHuntPosterGuideEntry(questionId);
+      const scannedDifferentPoster =
+        !!suggestedGuideEntry &&
+        suggestedGuideEntry.id !== questionId &&
+        !!foundGuideEntry;
+
       stopHuntScanner();
       setScannerStatus(t("recognized"), "is-success");
-      showFeedback(t("answerToContinue"), "is-neutral");
+      showFeedback(
+        scannedDifferentPoster
+          ? t("otherPosterStillGood", {
+              found: foundGuideEntry.label,
+              expected: suggestedGuideEntry.label
+            })
+          : t("answerToContinue"),
+        "is-neutral"
+      );
       pushRoute(routePathForQuestion(questionId));
       showHuntQuestion(question);
     }
@@ -2439,6 +2548,13 @@
       if (!playerName) {
         huntPlayerNameInput.focus();
         showFeedback(t("nameRequired"), "is-error");
+        return;
+      }
+
+      if (playerName === "67") {
+        huntPlayerNameInput.focus();
+        huntPlayerNameInput.select();
+        showFeedback(t("blockedPlayerName"), "is-error");
         return;
       }
 

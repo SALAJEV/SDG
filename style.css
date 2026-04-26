@@ -4513,6 +4513,19 @@ h2,
   max-width: 62ch;
 }
 
+.hero-start,
+.hero-start > * {
+  width: 100%;
+  max-width: none;
+}
+
+.hero-start .subtitle,
+.start-copy,
+.start-paragraph {
+  width: 100%;
+  max-width: none;
+}
+
 .hero-game .subtitle {
   width: 100%;
   max-width: none;

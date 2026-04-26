@@ -65,38 +65,20 @@
 
       </div>
 
-      <section class="mode-explainer" aria-label="Zo werkt The Green Hunters">
-        <article class="mode-explainer-card">
-          <p id="hunt-explainer-kicker" class="panel-kicker">Zo werkt het</p>
-          <h2 id="hunt-explainer-title" class="explainer-title">Hoe werkt The Green Hunters?</h2>
-          <p id="hunt-explainer-intro" class="explainer-text">
-            Op de campus hangen posters met een letter zoals P van People of Planet. Zoek zo'n poster, scan de QR-code en open je vraag.
-          </p>
-          <div class="explainer-steps">
-            <p class="explainer-step"><strong id="hunt-step-one-label">1. Zoek een poster</strong> <span id="hunt-step-one-text">Kijk op de campus uit naar een poster met een duidelijke letter zoals P.</span></p>
-            <p class="explainer-step"><strong id="hunt-step-two-label">2. Scan en antwoord</strong> <span id="hunt-step-two-text">Scan de QR-code op de poster en beantwoord meteen de vraag die op je scherm verschijnt.</span></p>
-            <p class="explainer-step"><strong id="hunt-step-three-label">3. Verzamel punten</strong> <span id="hunt-step-three-text">Voor elk juist antwoord verzamel je punten. Hoe beter en sneller je speelt, hoe hoger je score.</span></p>
-          </div>
-          <p id="hunt-mode-text" class="explainer-note">
-            Op het einde krijg je een overzicht van je score en kun je tonen dat je het spel hebt voltooid.
-          </p>
-        </article>
+      <section class="mode-actions mode-actions-home" aria-label="Kies een game">
+        <button id="start-hunt-mode" class="mode-action mode-action-hunt" type="button" data-mode="hunt">
+          <span id="start-hunt-kicker" class="mode-action-kicker">Campusspel</span>
+          <strong id="start-hunt-title" class="mode-action-title">The Green Hunters</strong>
+          <span id="hunt-mode-count" class="mode-action-meta">0 QR-vragen</span>
+          <span id="start-hunt-cta" class="mode-action-cta">Start The Green Hunters</span>
+        </button>
 
-        <div class="mode-actions" aria-label="Kies een game">
-          <button id="start-hunt-mode" class="mode-action mode-action-hunt" type="button" data-mode="hunt">
-            <span id="start-hunt-kicker" class="mode-action-kicker">Campusspel</span>
-            <strong id="start-hunt-title" class="mode-action-title">The Green Hunters</strong>
-            <span id="hunt-mode-count" class="mode-action-meta">0 QR-vragen</span>
-            <span id="start-hunt-cta" class="mode-action-cta">Start The Green Hunters</span>
-          </button>
-
-          <button id="start-memory-mode" class="mode-action mode-action-memory" type="button" data-mode="memory">
-            <span id="start-memory-kicker" class="mode-action-kicker">SDG-spel</span>
-            <strong id="start-memory-title" class="mode-action-title">Memorie</strong>
-            <span id="start-memory-meta" class="mode-action-meta">17 SDG's · 34 kaarten</span>
-            <span id="start-memory-cta" class="mode-action-cta">Start memorie</span>
-          </button>
-        </div>
+        <button id="start-memory-mode" class="mode-action mode-action-memory" type="button" data-mode="memory">
+          <span id="start-memory-kicker" class="mode-action-kicker">SDG-spel</span>
+          <strong id="start-memory-title" class="mode-action-title">Memorie</strong>
+          <span id="start-memory-meta" class="mode-action-meta">17 SDG's · 34 kaarten</span>
+          <span id="start-memory-cta" class="mode-action-cta">Start memorie</span>
+        </button>
       </section>
 
     </section>
@@ -133,10 +115,9 @@
                 <p class="panel-kicker">The Green Hunters</p>
               </div>
 
-              <h2 class="question-title">Scan een QR-code op campus en open je eerste vraag.</h2>
+              <h2 class="question-title">Hoe werkt The Green Hunters?</h2>
               <p class="question-support">
-                Zoals in de referentieflow: je start eenvoudig, scant een code, beantwoordt de vraag en trekt daarna
-                door naar je volgende stop op campus.
+                Zoek op de campus een poster met een letter zoals P van People of Planet. Scan de QR-code op die poster en open zo je vraag.
               </p>
 
               <div class="hunt-feature-grid">
@@ -163,8 +144,8 @@
                 <article class="step-item">
                   <span class="step-number">1</span>
                   <div>
-                    <strong>Scan een code</strong>
-                    <p>Gebruik de QR-code op de campus of vul de code manueel in als reserve.</p>
+                    <strong>Zoek een poster</strong>
+                    <p>Kijk uit naar een poster met een duidelijke letter en scan daarna de QR-code.</p>
                   </div>
                 </article>
 
@@ -172,15 +153,15 @@
                   <span class="step-number">2</span>
                   <div>
                     <strong>Beantwoord de vraag</strong>
-                    <p>Je score stijgt per juist antwoord. Bij 3 missers ga je terug naar de scanner.</p>
+                    <p>Na het scannen verschijnt een vraag op je scherm. Geef het juiste antwoord om punten te verdienen.</p>
                   </div>
                 </article>
 
                 <article class="step-item">
                   <span class="step-number">3</span>
                   <div>
-                    <strong>Werk alle vragen af</strong>
-                    <p>Na de laatste vraag krijg je je score en zie je dat je je prijs mag afhalen.</p>
+                    <strong>Verzamel punten</strong>
+                    <p>Hoe beter en sneller je speelt, hoe hoger je score. Op het einde krijg je een overzicht van je resultaat.</p>
                   </div>
                 </article>
               </div>
@@ -401,15 +382,6 @@
         panelNote: "Deze website is gemaakt om het spel snel en duidelijk speelbaar te maken tijdens het VIVES-event.",
         huntKicker: "Campus hunt",
         huntText: "Scan posters en beantwoord 5 vragen.",
-        huntExplainerTitle: "Hoe werkt The Green Hunters?",
-        huntExplainerIntro: "Op de campus hangen posters met een letter zoals P van People of Planet. Zoek zo'n poster, scan de QR-code en open je vraag.",
-        huntStepOneLabel: "1. Zoek een poster",
-        huntStepOneText: "Kijk op de campus uit naar een poster met een duidelijke letter zoals P.",
-        huntStepTwoLabel: "2. Scan en antwoord",
-        huntStepTwoText: "Scan de QR-code op de poster en beantwoord meteen de vraag die op je scherm verschijnt.",
-        huntStepThreeLabel: "3. Verzamel punten",
-        huntStepThreeText: "Voor elk juist antwoord verzamel je punten. Hoe beter en sneller je speelt, hoe hoger je score.",
-        huntExplainerNote: "Op het einde krijg je een overzicht van je score en kun je tonen dat je het spel hebt voltooid.",
         huntClosedText: "The Green Hunt is afgelopen. Speel Memorie of volg ons op Instagram.",
         huntCount: "QR-vragen",
         scoreQuestions: "Score",
@@ -434,19 +406,19 @@
         time: "Tijd",
         pairs: "Paren",
         turns: "Beurten",
-        huntIntroTitle: "Scan je eerste poster.",
-        huntIntroText: "Vul je naam in, scan een QR-code en beantwoord de vraag.",
+        huntIntroTitle: "Hoe werkt The Green Hunters?",
+        huntIntroText: "Zoek op de campus een poster met een letter zoals P van People of Planet. Scan de QR-code op die poster en open zo je vraag.",
         questions: "Vragen",
         questionsText: "Elke poster opent 1 vraag.",
         attempts: "Pogingen",
         attemptsText: "Je krijgt 3 kansen per vraag.",
         rewardText: "Na de laatste vraag krijg je je certificaat.",
-        scanCode: "Scan poster",
-        scanCodeText: "Gebruik de QR-code op de poster.",
+        scanCode: "Zoek een poster",
+        scanCodeText: "Kijk uit naar een poster met een duidelijke letter en scan daarna de QR-code.",
         answerQuestion: "Beantwoord",
-        answerQuestionText: "Kies het juiste antwoord.",
-        finishAll: "Werk af",
-        finishAllText: "Toon je certificaat aan de stand.",
+        answerQuestionText: "Na het scannen verschijnt een vraag op je scherm. Geef het juiste antwoord om punten te verdienen.",
+        finishAll: "Verzamel punten",
+        finishAllText: "Hoe beter en sneller je speelt, hoe hoger je score. Op het einde krijg je een overzicht van je resultaat.",
         playerLogin: "Speler",
         playerName: "Naam",
         playerPlaceholder: "Je naam",
@@ -529,15 +501,6 @@
         panelNote: "This website was made to keep the game clear and easy to play during the VIVES event.",
         huntKicker: "Campus hunt",
         huntText: "Scan posters and answer 5 questions.",
-        huntExplainerTitle: "How does The Green Hunters work?",
-        huntExplainerIntro: "Around campus you will find posters with a letter such as P for People or Planet. Find one, scan the QR code, and open your question.",
-        huntStepOneLabel: "1. Find a poster",
-        huntStepOneText: "Look around campus for a poster with a clear letter such as P.",
-        huntStepTwoLabel: "2. Scan and answer",
-        huntStepTwoText: "Scan the poster's QR code and answer the question that appears on your screen.",
-        huntStepThreeLabel: "3. Collect points",
-        huntStepThreeText: "You earn points for every correct answer. The better and faster you play, the higher your score.",
-        huntExplainerNote: "At the end, you receive an overview of your score and can show that you completed the game.",
         huntClosedText: "The Green Hunt is over. Play Memory or follow us on Instagram.",
         huntCount: "QR questions",
         scoreQuestions: "Score",
@@ -562,19 +525,19 @@
         time: "Time",
         pairs: "Pairs",
         turns: "Turns",
-        huntIntroTitle: "Scan your first poster.",
-        huntIntroText: "Enter your name, scan a QR code, and answer the question.",
+        huntIntroTitle: "How does The Green Hunters work?",
+        huntIntroText: "Look around campus for a poster with a letter such as P for People or Planet. Scan that poster's QR code to open your question.",
         questions: "Questions",
         questionsText: "Each poster opens 1 question.",
         attempts: "Tries",
         attemptsText: "You get 3 tries per question.",
         rewardText: "After the last question, you get your certificate.",
-        scanCode: "Scan poster",
-        scanCodeText: "Use the QR code on the poster.",
+        scanCode: "Find a poster",
+        scanCodeText: "Look for a poster with a clear letter and then scan the QR code.",
         answerQuestion: "Answer",
-        answerQuestionText: "Pick the right answer.",
-        finishAll: "Finish",
-        finishAllText: "Show your certificate at the stand.",
+        answerQuestionText: "After scanning, a question appears on your screen. Answer correctly to earn points.",
+        finishAll: "Collect points",
+        finishAllText: "The better and faster you play, the higher your score. At the end you receive an overview of your result.",
         playerLogin: "Player",
         playerName: "Name",
         playerPlaceholder: "Your name",
@@ -781,7 +744,6 @@
     const modeButtons = Array.from(document.querySelectorAll("[data-mode]"));
     const huntModeButton = document.getElementById("start-hunt-mode");
     const eventStatusNoteEl = document.getElementById("event-status-note");
-    const huntModeTextEl = document.getElementById("hunt-mode-text");
     const gameTitleEl = document.getElementById("game-title");
     const gameSubtitleEl = document.getElementById("game-subtitle");
     const primaryLabelEl = document.getElementById("primary-label");
@@ -1089,16 +1051,6 @@
       setText("#poster-start-hunt", "posterButton");
       setText(".hero-start h1", "heroTitle");
       setText(".hero-start .subtitle", "heroSubtitle");
-      setText("#hunt-explainer-kicker", "stepsTitle");
-      setText("#hunt-explainer-title", "huntExplainerTitle");
-      setText("#hunt-explainer-intro", "huntExplainerIntro");
-      setText("#hunt-step-one-label", "huntStepOneLabel");
-      setText("#hunt-step-one-text", "huntStepOneText");
-      setText("#hunt-step-two-label", "huntStepTwoLabel");
-      setText("#hunt-step-two-text", "huntStepTwoText");
-      setText("#hunt-step-three-label", "huntStepThreeLabel");
-      setText("#hunt-step-three-text", "huntStepThreeText");
-      setText("#hunt-mode-text", "huntExplainerNote");
       setText("#start-hunt-kicker", "huntKicker");
       document.getElementById("start-hunt-title").textContent = "The Green Hunters";
       setText("#start-memory-kicker", "memoryKicker");
@@ -1344,12 +1296,6 @@
         huntModeButton.disabled = closed;
         huntModeButton.classList.toggle("is-disabled", closed);
         huntModeButton.setAttribute("aria-disabled", closed ? "true" : "false");
-      }
-
-      if (huntModeTextEl) {
-        huntModeTextEl.textContent = closed
-          ? t("huntClosedText")
-          : t("huntExplainerNote");
       }
 
       if (eventStatusNoteEl) {
@@ -2221,13 +2167,8 @@
         });
       huntQuestionLocationEl.textContent = question.location;
       huntQuestionTextEl.textContent = question.question;
-      if (question.hint) {
-        huntQuestionHintEl.hidden = false;
-        huntQuestionHintEl.textContent = (currentLang === "en" ? "Hint: " : "Hint: ") + question.hint;
-      } else {
-        huntQuestionHintEl.hidden = true;
-        huntQuestionHintEl.textContent = "";
-      }
+      huntQuestionHintEl.hidden = true;
+      huntQuestionHintEl.textContent = "";
       setHuntQuestionMessage("", "is-neutral");
       updateStatus();
       updateHuntProgressUI();
@@ -2370,6 +2311,12 @@
         state.hunt.correctAnswers += 1;
         commitHuntScore();
         state.hunt.answeredIds.add(question.id);
+
+        if (question.hint) {
+          huntQuestionHintEl.hidden = false;
+          huntQuestionHintEl.textContent = (currentLang === "en" ? "Explanation: " : "Uitleg: ") + question.hint;
+        }
+
         setHuntQuestionMessage(t("correct"), "is-success");
         updateStatus();
 

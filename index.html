@@ -285,27 +285,6 @@
                 </div>
               </div>
 
-              <p id="scanner-status" class="scanner-status">Geef cameratoegang om je eerste Green Hunt-vraag te openen.</p>
-
-              <div class="scanner-actions">
-                <button id="start-scanner" class="restart-btn" type="button">Scanner starten</button>
-                <button id="stop-scanner" class="ghost-btn" type="button">Scanner stoppen</button>
-              </div>
-
-              <form id="manual-qr-form" class="manual-form">
-                <label class="manual-label" for="manual-qr-input">Lukt scannen niet? Vul dan je QR-link of code in</label>
-                <div class="manual-row">
-                  <input
-                    id="manual-qr-input"
-                    class="manual-input"
-                    name="manual-qr-input"
-                    type="text"
-                    placeholder="Bijvoorbeeld q=1"
-                    autocomplete="off"
-                  >
-                  <button class="ghost-btn" type="submit">Open vraag</button>
-                </div>
-              </form>
             </article>
           </div>
 
@@ -974,7 +953,31 @@
       state.hunt.startedAt = 0;
     }
 
-    function showStartScreen() {
+    function routePathForMode(mode) {
+      if (mode === "memory") {
+        return "/memorie/";
+      }
+
+      if (mode === "hunt") {
+        return "/greenhunt/";
+      }
+
+      return "/";
+    }
+
+    function routePathForQuestion(questionId) {
+      return "/" + String(questionId || "").toLowerCase();
+    }
+
+    function pushRoute(path) {
+      if (runtime.isFile || window.location.pathname === path) {
+        return;
+      }
+
+      window.history.pushState({ path }, "", path);
+    }
+
+    function showStartScreen(shouldPushRoute = true) {
       clearPendingTimers();
       stopHuntScanner();
       stopHuntTimer(false);
@@ -986,9 +989,13 @@
       gameScreen.hidden = true;
       huntGameEl.hidden = true;
       memoryGameEl.hidden = true;
+
+      if (shouldPushRoute) {
+        pushRoute("/");
+      }
     }
 
-    function showPosterScreen(questionId) {
+    function showPosterScreen(questionId, shouldPushRoute = false) {
       clearPendingTimers();
       stopHuntScanner();
       stopHuntTimer(false);
@@ -1000,6 +1007,10 @@
       gameScreen.hidden = true;
       huntGameEl.hidden = true;
       memoryGameEl.hidden = true;
+
+      if (shouldPushRoute) {
+        pushRoute(routePathForQuestion(questionId));
+      }
 
       const question = getHuntQuestionMap().get(questionId);
       const locationLabel = question ? question.location : "deze poster";
@@ -1021,13 +1032,13 @@
       gameSubtitleEl.textContent = mode === "hunt" ? getHuntSubtitle() : config.subtitle;
     }
 
-    async function openGame(mode) {
+    async function openGame(mode, shouldPushRoute = true) {
       clearPendingTimers();
       stopHuntScanner();
       await loadGameData();
 
       if (mode === "hunt" && isHuntClosed()) {
-        showStartScreen();
+        showStartScreen(shouldPushRoute);
         showFeedback(
           "The Green Hunt is afgelopen sinds 27 april 2026 om 20:00. Je kan wel nog memorie spelen of ons volgen op Instagram.",
           "is-error"
@@ -1045,6 +1056,10 @@
       memoryGameEl.hidden = mode !== "memory";
       applyGameMeta(mode);
       restartCurrentGame();
+
+      if (shouldPushRoute) {
+        pushRoute(routePathForMode(mode));
+      }
     }
 
     function buildMemoryDeck() {
@@ -1369,6 +1384,55 @@
       showPosterScreen(linkedQuestionId);
     }
 
+    async function handleRouteChange() {
+      await loadGameData();
+      const path = window.location.pathname.toLowerCase();
+      const linkedQuestionId = extractQuestionId(window.location.href);
+
+      if (linkedQuestionId) {
+        if (state.currentMode === "hunt" && !isHuntClosed()) {
+          const question = getHuntQuestionMap().get(linkedQuestionId);
+
+          if (question && !state.hunt.answeredIds.has(linkedQuestionId)) {
+            stopHuntScanner();
+            showHuntQuestion(question);
+            return;
+          }
+
+          showHuntView("scanner");
+          updateStatus();
+          showFeedback("Deze vraag is al afgerond. Scan een volgende QR-code.", "is-error");
+          return;
+        }
+
+        showPosterScreen(linkedQuestionId, false);
+        return;
+      }
+
+      if (path === "/memorie" || path === "/memorie/") {
+        if (state.currentMode === "memory") {
+          return;
+        }
+
+        await openGame("memory", false);
+        return;
+      }
+
+      if (path === "/greenhunt" || path === "/greenhunt/") {
+        if (state.currentMode === "hunt") {
+          state.hunt.currentQuestion = null;
+          showHuntView("scanner");
+          updateStatus();
+          return;
+        }
+
+        await openGame("hunt", false);
+        return;
+      }
+
+      showStartScreen(false);
+    }
+
     async function scanVideoFrame() {
       if (state.currentMode !== "hunt" || huntScannerViewEl.hidden || !state.hunt.stream) {
         return;
@@ -1620,6 +1684,7 @@
       stopHuntScanner();
       setScannerStatus("Locatie herkend. Je vraag wordt geopend.", "is-success");
       showFeedback("Beantwoord de vraag om verder te spelen.", "is-neutral");
+      pushRoute(routePathForQuestion(questionId));
       showHuntQuestion(question);
     }
 
@@ -1822,10 +1887,11 @@
 
     installRuntimeEnhancements();
     syncHuntCopy();
-    showStartScreen();
-    loadGameData();
     updateHuntProgressUI();
-    openHuntFromLinkedUrl();
+    handleRouteChange();
+    window.addEventListener("popstate", () => {
+      handleRouteChange();
+    });
     window.setInterval(syncHuntCopy, 60000);
 
     if (runtime.canRegisterServiceWorker) {

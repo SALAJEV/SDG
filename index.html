@@ -658,13 +658,10 @@
     }
 
     function normalizeGameData(data) {
-      const memoryImages =
-        Array.isArray(data.memoryImages) && data.memoryImages.length
-          ? data.memoryImages
-          : [
-              ...(Array.isArray(data.sustainable) ? data.sustainable.map((item) => item.image || item) : []),
-              ...(Array.isArray(data.notsustainable) ? data.notsustainable.map((item) => item.image || item) : [])
-            ];
+      const fallbackMemoryPairs = DEFAULT_GAME_DATA.memoryPairs;
+      const memoryPairs = Array.isArray(data.memoryPairs) && data.memoryPairs.length
+        ? data.memoryPairs
+        : fallbackMemoryPairs;
 
       const huntQuestions =
         Array.isArray(data.huntQuestions) && data.huntQuestions.length
@@ -672,7 +669,17 @@
           : DEFAULT_GAME_DATA.huntQuestions;
 
       return {
-        memoryImages: memoryImages.length ? memoryImages : DEFAULT_GAME_DATA.memoryImages,
+        memoryPairs: memoryPairs
+          .map((pair, index) => {
+            const sdg = Number.parseInt(pair.sdg || index + 1, 10);
+
+            return {
+              sdg: Number.isInteger(sdg) ? sdg : index + 1,
+              image: String(pair.image || "").trim(),
+              fact: String(pair.fact || "").trim()
+            };
+          })
+          .filter((pair) => pair.image && pair.fact),
         huntQuestions: huntQuestions.map((question, index) => {
           const answers = Array.isArray(question.answers)
             ? question.answers.map((answer) => String(answer))
@@ -968,17 +975,20 @@
     }
 
     function buildMemoryDeck() {
-      const selectedImages = shuffle(state.gameData.memoryImages).slice(0, 4);
-      const cards = selectedImages.flatMap((fileName, index) => [
+      const cards = state.gameData.memoryPairs.flatMap((pair) => [
         {
-          id: "pair-" + index + "-a",
-          pairKey: "pair-" + index,
-          fileName
+          id: "sdg-" + pair.sdg + "-image",
+          pairKey: "sdg-" + pair.sdg,
+          type: "image",
+          fileName: pair.image,
+          sdgLabel: "SDG " + pair.sdg
         },
         {
-          id: "pair-" + index + "-b",
-          pairKey: "pair-" + index,
-          fileName
+          id: "sdg-" + pair.sdg + "-fact",
+          pairKey: "sdg-" + pair.sdg,
+          type: "fact",
+          fact: pair.fact,
+          sdgLabel: "SDG " + pair.sdg
         }
       ]);
 
@@ -986,12 +996,23 @@
     }
 
     function memoryCardMarkup(card) {
+      const backContent =
+        card.type === "image"
+          ? `<img src="${toSrc(card.fileName)}" alt="${escapeHtml(card.sdgLabel)}" draggable="false">`
+          : `
+            <span class="memory-fact-card">
+              <span class="memory-fact-kicker">Wist je dat,</span>
+              <span class="memory-fact-text">${escapeHtml(card.fact)}</span>
+              <span class="memory-fact-sdg">${escapeHtml(card.sdgLabel)}</span>
+            </span>
+          `;
+
       return `
         <button
-          class="memory-card"
+          class="memory-card memory-card-${card.type}"
           type="button"
-          data-card-id="${card.id}"
-          data-pair-key="${card.pairKey}"
+          data-card-id="${escapeHtml(card.id)}"
+          data-pair-key="${escapeHtml(card.pairKey)}"
           aria-label="Verborgen kaart"
         >
           <span class="memory-card-inner">
@@ -1000,7 +1021,7 @@
               <span class="memory-front-label">Memorie</span>
             </span>
             <span class="memory-face memory-back">
-              <img src="${toSrc(card.fileName)}" alt="Memoriekaart" draggable="false">
+              ${backContent}
             </span>
           </span>
         </button>
@@ -1032,7 +1053,7 @@
 
       renderMemoryDeck();
       updateStatus();
-      showFeedback("Draai twee kaarten om en vind alle gelijke paren.", "is-neutral");
+      showFeedback("Draai twee kaarten om en koppel elk SDG-logo aan het juiste weetje.", "is-neutral");
     }
 
     function handleMemoryCardClick(card) {
@@ -1071,11 +1092,11 @@
 
         if (state.memory.pairsFound === state.memory.totalPairs) {
           showFeedback(
-            "Alles gevonden in " + state.memory.turns + " beurten. Sterk gespeeld.",
+            "Alle SDG's gekoppeld in " + state.memory.turns + " beurten. Sterk gespeeld.",
             "is-success"
           );
         } else {
-          showFeedback("Mooi, dat is een juist paar.", "is-success");
+          showFeedback("Mooi, dat logo en weetje horen bij elkaar.", "is-success");
         }
 
         schedule(() => {

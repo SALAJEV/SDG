@@ -750,7 +750,7 @@ h1 {
 .question-layout,
 .memory-shell {
   display: grid;
-  grid-template-columns: minmax(0, 1.22fr) minmax(270px, 0.78fr);
+  grid-template-columns: minmax(240px, 0.34fr) minmax(0, 1fr);
   gap: 20px;
   align-items: start;
 }
@@ -1110,10 +1110,10 @@ h1 {
 }
 
 .memory-grid {
-  padding: 18px;
+  padding: clamp(8px, 2vw, 14px);
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
+  gap: clamp(8px, 1.3vw, 12px);
   border-radius: 28px;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.74), rgba(237, 248, 244, 0.68));
   border: 1px solid var(--line);
@@ -1125,7 +1125,7 @@ h1 {
   border: none;
   background: transparent;
   cursor: pointer;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 4 / 3;
   perspective: 900px;
   transition: transform 180ms ease;
 }
@@ -1154,7 +1154,7 @@ h1 {
 .memory-face {
   position: absolute;
   inset: 0;
-  border-radius: 22px;
+  border-radius: 10px;
   overflow: hidden;
   backface-visibility: hidden;
   box-shadow: var(--shadow-soft);
@@ -1163,8 +1163,8 @@ h1 {
 .memory-front {
   display: grid;
   place-items: center;
-  gap: 8px;
-  padding: 16px;
+  gap: 6px;
+  padding: clamp(8px, 1.4vw, 12px);
   text-align: center;
   border: 1px solid rgba(13, 123, 113, 0.08);
   background:
@@ -1174,13 +1174,13 @@ h1 {
 }
 
 .memory-front-mark {
-  font-family: Georgia, "Palatino Linotype", serif;
-  font-size: clamp(2.5rem, 5vw, 3.4rem);
+  font-family: "Aptos Display", "Segoe UI", Arial, sans-serif;
+  font-size: clamp(1.7rem, 4vw, 2.7rem);
   line-height: 1;
 }
 
 .memory-front-label {
-  font-size: 0.82rem;
+  font-size: clamp(0.56rem, 1.1vw, 0.72rem);
   font-weight: 800;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1195,8 +1195,37 @@ h1 {
 .memory-back img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
+  background: white;
+}
+
+.memory-fact-card {
+  min-height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: clamp(3px, 0.8vw, 8px);
+  padding: clamp(7px, 1.3vw, 10px);
+  color: #18303e;
+  background: #fffdf7;
+  overflow: hidden;
+}
+
+.memory-fact-kicker,
+.memory-fact-sdg {
+  font-size: clamp(0.52rem, 1vw, 0.68rem);
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #0d7b71;
+}
+
+.memory-fact-text {
+  align-self: center;
+  font-size: clamp(0.5rem, 0.94vw, 0.72rem);
+  font-weight: 800;
+  line-height: 1.12;
+  overflow-wrap: anywhere;
 }
 
 .memory-card.is-matched .memory-face {
@@ -1264,6 +1293,10 @@ h1 {
     grid-template-columns: 1fr;
   }
 
+  .memory-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .overview-grid {
     grid-template-columns: 1fr;
   }
@@ -1322,8 +1355,35 @@ h1 {
 
   .memory-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    padding: 14px;
-    gap: 12px;
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .memory-card {
+    aspect-ratio: 4 / 3;
+  }
+
+  .memory-front-mark {
+    font-size: clamp(1.45rem, 9vw, 2.15rem);
+  }
+
+  .memory-front-label {
+    font-size: 0.56rem;
+  }
+
+  .memory-fact-card {
+    padding: 7px;
+    gap: 3px;
+  }
+
+  .memory-fact-kicker,
+  .memory-fact-sdg {
+    font-size: 0.48rem;
+  }
+
+  .memory-fact-text {
+    font-size: clamp(0.46rem, 2.35vw, 0.6rem);
+    line-height: 1.08;
   }
 
   .manual-row,
@@ -1380,7 +1440,15 @@ h1 {
 
 @media (max-width: 420px) {
   .memory-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .memory-grid {
+    margin-inline: -6px;
+  }
+
+  .memory-card {
+    min-width: 0;
   }
 }
 
@@ -1748,5 +1816,29 @@ h2,
 
   .mode-card {
     min-height: 220px;
+  }
+
+  .memory-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .memory-card {
+    aspect-ratio: 4 / 3;
+  }
+
+  .memory-fact-card {
+    padding: 7px;
+    gap: 3px;
+  }
+
+  .memory-fact-kicker,
+  .memory-fact-sdg {
+    font-size: 0.48rem;
+  }
+
+  .memory-fact-text {
+    font-size: clamp(0.46rem, 2.35vw, 0.6rem);
+    line-height: 1.08;
   }
 }

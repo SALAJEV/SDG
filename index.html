@@ -41,6 +41,10 @@
             snel, duidelijk en vlot speelbaar op je smartphone.
           </p>
 
+          <p id="event-status-note" class="event-status-note">
+            The Green Hunt loopt tot 27 april 2026 om 20:00. Nadien kan je nog memorie spelen en ons volgen via Instagram.
+          </p>
+
           <section class="overview-grid" aria-label="Overzicht van de challenge">
             <article class="overview-card">
               <span class="overview-label">Games</span>
@@ -101,7 +105,7 @@
         <button class="mode-card mode-card-hunt" type="button" data-mode="hunt">
           <span class="mode-kicker">Rond de campus</span>
           <strong class="mode-title">The Green Hunt</strong>
-          <span class="mode-text">
+          <span id="hunt-mode-text" class="mode-text">
             Trek met je medestudenten over de campus, open per locatie een vraag en speel naar je score.
           </span>
           <span class="mode-meta">
@@ -125,6 +129,13 @@
           </span>
           <span class="mode-cta">Start memorie</span>
         </button>
+      </section>
+
+      <section class="social-strip" aria-label="Green Hunters online">
+        <span>Blijf na de challenge verbonden met The Green Hunters.</span>
+        <a href="https://www.instagram.com/greenhunters___/" target="_blank" rel="noopener noreferrer">
+          Instagram @greenhunters___
+        </a>
       </section>
     </section>
 
@@ -227,6 +238,7 @@
 
               <div class="finish-actions">
                 <form id="hunt-player-form" class="player-form">
+                  <p class="panel-kicker">Speler login</p>
                   <label class="manual-label" for="hunt-player-name">Naam speler</label>
                   <div class="manual-row">
                     <input
@@ -340,9 +352,15 @@
           <div id="hunt-finish-view" class="hunt-view" hidden>
             <article class="finish-card">
               <div class="finish-emblem" aria-hidden="true">+</div>
-              <p class="badge">The Green Hunt voltooid</p>
-              <h2 class="finish-title">Top gedaan. Je mag je prijs afhalen aan de VIVES-stand</h2>
+              <p class="badge">Certificaat</p>
+              <h2 class="finish-title">The Green Hunt voltooid</h2>
+              <div class="certificate-panel">
+                <span class="certificate-label">Behaald door</span>
+                <strong id="hunt-certificate-name" class="certificate-name">Speler</strong>
+                <span id="hunt-certificate-date" class="certificate-date">Challenge 10</span>
+              </div>
               <p id="hunt-final-score" class="finish-score">Je score is 0 op 0.</p>
+              <p class="certificate-note">Toon dit certificaat aan onze stand om je deelname te laten controleren.</p>
 
               <div class="finish-meta">
                 <span id="hunt-finish-count-pill" class="meta-pill">0 vragen afgewerkt</span>
@@ -501,6 +519,9 @@
     const posterStartHuntBtn = document.getElementById("poster-start-hunt");
     const gameScreen = document.getElementById("game-screen");
     const modeButtons = Array.from(document.querySelectorAll(".mode-card"));
+    const huntModeButton = document.querySelector(".mode-card-hunt");
+    const eventStatusNoteEl = document.getElementById("event-status-note");
+    const huntModeTextEl = document.getElementById("hunt-mode-text");
     const gameBadgeEl = document.getElementById("game-badge");
     const gameTitleEl = document.getElementById("game-title");
     const gameSubtitleEl = document.getElementById("game-subtitle");
@@ -542,6 +563,8 @@
     const huntSuccessTextEl = document.getElementById("hunt-success-text");
     const huntNextScanBtn = document.getElementById("hunt-next-scan");
     const huntFinalScoreEl = document.getElementById("hunt-final-score");
+    const huntCertificateNameEl = document.getElementById("hunt-certificate-name");
+    const huntCertificateDateEl = document.getElementById("hunt-certificate-date");
     const huntFinishTimePillEl = document.getElementById("hunt-finish-time-pill");
     const huntPlayAgainBtn = document.getElementById("hunt-play-again");
     const huntBackHomeBtn = document.getElementById("hunt-back-home");
@@ -565,6 +588,7 @@
 
     let pendingTimers = [];
     let dataLoadPromise = null;
+    const HUNT_END_AT = new Date("2026-04-27T20:00:00+02:00");
 
     const state = {
       currentMode: null,
@@ -657,6 +681,20 @@
       return String(minutes).padStart(2, "0") + ":" + String(seconds).padStart(2, "0");
     }
 
+    function isHuntClosed() {
+      return Date.now() >= HUNT_END_AT.getTime();
+    }
+
+    function formatCertificateDate(date) {
+      return new Intl.DateTimeFormat("nl-BE", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+      }).format(date);
+    }
+
     function normalizeGameData(data) {
       const fallbackMemoryPairs = DEFAULT_GAME_DATA.memoryPairs;
       const memoryPairs = Array.isArray(data.memoryPairs) && data.memoryPairs.length
@@ -719,6 +757,7 @@
 
     function syncHuntCopy() {
       const total = getHuntTargetCount();
+      const closed = isHuntClosed();
 
       if (huntOverviewCountEl) {
         huntOverviewCountEl.textContent = formatCountLabel(total, "vraag", "vragen");
@@ -738,6 +777,25 @@
 
       if (state.currentMode === "hunt") {
         gameSubtitleEl.textContent = getHuntSubtitle();
+      }
+
+      if (huntModeButton) {
+        huntModeButton.disabled = closed;
+        huntModeButton.classList.toggle("is-disabled", closed);
+        huntModeButton.setAttribute("aria-disabled", closed ? "true" : "false");
+      }
+
+      if (huntModeTextEl) {
+        huntModeTextEl.textContent = closed
+          ? "The Green Hunt is afgelopen. Speel nog memorie of volg ons via Instagram."
+          : "Trek met je medestudenten over de campus, open per locatie een vraag en speel naar je score.";
+      }
+
+      if (eventStatusNoteEl) {
+        eventStatusNoteEl.textContent = closed
+          ? "The Green Hunt is afgelopen sinds 27 april 2026 om 20:00. Speel memorie en volg ons via Instagram voor updates."
+          : "The Green Hunt loopt tot 27 april 2026 om 20:00. Nadien kan je nog memorie spelen en ons volgen via Instagram.";
+        eventStatusNoteEl.classList.toggle("is-closed", closed);
       }
     }
 
@@ -945,10 +1003,14 @@
 
       const question = getHuntQuestionMap().get(questionId);
       const locationLabel = question ? question.location : "deze poster";
-      posterMessageEl.textContent =
-        "Je hebt " +
-        locationLabel +
-        " gevonden. Bezoek de stand van Challenge 10 in hal 4 om deze poster te spelen.";
+      posterMessageEl.textContent = isHuntClosed()
+        ? "Je hebt " +
+          locationLabel +
+          " gevonden, maar The Green Hunt is afgelopen sinds 27 april 2026 om 20:00. Speel gerust memorie en volg ons via Instagram."
+        : "Je hebt " +
+          locationLabel +
+          " gevonden. Bezoek de stand van Challenge 10 in hal 4 om deze poster te spelen.";
+      posterStartHuntBtn.hidden = isHuntClosed();
     }
 
     function applyGameMeta(mode) {
@@ -963,6 +1025,17 @@
       clearPendingTimers();
       stopHuntScanner();
       await loadGameData();
+
+      if (mode === "hunt" && isHuntClosed()) {
+        showStartScreen();
+        showFeedback(
+          "The Green Hunt is afgelopen sinds 27 april 2026 om 20:00. Je kan wel nog memorie spelen of ons volgen op Instagram.",
+          "is-error"
+        );
+        syncHuntCopy();
+        return;
+      }
+
       state.currentMode = mode;
       appShell.dataset.mode = mode;
       startScreen.hidden = true;
@@ -1344,6 +1417,16 @@
       showHuntView("scanner");
       setHuntQuestionMessage("", "is-neutral");
 
+      if (isHuntClosed()) {
+        stopHuntScanner();
+        setScannerStatus(
+          "The Green Hunt is afgelopen sinds 27 april 2026 om 20:00.",
+          "is-error"
+        );
+        showFeedback("Je kan wel nog memorie spelen of ons volgen op Instagram.", "is-error");
+        return;
+      }
+
       if (state.hunt.answeredIds.size >= getHuntTargetCount()) {
         return;
       }
@@ -1473,8 +1556,12 @@
       stopHuntTimer(true);
       state.hunt.attemptsRemaining = 3;
       showHuntView("finish");
-      const playerLabel = state.hunt.playerName ? state.hunt.playerName + ", je score" : "Je score";
+      const playerName = state.hunt.playerName || "Speler";
+      const playerLabel = playerName + ", je score";
       const elapsedTime = formatElapsedTime(state.hunt.elapsedMs);
+      huntCertificateNameEl.textContent = playerName;
+      huntCertificateDateEl.textContent =
+        "Behaald op " + formatCertificateDate(new Date()) + " - Challenge 10";
       huntFinalScoreEl.textContent =
         playerLabel +
         " is " +
@@ -1491,6 +1578,12 @@
 
     function handleHuntScan(rawValue) {
       const currentTime = Date.now();
+
+      if (isHuntClosed()) {
+        setScannerStatus("The Green Hunt is afgelopen sinds 27 april 2026 om 20:00.", "is-error");
+        showFeedback("Deze QR-code is niet meer speelbaar. Speel memorie of volg ons op Instagram.", "is-error");
+        return;
+      }
 
       if (
         rawValue === state.hunt.lastScanValue &&
@@ -1645,6 +1738,16 @@
       updateStatus();
       setScannerStatus("Geef cameratoegang om je eerste Green Hunt-vraag te openen.", "is-neutral");
 
+      if (isHuntClosed()) {
+        showStartScreen();
+        showFeedback(
+          "The Green Hunt is afgelopen sinds 27 april 2026 om 20:00. Speel nog memorie of volg ons op Instagram.",
+          "is-error"
+        );
+        syncHuntCopy();
+        return;
+      }
+
       if (runtime.isFile) {
         showFeedback("Gebruik op dit toestel gerust de QR-link of code om verder te spelen.", "is-neutral");
       } else {
@@ -1686,6 +1789,10 @@
 
     modeButtons.forEach((button) => {
       button.addEventListener("click", () => {
+        if (button.disabled) {
+          return;
+        }
+
         openGame(button.dataset.mode);
       });
     });
@@ -1719,6 +1826,7 @@
     loadGameData();
     updateHuntProgressUI();
     openHuntFromLinkedUrl();
+    window.setInterval(syncHuntCopy, 60000);
 
     if (runtime.canRegisterServiceWorker) {
       window.addEventListener("load", () => {

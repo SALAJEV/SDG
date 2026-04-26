@@ -291,6 +291,44 @@ h1 {
   line-height: 1.7;
 }
 
+.event-status-note,
+.social-strip {
+  margin: 18px 0 0;
+  padding: 14px 16px;
+  border-radius: 8px;
+  color: #173f4b;
+  background: #fff8e7;
+  border: 1px solid rgba(244, 180, 68, 0.28);
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.event-status-note.is-closed {
+  color: #7d2f28;
+  background: #fff0ec;
+  border-color: rgba(233, 66, 53, 0.22);
+}
+
+.social-strip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 18px;
+  background: #f4fbf8;
+  border-color: rgba(13, 123, 113, 0.18);
+}
+
+.social-strip a {
+  color: #0d7b71;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.social-strip a:hover {
+  text-decoration: underline;
+}
+
 .overview-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -432,6 +470,19 @@ h1 {
   transform: translateY(-6px) scale(1.01);
   box-shadow: var(--shadow-strong);
   filter: brightness(1.02);
+}
+
+.mode-card.is-disabled,
+.mode-card:disabled {
+  cursor: not-allowed;
+  opacity: 0.68;
+  filter: grayscale(0.22);
+}
+
+.mode-card.is-disabled:hover,
+.mode-card:disabled:hover {
+  transform: none;
+  box-shadow: var(--shadow-soft);
 }
 
 .mode-card-hunt {
@@ -1081,6 +1132,43 @@ h1 {
   color: var(--ink-soft);
   font-size: 1.08rem;
   line-height: 1.7;
+}
+
+.certificate-panel {
+  margin: 22px auto 0;
+  max-width: 520px;
+  padding: clamp(18px, 4vw, 28px);
+  border-radius: 8px;
+  background:
+    linear-gradient(90deg, rgba(13, 123, 113, 0.12), transparent 18%, transparent 82%, rgba(244, 180, 68, 0.18)),
+    #f8fbf8;
+  border: 1px solid rgba(13, 123, 113, 0.16);
+}
+
+.certificate-label,
+.certificate-date {
+  display: block;
+  color: var(--ink-soft);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.certificate-name {
+  display: block;
+  margin: 8px 0;
+  color: #0d4c47;
+  font-size: clamp(1.9rem, 6vw, 3.4rem);
+  line-height: 1;
+}
+
+.certificate-note {
+  margin: 14px auto 0;
+  max-width: 42ch;
+  color: #173f4b;
+  font-weight: 900;
+  line-height: 1.5;
 }
 
 .finish-meta {

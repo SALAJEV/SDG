@@ -3399,3 +3399,55 @@ h2,
   margin-top: 14px;
   color: #5b7279;
 }
+
+@media (max-width: 640px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .hero-start,
+  .hero-start > * {
+    min-width: 0;
+  }
+
+  .hero-start h1 {
+    max-width: none;
+    font-size: clamp(2.1rem, 12vw, 3.2rem);
+    line-height: 0.98;
+    text-wrap: balance;
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
+  .hero-start .subtitle,
+  .start-copy,
+  .start-paragraph {
+    max-width: none;
+    width: 100%;
+    overflow-wrap: normal;
+    word-break: normal;
+    text-wrap: pretty;
+  }
+
+  .hero-start .subtitle {
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .start-paragraph {
+    font-size: 0.98rem;
+    line-height: 1.6;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-start h1 {
+    font-size: clamp(1.95rem, 11vw, 2.8rem);
+  }
+
+  .hero-start .subtitle,
+  .start-paragraph {
+    font-size: 0.96rem;
+  }
+}

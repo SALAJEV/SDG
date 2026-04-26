@@ -741,7 +741,7 @@
     const posterMessageEl = document.getElementById("poster-message");
     const posterStartHuntBtn = document.getElementById("poster-start-hunt");
     const gameScreen = document.getElementById("game-screen");
-    const modeButtons = Array.from(document.querySelectorAll("[data-mode]"));
+    const modeButtons = Array.from(document.querySelectorAll("button[data-mode]"));
     const huntModeButton = document.getElementById("start-hunt-mode");
     const eventStatusNoteEl = document.getElementById("event-status-note");
     const gameTitleEl = document.getElementById("game-title");
@@ -1583,6 +1583,11 @@
     }
 
     async function openGame(mode, shouldPushRoute = true) {
+      if (mode !== "hunt" && mode !== "memory") {
+        showStartScreen(shouldPushRoute);
+        return;
+      }
+
       clearPendingTimers();
       stopHuntScanner();
 

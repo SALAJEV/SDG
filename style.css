@@ -3339,19 +3339,19 @@ h2,
 }
 
 .hero-grid {
-  grid-template-columns: minmax(0, 1.18fr) minmax(280px, 0.82fr);
-  gap: 30px;
+  grid-template-columns: 1fr;
+  gap: 24px;
   align-items: start;
 }
 
 .hero-start h1 {
   font-size: clamp(2.5rem, 5vw, 4.35rem);
   line-height: 0.98;
-  max-width: 9ch;
+  max-width: none;
 }
 
 .hero-start .subtitle {
-  max-width: 52ch;
+  max-width: none;
   font-size: 1.08rem;
   line-height: 1.62;
 }
@@ -3359,7 +3359,7 @@ h2,
 .start-copy {
   margin-top: 24px;
   gap: 14px;
-  max-width: 62ch;
+  max-width: none;
 }
 
 .start-paragraph {

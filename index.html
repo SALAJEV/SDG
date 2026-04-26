@@ -13,6 +13,11 @@
 </head>
 <body>
   <main class="app-shell" data-mode="menu">
+    <div class="language-switch" aria-label="Language">
+      <button id="lang-nl" class="language-btn" type="button" data-lang="nl">NL</button>
+      <button id="lang-en" class="language-btn" type="button" data-lang="en">EN</button>
+    </div>
+
     <section id="poster-screen" class="screen poster-screen" hidden>
       <article class="poster-card">
         <p class="badge">Challenge 10</p>
@@ -41,9 +46,7 @@
             snel, duidelijk en vlot speelbaar op je smartphone.
           </p>
 
-          <p id="event-status-note" class="event-status-note">
-            The Green Hunt loopt tot 27 april 2026 om 20:00. Nadien kan je nog memorie spelen en ons volgen via Instagram.
-          </p>
+          <p id="event-status-note" class="event-status-note" hidden></p>
 
           <section class="overview-grid" aria-label="Overzicht van de challenge">
             <article class="overview-card">
@@ -153,8 +156,6 @@
               <p id="game-subtitle" class="subtitle"></p>
             </div>
           </div>
-
-          <button id="back-to-menu" class="ghost-btn" type="button">Terug naar start</button>
         </div>
 
         <div class="hero-info-strip" aria-label="Spelinfo">
@@ -172,7 +173,6 @@
           <span id="secondary-label" class="status-label">Voortgang</span>
           <strong id="secondary-value" class="status-value">0/0</strong>
         </div>
-        <button id="restart" class="restart-btn" type="button">Opnieuw starten</button>
       </section>
 
       <section id="hunt-game" class="game-panel" hidden>
@@ -253,7 +253,6 @@
                     <button id="hunt-start-game" class="restart-btn" type="submit">Start The Green Hunt</button>
                   </div>
                 </form>
-                <button id="hunt-back-home-intro" class="ghost-btn" type="button">Terug naar start</button>
               </div>
             </article>
           </div>
@@ -347,10 +346,6 @@
                 <span class="meta-pill">Klaar voor de stand</span>
               </div>
 
-              <div class="finish-actions">
-                <button id="hunt-play-again" class="restart-btn" type="button">Nog eens spelen</button>
-                <button id="hunt-back-home" class="ghost-btn" type="button">Terug naar start</button>
-              </div>
             </article>
           </div>
         </div>
@@ -359,16 +354,10 @@
       <section id="memory-game" class="game-panel" hidden>
         <div class="memory-shell">
           <article class="memory-intro">
-            <p class="panel-kicker">Memorie</p>
             <h2 class="question-title">Koppel elk SDG-logo aan het juiste weetje.</h2>
             <p class="memory-copy">
-              Alle kaarten liggen eerst omgedraaid. Zoek telkens het juiste paar: een SDG-logo en het bijhorende weetje.
+              Draai twee kaarten om en zoek het juiste paar: een SDG-logo en het bijhorende weetje. Werk alle SDG's af in zo weinig mogelijk beurten.
             </p>
-            <div class="memory-tags">
-              <span class="meta-pill">34 kaarten</span>
-              <span class="meta-pill">17 juiste paren</span>
-              <span class="meta-pill">Beurten tellen mee</span>
-            </div>
           </article>
 
           <div id="memory-grid" class="memory-grid" aria-label="Memorie speelveld"></div>
@@ -509,8 +498,6 @@
     const secondaryLabelEl = document.getElementById("secondary-label");
     const secondaryValueEl = document.getElementById("secondary-value");
     const feedbackEl = document.getElementById("feedback");
-    const restartBtn = document.getElementById("restart");
-    const backToMenuBtn = document.getElementById("back-to-menu");
     const huntOverviewCountEl = document.getElementById("hunt-overview-count");
     const huntModeCountEl = document.getElementById("hunt-mode-count");
     const huntFeatureCountEl = document.getElementById("hunt-feature-count");
@@ -523,15 +510,9 @@
     const huntSuccessViewEl = document.getElementById("hunt-success-view");
     const huntFinishViewEl = document.getElementById("hunt-finish-view");
     const huntVideoEl = document.getElementById("hunt-video");
-    const scannerStatusEl = document.getElementById("scanner-status");
     const huntPlayerForm = document.getElementById("hunt-player-form");
     const huntPlayerNameInput = document.getElementById("hunt-player-name");
-    const huntBackHomeIntroBtn = document.getElementById("hunt-back-home-intro");
     const huntScanCounterEl = document.getElementById("hunt-scan-counter");
-    const startScannerBtn = document.getElementById("start-scanner");
-    const stopScannerBtn = document.getElementById("stop-scanner");
-    const manualQrForm = document.getElementById("manual-qr-form");
-    const manualQrInput = document.getElementById("manual-qr-input");
     const huntQuestionCounterEl = document.getElementById("hunt-question-counter");
     const huntQuestionLocationEl = document.getElementById("hunt-question-location");
     const huntQuestionTextEl = document.getElementById("hunt-question-text");
@@ -545,8 +526,6 @@
     const huntCertificateNameEl = document.getElementById("hunt-certificate-name");
     const huntCertificateDateEl = document.getElementById("hunt-certificate-date");
     const huntFinishTimePillEl = document.getElementById("hunt-finish-time-pill");
-    const huntPlayAgainBtn = document.getElementById("hunt-play-again");
-    const huntBackHomeBtn = document.getElementById("hunt-back-home");
     const huntProgressFillEl = document.getElementById("hunt-progress-fill");
     const huntProgressLabelEl = document.getElementById("hunt-progress-label");
 
@@ -771,9 +750,10 @@
       }
 
       if (eventStatusNoteEl) {
+        eventStatusNoteEl.hidden = !closed;
         eventStatusNoteEl.textContent = closed
           ? "The Green Hunt is afgelopen sinds 27 april 2026 om 20:00. Speel memorie en volg ons via Instagram voor updates."
-          : "The Green Hunt loopt tot 27 april 2026 om 20:00. Nadien kan je nog memorie spelen en ons volgen via Instagram.";
+          : "";
         eventStatusNoteEl.classList.toggle("is-closed", closed);
       }
     }
@@ -1222,7 +1202,6 @@
       state.hunt.lastScanValue = "";
       state.hunt.lastScanAt = 0;
       huntAnswerListEl.innerHTML = "";
-      manualQrInput.value = "";
       huntPlayerNameInput.value = "";
       setHuntQuestionMessage("", "is-neutral");
       updateHuntProgressUI();
@@ -1237,8 +1216,7 @@
     }
 
     function setScannerStatus(message, stateClass) {
-      scannerStatusEl.textContent = message;
-      scannerStatusEl.className = "scanner-status " + stateClass;
+      showFeedback(message, stateClass);
     }
 
     function setHuntQuestionMessage(message, stateClass) {
@@ -1862,28 +1840,12 @@
       });
     });
 
-    restartBtn.addEventListener("click", restartCurrentGame);
-    backToMenuBtn.addEventListener("click", showStartScreen);
     posterStartHuntBtn.addEventListener("click", () => openGame("hunt"));
     huntPlayerForm.addEventListener("submit", (event) => {
       event.preventDefault();
       startHuntWithPlayer();
     });
-    huntBackHomeIntroBtn.addEventListener("click", showStartScreen);
-    startScannerBtn.addEventListener("click", startHuntScanner);
-    stopScannerBtn.addEventListener("click", () => {
-      stopHuntScanner();
-      setScannerStatus("Scanner gestopt. Start opnieuw wanneer je klaar bent.", "is-neutral");
-    });
     huntNextScanBtn.addEventListener("click", startHuntScanner);
-    huntPlayAgainBtn.addEventListener("click", restartHuntGame);
-    huntBackHomeBtn.addEventListener("click", showStartScreen);
-
-    manualQrForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-      handleHuntScan(manualQrInput.value);
-      manualQrInput.value = "";
-    });
 
     installRuntimeEnhancements();
     syncHuntCopy();

@@ -58,55 +58,34 @@
 
           <p id="event-status-note" class="event-status-note" hidden></p>
 
-          <section class="overview-grid" aria-label="Overzicht van de challenge">
-            <article class="overview-card">
-              <span class="overview-label">Games</span>
-              <strong class="overview-value">2</strong>
-              <p class="overview-text">Je kunt kiezen tussen een campusspel met QR-codes en een korte memory game over de SDG's.</p>
-            </article>
-
-            <article class="overview-card">
-              <span class="overview-label">Green Hunt</span>
-              <strong id="hunt-overview-count" class="overview-value">0 vragen</strong>
-              <p class="overview-text">Tijdens de hunt scan je posters op de campus. Elke poster opent een vraag die je meteen op je scherm beantwoordt.</p>
-            </article>
-
-            <article class="overview-card">
-              <span class="overview-label">Beloning</span>
-              <strong class="overview-value">Prijs</strong>
-              <p class="overview-text">Na afloop krijg je een certificaat. Daarmee kun je aan de stand tonen dat je het spel hebt voltooid.</p>
-            </article>
+          <section class="start-copy" aria-label="Overzicht van de challenge">
+            <p class="start-paragraph" id="start-overview-games">Je kunt kiezen tussen een campusspel met QR-codes en een korte memory game over de SDG's.</p>
+            <p class="start-paragraph">
+              <span id="start-overview-hunt-prefix">The Green Hunt bestaat uit</span>
+              <strong id="hunt-overview-count" class="inline-highlight">0 vragen</strong>.
+              <span id="start-overview-hunt-suffix">Tijdens de hunt scan je posters op de campus. Elke poster opent een vraag die je meteen op je scherm beantwoordt.</span>
+            </p>
+            <p class="start-paragraph" id="start-overview-prize">Na afloop krijg je een certificaat. Daarmee kun je aan de stand tonen dat je het spel hebt voltooid.</p>
           </section>
         </header>
 
-        <aside class="hero-panel">
+        <aside class="hero-panel hero-panel-plain">
           <p class="panel-kicker">Zo werkt het</p>
 
-          <div class="step-list">
-            <article class="step-item">
-              <span class="step-number">1</span>
-              <div>
-                <strong>Kies een spel</strong>
-                <p>Kies of je de campus wilt verkennen met The Green Hunt, of liever start met een korte memory game.</p>
-              </div>
-            </article>
-
-            <article class="step-item">
-              <span class="step-number">2</span>
-              <div>
-                <strong>Volg de stappen</strong>
-                <p>De site begeleidt je stap voor stap. Je ziet telkens duidelijk wat je moet doen om verder te gaan.</p>
-              </div>
-            </article>
-
-            <article class="step-item">
-              <span class="step-number">3</span>
-              <div>
-                <strong>Bekijk je resultaat</strong>
-                <p>Onderweg zie je je score en tijd. Op het einde krijg je een overzicht van je resultaat.</p>
-              </div>
-            </article>
-          </div>
+          <ol class="text-steps">
+            <li class="text-step">
+              <strong class="step-heading">Kies een spel</strong>
+              <span class="step-body">Kies of je de campus wilt verkennen met The Green Hunt, of liever start met een korte memory game.</span>
+            </li>
+            <li class="text-step">
+              <strong class="step-heading">Volg de stappen</strong>
+              <span class="step-body">De site begeleidt je stap voor stap. Je ziet telkens duidelijk wat je moet doen om verder te gaan.</span>
+            </li>
+            <li class="text-step">
+              <strong class="step-heading">Bekijk je resultaat</strong>
+              <span class="step-body">Onderweg zie je je score en tijd. Op het einde krijg je een overzicht van je resultaat.</span>
+            </li>
+          </ol>
 
           <p class="panel-note">
             Deze website is gemaakt om het spel snel en duidelijk speelbaar te maken tijdens het VIVES-event.
@@ -432,6 +411,7 @@
         overviewGames: "Games",
         greenHunt: "Green Hunt",
         overviewGamesText: "Je kunt kiezen tussen een campusspel met QR-codes en een korte memory game over de SDG's.",
+        overviewHuntPrefix: "The Green Hunt bestaat uit",
         overviewHuntText: "Tijdens de hunt scan je posters op de campus. Elke poster opent een vraag die je meteen op je scherm beantwoordt.",
         overviewReward: "Beloning",
         overviewPrize: "Prijs",
@@ -551,6 +531,7 @@
         overviewGames: "Games",
         greenHunt: "Green Hunt",
         overviewGamesText: "You can choose between a QR-based campus game and a short SDG memory game.",
+        overviewHuntPrefix: "The Green Hunt has",
         overviewHuntText: "During the hunt, you scan posters on campus. Each poster opens a question that you answer on your screen.",
         overviewReward: "Reward",
         overviewPrize: "Prize",
@@ -1149,11 +1130,12 @@
       setText(".memory-intro .question-title", "memoryHeading");
       setText(".memory-copy", "memoryIntro");
       memoryGridEl.setAttribute("aria-label", t("memoryGridLabel"));
-      setAllText(".overview-card .overview-label", ["overviewGames", "greenHunt", "overviewReward"]);
-      setAllText(".overview-card .overview-text", ["overviewGamesText", "overviewHuntText", "overviewPrizeText"]);
-      setText(".overview-card:nth-child(3) .overview-value", "overviewPrize");
-      setAllText(".hero-panel .step-item strong", ["stepOneTitle", "stepTwoTitle", "stepThreeTitle"]);
-      setAllText(".hero-panel .step-item p", ["stepOneText", "stepTwoText", "stepThreeText"]);
+      setText("#start-overview-games", "overviewGamesText");
+      setText("#start-overview-hunt-prefix", "overviewHuntPrefix");
+      setText("#start-overview-hunt-suffix", "overviewHuntText");
+      setText("#start-overview-prize", "overviewPrizeText");
+      setAllText(".hero-panel .step-heading", ["stepOneTitle", "stepTwoTitle", "stepThreeTitle"]);
+      setAllText(".hero-panel .step-body", ["stepOneText", "stepTwoText", "stepThreeText"]);
       setAllText(".mode-card-hunt .meta-pill", ["huntCount", "scoreQuestions", "prizeStand"]);
       setAllText(".mode-card-memory .meta-pill", ["sdgs", "cards", "turnsCount"]);
       setAllText(".hunt-feature-card .overview-label", ["questions", "attempts", "overviewReward"]);

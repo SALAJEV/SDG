@@ -354,6 +354,25 @@ h1 {
   margin-top: 24px;
 }
 
+.start-copy {
+  margin-top: 22px;
+  display: grid;
+  gap: 12px;
+  max-width: 74ch;
+}
+
+.start-paragraph {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 1rem;
+  line-height: 1.72;
+}
+
+.inline-highlight {
+  color: var(--ink);
+  font-weight: 900;
+}
+
 .overview-card {
   padding: 16px 18px;
   border-radius: 22px;
@@ -404,6 +423,50 @@ h1 {
 .panel-note-dark {
   color: rgba(255, 255, 255, 0.9);
   background: rgba(255, 255, 255, 0.08);
+}
+
+.hero-panel-plain {
+  padding: 4px 0 0 20px;
+  border: none;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.hero-panel-plain::before {
+  display: none;
+}
+
+.hero-panel-plain .panel-note {
+  margin-top: 16px;
+  padding: 0;
+  border-radius: 0;
+  color: var(--ink-soft);
+  background: transparent;
+}
+
+.text-steps {
+  margin: 0;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 14px;
+}
+
+.text-step {
+  color: var(--ink-soft);
+  line-height: 1.62;
+}
+
+.step-heading {
+  display: inline;
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.step-body {
+  display: inline;
 }
 
 .step-list {

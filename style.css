@@ -3951,6 +3951,68 @@ body {
   }
 }
 
+/* Footer docking and flat footer treatment */
+.app-shell {
+  min-height: min(920px, calc(100svh - 40px));
+  display: flex;
+  flex-direction: column;
+}
+
+.app-shell::after {
+  display: none !important;
+}
+
+.screen {
+  flex: 0 0 auto;
+}
+
+.screen-start,
+.screen-game,
+.poster-screen {
+  flex: 1 0 auto;
+}
+
+.site-disclaimer {
+  margin-top: auto;
+  padding: 18px 0 0;
+  background: transparent !important;
+  border: 0 !important;
+  border-top: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.site-disclaimer::before {
+  display: none !important;
+}
+
+.disclaimer-copy {
+  gap: 10px;
+}
+
+.vives-logo-badge {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .site-disclaimer {
+    border-top: 0 !important;
+  }
+}
+
+@media (max-width: 820px) {
+  .app-shell {
+    min-height: 100svh;
+  }
+
+  .site-disclaimer {
+    padding-top: 16px;
+  }
+}
+
 @media (max-width: 640px) {
   .screen-start {
     gap: 18px;

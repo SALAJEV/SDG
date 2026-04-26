@@ -1303,6 +1303,7 @@ h1 {
 .memory-card {
   display: block;
   width: 100%;
+  min-height: clamp(128px, 22vw, 180px);
   padding: 0;
   border: none;
   background: transparent;
@@ -1324,6 +1325,7 @@ h1 {
   position: relative;
   width: 100%;
   height: 100%;
+  min-height: inherit;
   transform-style: preserve-3d;
   transition: transform 340ms ease;
 }
@@ -1381,6 +1383,19 @@ h1 {
   display: block;
   padding: 8px;
   background: white;
+}
+
+.memory-image-fallback {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 12px;
+  background: white;
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 900;
+  text-align: center;
 }
 
 .memory-fact-card {

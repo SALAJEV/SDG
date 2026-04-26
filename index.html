@@ -1647,6 +1647,37 @@
     async function openGame(mode, shouldPushRoute = true) {
       clearPendingTimers();
       stopHuntScanner();
+
+      if (mode === "memory") {
+        if (!Array.isArray(state.gameData.memoryPairs) || !state.gameData.memoryPairs.length) {
+          state.gameData = normalizeGameData(DEFAULT_GAME_DATA);
+        }
+
+        state.currentMode = mode;
+        appShell.dataset.mode = mode;
+        startScreen.hidden = true;
+        posterScreen.hidden = true;
+        gameScreen.hidden = false;
+        huntGameEl.hidden = true;
+        memoryGameEl.hidden = false;
+        applyGameMeta(mode);
+        restartCurrentGame();
+
+        loadGameData()
+          .then(() => {
+            if (state.currentMode === "memory") {
+              restartMemoryGame();
+            }
+          })
+          .catch(() => {});
+
+        if (shouldPushRoute) {
+          pushRoute(routePathForMode(mode));
+        }
+
+        return;
+      }
+
       await loadGameData();
 
       if (mode === "hunt" && isHuntClosed()) {
@@ -1675,7 +1706,12 @@
     }
 
     function buildMemoryDeck() {
-      const cards = state.gameData.memoryPairs.flatMap((pair) => [
+      const memoryPairs =
+        Array.isArray(state.gameData.memoryPairs) && state.gameData.memoryPairs.length
+          ? state.gameData.memoryPairs
+          : normalizeGameData(DEFAULT_GAME_DATA).memoryPairs;
+
+      const cards = memoryPairs.flatMap((pair) => [
         {
           id: "sdg-" + pair.sdg + "-image",
           pairKey: "sdg-" + pair.sdg,
@@ -1741,6 +1777,13 @@
 
       Array.from(memoryGridEl.querySelectorAll(".memory-card")).forEach((card) => {
         card.addEventListener("click", () => handleMemoryCardClick(card));
+      });
+
+      Array.from(memoryGridEl.querySelectorAll(".memory-back img")).forEach((image) => {
+        image.addEventListener("error", () => {
+          const fallbackLabel = image.alt || "SDG";
+          image.outerHTML = `<span class="memory-image-fallback">${escapeHtml(fallbackLabel)}</span>`;
+        }, { once: true });
       });
     }
 

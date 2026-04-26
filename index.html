@@ -261,7 +261,7 @@
                     class="manual-input"
                     name="manual-qr-input"
                     type="text"
-                    placeholder="Bijvoorbeeld q=1 of GH-01"
+                    placeholder="Bijvoorbeeld q=1 voor random of GH-01"
                     autocomplete="off"
                   >
                   <button class="ghost-btn" type="submit">Open vraag</button>
@@ -658,6 +658,20 @@
       return new Map(getHuntQuestions().map((question) => [question.id, question]));
     }
 
+    function getRandomHuntQuestionId() {
+      const unansweredQuestionIds = getHuntQuestions()
+        .filter((question) => !state.hunt.answeredIds.has(question.id))
+        .map((question) => question.id);
+      const fallbackQuestionIds = getHuntQuestions().map((question) => question.id);
+      const questionPool = unansweredQuestionIds.length ? unansweredQuestionIds : fallbackQuestionIds;
+
+      return questionPool.length ? pickRandom(questionPool) : null;
+    }
+
+    function isRandomQuestionCandidate(candidate) {
+      return /^(?:[/?])?Q=1$/i.test(String(candidate || "").trim());
+    }
+
     function getQuestionIdFromSequenceNumber(sequenceNumber) {
       const questionNumber = Number.parseInt(sequenceNumber, 10);
 
@@ -1009,7 +1023,17 @@
       const candidates = [rawText];
 
       try {
-        const url = new URL(rawText);
+        const url = new URL(rawText, window.location.href);
+        const qParam = String(url.searchParams.get("q") || "").trim();
+
+        if (qParam === "1") {
+          const randomQuestionId = getRandomHuntQuestionId();
+
+          if (randomQuestionId) {
+            return randomQuestionId;
+          }
+        }
+
         candidates.push(
           url.searchParams.get("id") || "",
           url.searchParams.get("code") || "",
@@ -1031,6 +1055,14 @@
 
         if (!normalizedCandidate) {
           continue;
+        }
+
+        if (isRandomQuestionCandidate(normalizedCandidate)) {
+          const randomQuestionId = getRandomHuntQuestionId();
+
+          if (randomQuestionId) {
+            return randomQuestionId;
+          }
         }
 
         if (questionMap.has(normalizedCandidate)) {
@@ -1065,6 +1097,17 @@
       }
 
       return null;
+    }
+
+    async function openHuntFromLinkedUrl() {
+      const linkedQuestionId = extractQuestionId(window.location.href);
+
+      if (!linkedQuestionId) {
+        return;
+      }
+
+      await openGame("hunt");
+      handleHuntScan(linkedQuestionId);
     }
 
     async function scanVideoFrame() {
@@ -1464,6 +1507,7 @@
     showStartScreen();
     loadGameData();
     updateHuntProgressUI();
+    openHuntFromLinkedUrl();
 
     if (runtime.canRegisterServiceWorker) {
       window.addEventListener("load", () => {

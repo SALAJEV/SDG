@@ -3088,6 +3088,11 @@ h2,
     padding: 12px;
   }
 
+  .hero-panel-plain {
+    padding: 16px;
+    border-radius: 10px;
+  }
+
   .panel-kicker {
     margin-bottom: 12px;
   }
@@ -3137,76 +3142,63 @@ h2,
 }
 
 .hero-grid {
-  grid-template-columns: minmax(0, 1.5fr) minmax(240px, 0.5fr);
-  gap: 14px;
+  grid-template-columns: minmax(0, 1.18fr) minmax(280px, 0.82fr);
+  gap: 30px;
+  align-items: start;
 }
 
 .hero-start h1 {
-  font-size: clamp(1.75rem, 3vw, 2.45rem);
-  max-width: 12ch;
+  font-size: clamp(2.5rem, 5vw, 4.35rem);
+  line-height: 0.98;
+  max-width: 9ch;
 }
 
 .hero-start .subtitle {
-  max-width: 44ch;
-  font-size: 0.95rem;
-  line-height: 1.45;
+  max-width: 52ch;
+  font-size: 1.08rem;
+  line-height: 1.62;
 }
 
-.overview-grid {
-  gap: 10px;
-  margin-top: 14px;
+.start-copy {
+  margin-top: 24px;
+  gap: 14px;
+  max-width: 62ch;
 }
 
-.overview-card {
-  padding: 13px 14px;
-  min-height: 0;
-}
-
-.overview-value {
-  margin-top: 6px;
-  font-size: clamp(1.15rem, 1.7vw, 1.55rem);
-}
-
-.overview-text {
-  margin-top: 8px;
-  font-size: 0.92rem;
-  line-height: 1.4;
+.start-paragraph {
+  font-size: 1.02rem;
+  line-height: 1.78;
 }
 
 .hero-panel {
-  padding: 16px 18px;
+  padding: 22px 24px;
+}
+
+.hero-panel-plain {
+  padding: 22px 24px;
+  border: 1px solid rgba(17, 69, 66, 0.12);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 18px 44px rgba(8, 19, 30, 0.08);
 }
 
 .panel-kicker {
-  margin-bottom: 10px;
+  margin-bottom: 14px;
+  font-size: 0.74rem;
 }
 
-.step-list {
-  gap: 10px;
+.text-steps {
+  gap: 12px;
+  padding-left: 1.15rem;
 }
 
-.step-item {
-  gap: 10px;
-}
-
-.step-item strong {
-  margin-bottom: 2px;
-  font-size: 0.94rem;
-}
-
-.step-item p,
+.text-step,
 .panel-note {
-  font-size: 0.9rem;
-  line-height: 1.4;
+  font-size: 0.97rem;
+  line-height: 1.6;
 }
 
 .panel-note {
-  margin-top: 12px;
-  padding: 10px 12px;
-}
-
-.step-number {
-  width: 30px;
-  height: 30px;
-  font-size: 0.85rem;
+  margin-top: 14px;
+  color: #5b7279;
 }

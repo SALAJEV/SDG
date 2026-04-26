@@ -134,6 +134,37 @@ input:focus-visible {
   pointer-events: none;
 }
 
+.language-switch {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 3;
+  display: inline-flex;
+  gap: 6px;
+  padding: 5px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid var(--line);
+  box-shadow: 0 10px 22px rgba(8, 19, 30, 0.1);
+}
+
+.language-btn {
+  min-width: 42px;
+  min-height: 34px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 6px;
+  color: var(--ink-soft);
+  background: transparent;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.language-btn.is-active {
+  color: white;
+  background: var(--spruce-700);
+}
+
 .app-shell[data-mode="memory"]::before {
   background: linear-gradient(90deg, #f4b444, #ffdb93, #173f4b);
 }
@@ -1623,6 +1654,7 @@ h2,
 
 .hero-start {
   padding: clamp(8px, 2vw, 14px) 0;
+  padding-top: 42px;
 }
 
 .hero-start h1 {
@@ -1945,6 +1977,16 @@ h2,
     box-shadow: 0 28px 76px rgba(0, 0, 0, 0.62);
   }
 
+  .language-switch {
+    background: rgba(14, 27, 34, 0.88);
+    border-color: rgba(214, 242, 235, 0.14);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.34);
+  }
+
+  .language-btn {
+    color: #aec7c4;
+  }
+
   .app-shell::after {
     border-color: rgba(214, 242, 235, 0.08);
   }
@@ -2143,5 +2185,362 @@ h2,
 
   .certificate-name {
     color: #7ce5cc;
+  }
+}
+
+@media (max-width: 820px) {
+  html,
+  body {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    min-height: 100svh;
+    display: block;
+    padding: 0;
+    background-attachment: scroll;
+  }
+
+  .app-shell {
+    width: 100%;
+    min-height: 100svh;
+    padding: max(14px, env(safe-area-inset-top)) 14px max(18px, env(safe-area-inset-bottom));
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .app-shell::after {
+    display: none;
+  }
+
+  .language-switch {
+    position: sticky;
+    top: 8px;
+    right: auto;
+    width: max-content;
+    margin-left: auto;
+    margin-bottom: 12px;
+  }
+
+  .screen-start {
+    gap: 18px;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .hero-start {
+    padding: 0;
+  }
+
+  .eyebrow-row {
+    gap: 8px;
+  }
+
+  .badge,
+  .hero-chip,
+  .mode-kicker,
+  .meta-pill,
+  .info-pill,
+  .hunt-stage-tag {
+    min-height: 30px;
+    padding: 5px 10px;
+    font-size: 0.72rem;
+  }
+
+  .hero-start h1,
+  h1 {
+    max-width: none;
+    margin-top: 12px;
+    font-size: clamp(2rem, 11vw, 3.1rem);
+    line-height: 1.02;
+  }
+
+  .subtitle,
+  .memory-copy,
+  .question-support,
+  .scanner-description {
+    font-size: 0.98rem;
+    line-height: 1.55;
+  }
+
+  .overview-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .overview-card,
+  .hunt-feature-card {
+    padding: 13px 14px;
+  }
+
+  .overview-value {
+    margin-top: 6px;
+    font-size: 1.45rem;
+  }
+
+  .hero-panel,
+  .poster-card,
+  .hunt-stage-card,
+  .memory-intro,
+  .finish-card {
+    padding: 16px;
+  }
+
+  .hero-panel {
+    display: none;
+  }
+
+  .mode-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .mode-card {
+    min-height: auto;
+    padding: 18px;
+    gap: 10px;
+  }
+
+  .mode-card::before {
+    width: 52px;
+    height: 52px;
+    right: 16px;
+    bottom: 16px;
+  }
+
+  .mode-title {
+    font-size: 1.55rem;
+  }
+
+  .mode-text {
+    max-width: 36ch;
+    line-height: 1.5;
+  }
+
+  .mode-meta {
+    gap: 6px;
+  }
+
+  .mode-cta {
+    padding-top: 10px;
+  }
+
+  .social-strip {
+    display: grid;
+    gap: 6px;
+    margin-top: 4px;
+    padding: 12px;
+  }
+
+  .screen-game {
+    gap: 12px;
+  }
+
+  .hero-game {
+    padding-bottom: 8px;
+  }
+
+  .hero-head,
+  .hero-head-stack,
+  .hero-copy {
+    gap: 8px;
+  }
+
+  .hero-info-strip {
+    margin-top: 12px;
+    gap: 6px;
+  }
+
+  .status-row {
+    position: sticky;
+    top: 8px;
+    z-index: 4;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .status-card {
+    padding: 12px;
+  }
+
+  .status-value {
+    margin-top: 6px;
+    font-size: 1.55rem;
+  }
+
+  .game-panel {
+    min-height: 0;
+  }
+
+  .hunt-shell,
+  .app-shell[data-mode="hunt"] .status-row {
+    max-width: none;
+  }
+
+  .hunt-feature-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin: 16px 0;
+  }
+
+  .step-list-compact {
+    gap: 10px;
+  }
+
+  .manual-row {
+    gap: 8px;
+  }
+
+  .manual-row > *,
+  .finish-actions > * {
+    flex-basis: 100%;
+  }
+
+  .manual-input,
+  .restart-btn,
+  .ghost-btn {
+    min-height: 50px;
+  }
+
+  .scanner-preview,
+  .scanner-video {
+    min-height: min(88svh, 440px);
+  }
+
+  .scanner-frame::before {
+    width: min(70vw, 260px);
+    height: min(70vw, 260px);
+  }
+
+  .scanner-frame span {
+    width: calc(100% - 28px);
+    text-align: center;
+    white-space: normal;
+  }
+
+  .question-title,
+  .finish-title {
+    margin-top: 10px;
+    font-size: clamp(1.45rem, 7vw, 2rem);
+  }
+
+  .answer-list {
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  .answer-btn {
+    min-height: 58px;
+    padding: 14px;
+    line-height: 1.35;
+  }
+
+  .progress-shell {
+    padding: 12px;
+  }
+
+  .memory-shell {
+    gap: 12px;
+  }
+
+  .memory-intro {
+    padding: 14px;
+  }
+
+  .memory-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    padding: 8px;
+    margin-inline: -4px;
+  }
+
+  .memory-card {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+  }
+
+  .memory-face {
+    border-radius: 8px;
+  }
+
+  .memory-front {
+    padding: 8px;
+  }
+
+  .memory-front-mark {
+    font-size: clamp(1.35rem, 9vw, 2rem);
+  }
+
+  .memory-front-label {
+    font-size: 0.52rem;
+  }
+
+  .memory-back img {
+    padding: 5px;
+  }
+
+  .memory-fact-card {
+    padding: 7px;
+    gap: 3px;
+  }
+
+  .memory-fact-kicker,
+  .memory-fact-sdg {
+    font-size: 0.44rem;
+  }
+
+  .memory-fact-text {
+    font-size: clamp(0.5rem, 2.55vw, 0.66rem);
+    line-height: 1.08;
+  }
+
+  .certificate-panel {
+    margin-top: 14px;
+    padding: 16px;
+  }
+
+  .certificate-name {
+    font-size: clamp(1.8rem, 10vw, 2.8rem);
+  }
+
+  .finish-meta {
+    gap: 6px;
+  }
+
+  .feedback {
+    min-height: 46px;
+    padding: 12px;
+    font-size: 0.94rem;
+    line-height: 1.35;
+  }
+}
+
+@media (max-width: 380px) {
+  .app-shell {
+    padding-inline: 10px;
+  }
+
+  .hero-start h1,
+  h1 {
+    font-size: clamp(1.85rem, 10vw, 2.55rem);
+  }
+
+  .memory-grid {
+    gap: 6px;
+    padding: 6px;
+  }
+
+  .memory-fact-card {
+    padding: 6px;
+  }
+
+  .memory-fact-text {
+    font-size: clamp(0.46rem, 2.6vw, 0.6rem);
   }
 }

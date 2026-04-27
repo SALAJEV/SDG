@@ -37,7 +37,7 @@
         <p class="badge">Challenge 10</p>
         <h1 id="poster-title" class="home-link-title" data-home-trigger="true" role="button" tabindex="0">Welkom bij The Green Hunters</h1>
         <p id="poster-message" class="subtitle">
-          Ga naar stand Challenge 10 in hal 4 en start de hunt.
+          Ga naar stand Challenge 10 in hantal 4 en start de hunt.
         </p>
         <div class="finish-actions">
           <button id="poster-start-hunt" class="restart-btn" type="button">Start via de website</button>
@@ -360,7 +360,7 @@
       nl: {
         pageTitle: "The Green Hunters",
         posterTitle: "Welkom bij The Green Hunters",
-        posterOpen: "Ga naar stand Challenge 10 in hal 4 en start de hunt.",
+        posterOpen: "Ga naar stand Challenge 10 in hantal 4 en start de hunt.",
         posterClosed: "{location} gevonden. The Green Hunt is afgelopen. Volg ons op Instagram.",
         posterButton: "Start op de website",
         heroTitle: "The Green Hunters",
@@ -486,7 +486,7 @@
       en: {
         pageTitle: "The Green Hunters",
         posterTitle: "Welcome to The Green Hunters",
-        posterOpen: "Head to the Challenge 10 stand in hall 4 and start the hunt.",
+        posterOpen: "Head to the Challenge 10 stand in hantal 4 and start the hunt.",
         posterClosed: "{location} found. The Green Hunt is over. Follow us on Instagram.",
         posterButton: "Start on the website",
         heroTitle: "The Green Hunters",
@@ -833,10 +833,10 @@
     let pendingTimers = [];
     let dataLoadPromise = null;
     const HUNT_END_AT = new Date("2026-04-27T20:00:00+02:00");
-    const HUNT_SCORE_BASE = 1000;
-    const HUNT_CORRECT_BONUS = 120;
-    const HUNT_WRONG_PENALTY = 45;
-    const HUNT_TIME_PENALTY_PER_SECOND = 2;
+    const HUNT_SCORE_BASE = 0;
+    const HUNT_CORRECT_BONUS = 100;
+    const HUNT_WRONG_PENALTY = 20;
+    const HUNT_TIME_PENALTY_PER_SECOND = 1;
     let currentLang = getInitialLanguage();
 
     const state = {

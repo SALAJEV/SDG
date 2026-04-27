@@ -2,20 +2,20 @@ window.HUNT_POSTER_GUIDE = [
   {
     id: "Q=1",
     label: "People",
-    hintNl: "Denk aan een verkeersweg die voor iedereen toegankelijk is.",
-    hintEn: "Think of a traffic route that is accessible to everyone."
+    hintNl: "Denk aan een verkeersweg die voor iedereen toegankelijk is. (open uitgang)",
+    hintEn: "Think of a traffic route that is accessible to everyone. (open exit)"
   },
   {
     id: "Q=2",
     label: "Planet",
-    hintNl: "Zoek de plek waar je mee recycleert.",
-    hintEn: "Look for the place where recycling happens."
+    hintNl: "Zoek de stand waar ze bezig zijn over recycleren.",
+    hintEn: "Find the stand where they are talking about recycling.."
   },
   {
     id: "Q=3",
     label: "Prosperity",
-    hintNl: "Denk aan samenwerking met de school.",
-    hintEn: "Think about collaboration with the school."
+    hintNl: "Denk aan samenwerking met de school. (eten)",
+    hintEn: "Think about collaboration with the school. (food)"
   },
   {
     id: "Q=4",

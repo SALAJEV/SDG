@@ -1,4 +1,4 @@
-const CACHE_NAME = "challenge-10-games-v32";
+const CACHE_NAME = "challenge-10-games-v33";
 const ASSETS = [
   "./",
   "index.html",
